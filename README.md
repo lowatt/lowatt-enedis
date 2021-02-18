@@ -27,7 +27,7 @@ In other words, ``CommandeCollectePublicationMesures``,
 ``RechercheServicesSouscritsMesures``, and
 ``CommandeArretServiceSouscritMesures`` are not yet implemented.
 
-## Commande line usage
+## Command line usage
 
 See ``lowatt-enedis --help`` for CLI usage. You'll be able to call the services
 controlled using options and see the SOAP response.  You can take a look at
