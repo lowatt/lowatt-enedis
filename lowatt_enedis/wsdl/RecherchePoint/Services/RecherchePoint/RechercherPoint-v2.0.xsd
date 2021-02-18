@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" targetNamespace="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaires/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaires/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+	<xs:element name="rechercherPoint" type="sc:RechercherPointType"/>
+	<xs:element name="rechercherPointResponse" type="sc:RechercherPointResponseType"/>
+	<xs:complexType name="RechercherPointType">
+		<xs:sequence>
+			<xs:element name="criteres" type="sc:CriteresType"/>
+			<xs:element name="loginUtilisateur" type="ds:UtilisateurLoginType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechercherPointResponseType">
+		<xs:sequence>
+			<xs:element name="points" type="sc:PointsType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PointsType">
+		<xs:sequence>
+			<xs:element name="point" type="sc:PointType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PointType">
+		<xs:sequence>
+			<xs:element name="adresseInstallationNormalisee" type="dc:AdresseAfnorType"/>
+			<xs:element name="matricule" type="ds:Chaine255Type" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="numeroSerie" type="ds:Chaine255Type" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="typeComptage" type="dc:StructureComptageType" minOccurs="0"/>
+			<xs:element name="etatContractuel" type="dc:PointEtatContractuelType"/>
+			<xs:element name="nomClientFinalOuDenominationSociale" type="ds:Chaine255Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="ds:PointIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CriteresType">
+		<xs:sequence>
+			<xs:element name="adresseInstallation" type="sc:AdresseInstallationType" minOccurs="0"/>
+			<xs:element name="numSiret" type="ds:EtablissementNumSiretType" minOccurs="0"/>
+			<xs:element name="matriculeOuNumeroSerie" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="domaineTensionAlimentationCode" type="ds:DomaineTensionCodeType" minOccurs="0"/>
+			<xs:element name="nomClientFinalOuDenominationSociale" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="categorieClientFinalCode" type="ds:ClientFinalCategorieCodeType" minOccurs="0"/>
+			<xs:element name="rechercheHorsPerimetre" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdresseInstallationType">
+		<xs:sequence>
+			<xs:element name="escalierEtEtageEtAppartement" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="batiment" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="numeroEtNomVoie" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="lieuDit" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="codePostal" type="ds:CodePostalFrancaisType" minOccurs="0"/>
+			<xs:element name="codeInseeCommune" type="ds:CommuneFranceCodeInseeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

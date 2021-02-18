@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0" 
+  xmlns:sc="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0"
+  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:css="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0"
+  xmlns:err="http://www.enedis.fr/sge/b2b/technique/v1.0">
+
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="ConsulterMesuresDetaillees-v2.0.1.xsd" namespace="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0" />
+      <xsd:import schemaLocation="ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0" />
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="consulterMesuresDetaillees">
+    <wsdl:part name="parameters" element="css:consulterMesuresDetaillees"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consulterMesuresDetailleesResponse">
+    <wsdl:part name="parameters" element="css:consulterMesuresDetailleesResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="adamB2BFault">
+    <wsdl:part name="errorB2B" element="err:erreur" />
+  </wsdl:message>
+  
+  <wsdl:portType name="AdamConsultationMesuresServiceReadPortType">
+    <wsdl:operation name="consulterMesuresDetaillees">
+      <wsdl:input message="sc:consulterMesuresDetaillees"></wsdl:input>
+      <wsdl:output message="sc:consulterMesuresDetailleesResponse"></wsdl:output>
+      <wsdl:fault name="fault" message="sc:adamB2BFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="AdamConsultationMesuresServiceReadHttpBinding" type="sc:AdamConsultationMesuresServiceReadPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="consulterMesuresDetaillees">
+      <wsdlsoap:operation soapAction="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0" />
+      <wsdl:input>
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="AdamConsultationMesuresServiceRead">
+    <wsdl:port name="AdamConsultationMesuresServiceReadHttpPort" binding="sc:AdamConsultationMesuresServiceReadHttpBinding">
+      <wsdlsoap:address location="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

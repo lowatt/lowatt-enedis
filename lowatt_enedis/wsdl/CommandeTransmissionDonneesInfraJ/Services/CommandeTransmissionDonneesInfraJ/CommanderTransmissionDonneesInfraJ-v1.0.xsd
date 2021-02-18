@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" targetNamespace="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" version="1.0.0">
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+	<xs:element name="commanderTransmissionDonneesInfraJ" type="sc:CommanderTransmissionDonneesInfraJType"/>
+	<xs:element name="commanderTransmissionDonneesInfraJResponse" type="sc:CommanderTransmissionDonneesInfraJResponseType"/>
+	<xs:complexType name="CommanderTransmissionDonneesInfraJResponseType">
+		<xs:sequence>
+			<xs:element name="demandeId" type="ds:AffaireIdType"/>
+			<xs:element name="prestations" type="sc:PrestationsType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommanderTransmissionDonneesInfraJType">
+		<xs:sequence>
+			<xs:element name="demande" type="sc:DemandeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeclarationAccordClientType">
+		<xs:sequence>
+			<xs:element name="accordClient" type="ds:BooleenType"/>
+			<xs:element name="injection" type="ds:BooleenType"/>
+			<xs:element name="soutirage" type="ds:BooleenType"/>
+			<xs:choice>
+				<xs:element name="personnePhysique" type="sc:PersonnePhysiqueType"/>
+				<xs:element name="personneMorale" type="sc:PersonneMoraleType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DemandeAccesDonneesType">
+		<xs:sequence>
+			<xs:element name="declarationAccordClient" type="sc:DeclarationAccordClientType" maxOccurs="2"/>
+			<xs:element name="injection" type="ds:BooleenType"/>
+			<xs:element name="soutirage" type="ds:BooleenType"/>
+			<xs:element name="cdc" type="ds:BooleenType"/>
+			<xs:element name="idx" type="ds:BooleenType"/>
+			<xs:element name="ptd" type="ds:BooleenType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DemandeType">
+		<xs:sequence>
+			<xs:element name="donneesGenerales" type="sc:DonneesGeneralesType"/>
+			<xs:element name="accesDonnees" type="sc:DemandeAccesDonneesType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DonneesGeneralesType">
+		<xs:sequence>
+			<xs:element name="refExterne" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="objetCode" type="ds:DemandeObjetCodeType"/>
+			<xs:element name="pointId" type="ds:PointIdType"/>
+			<xs:element name="initiateurLogin" type="ds:UtilisateurLoginType"/>
+			<xs:element name="contratId" type="ds:ContratIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonneMoraleType">
+		<xs:sequence>
+			<xs:element name="denominationSociale" type="ds:Chaine255Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonnePhysiqueType">
+		<xs:sequence>
+			<xs:element name="civilite" type="ds:CiviliteAbreviationType" minOccurs="0"/>
+			<xs:element name="nom" type="ds:Chaine255Type"/>
+			<xs:element name="prenom" type="ds:Chaine255Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrestationsType">
+		<xs:sequence>
+			<xs:element name="prestation" type="sc:PrestationType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrestationType">
+		<xs:sequence>
+			<xs:element name="rang" type="ds:NbEntierType"/>
+			<xs:element name="fiche" type="dc:PrestationFicheType"/>
+			<xs:element name="option" type="dc:PrestationOptionType" minOccurs="0"/>
+			<xs:element name="cas" type="dc:PrestationCasType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

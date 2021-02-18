@@ -1,0 +1,73 @@
+<wsdl:definitions name="CommanderTransmissionHistoriqueMesures-v1.0"
+	targetNamespace="http://www.enedis.fr/sge/b2b/commandetransmissionhistoriquemesures/v1.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://www.enedis.fr/sge/b2b/commandetransmissionhistoriquemesures/v1.0"
+	xmlns:ope="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0"
+	xmlns:dic="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc">
+
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="CommanderTransmissionHistoriqueMesures-v1.0.xsd"
+				namespace="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0" />
+			<xs:import
+				schemaLocation="../../Dictionnaires/v4.0/ERDF.Dictionnaire.TypeComplexe.v4.0.xsd"
+				namespace="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" />
+		</xs:schema>
+	</wsdl:types>
+	<!-- Messages -->
+	<wsdl:message name="commanderTransmissionHistoriqueMesures">
+		<wsdl:part name="commanderTransmissionHistoriqueMesures" element="ope:commanderTransmissionHistoriqueMesures" />
+	</wsdl:message>
+	<wsdl:message name="commanderTransmissionHistoriqueMesuresResponse">
+		<wsdl:part name="commanderTransmissionHistoriqueMesuresResponse" element="ope:commanderTransmissionHistoriqueMesuresResponse" />
+	</wsdl:message>
+	<!-- Erreur -->
+	<wsdl:message name="erreur">
+		<wsdl:part name="Erreur" element="dic:erreur" />
+	</wsdl:message>
+	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="dic:enteteP" />
+	</wsdl:message>
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="dic:acquittementP" />
+	</wsdl:message>
+	<!-- portType -->
+	<wsdl:portType name="CommanderTransmissionHistoriqueMesuresPortType">
+		<wsdl:operation name="commanderTransmissionHistoriqueMesures">
+			<wsdl:input message="tns:commanderTransmissionHistoriqueMesures" name="commanderTransmissionHistoriqueMesures" />
+			<wsdl:output message="tns:commanderTransmissionHistoriqueMesuresResponse"
+				name="commanderTransmissionHistoriqueMesuresResponse" />
+			<wsdl:fault message="tns:erreur" name="erreur" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<!-- binding -->
+	<wsdl:binding name="CommanderTransmissionHistoriqueMesuresBinding" type="tns:CommanderTransmissionHistoriqueMesuresPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<!-- commanderTransmissionHistoriqueMesures -->
+		<wsdl:operation name="commanderTransmissionHistoriqueMesures">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="commanderTransmissionHistoriqueMesures">
+				<soap:body use="literal" />
+				<soap:header use="literal" part="entete" message="tns:entete" />
+			</wsdl:input>
+			<wsdl:output name="commanderTransmissionHistoriqueMesuresResponse">
+				<soap:body use="literal" />
+				<soap:header use="literal" part="acquittement" message="tns:acquittement" />
+			</wsdl:output>
+			<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- service -->
+	<wsdl:service name="commanderTransmissionHistoriqueMesures-v1">
+		<wsdl:port name="commanderTransmissionHistoriqueMesuresPortType" binding="tns:CommanderTransmissionHistoriqueMesuresBinding">
+			<soap:address
+				location="https://sge-b2b.erdf.fr/CommandeTransmissionHistoriqueMesures/v1.0" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

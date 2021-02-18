@@ -1,0 +1,67 @@
+<wsdl:definitions name="ConsultationMesures-V1.1" 
+targetNamespace="http://www.enedis.fr/sge/b2b/services/consultationmesures/v1.1" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://www.enedis.fr/sge/b2b/services/consultationmesures/v1.1" 
+xmlns:ope="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1" 
+xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="ConsulterMesures-v1.1.xsd" namespace="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1"/>
+			<xs:import schemaLocation="../../Dictionnaires/Technique/v1.0/ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+		</xs:schema>
+	</wsdl:types>
+	<!-- Messages -->
+	<wsdl:message name="consulterMesures">
+		<wsdl:part name="consulterMesures" element="ope:consulterMesures"/>
+	</wsdl:message>
+	<wsdl:message name="consulterMesuresResponse">
+		<wsdl:part name="consulterMesuresResponse" element="ope:consulterMesuresResponse"/>
+	</wsdl:message>
+	<!-- Erreur -->
+    <wsdl:message name="erreur">
+        <wsdl:part name="Erreur" element="tec:erreur"/>
+    </wsdl:message>
+  	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="tec:entete"/>
+	</wsdl:message>
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="tec:acquittement"/>
+	</wsdl:message>
+	<!-- portType -->
+	<wsdl:portType name="ConsultationMesuresPortType">
+		<wsdl:operation name="consulterMesures">
+			<wsdl:input message="tns:consulterMesures" name="consulterMesures"/>
+			<wsdl:output message="tns:consulterMesuresResponse" name="consulterMesuresResponse"/>
+			<wsdl:fault message="tns:erreur" name="erreur"/>
+		</wsdl:operation>
+	</wsdl:portType> 
+	<!-- binding -->
+	<wsdl:binding name="ConsultationMesuresBinding" type="tns:ConsultationMesuresPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- consulterMesures -->
+		<wsdl:operation name="consulterMesures">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="consulterMesures">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="entete" message="tns:entete"/>
+			</wsdl:input>
+			<wsdl:output name="consulterMesuresResponse">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+			</wsdl:output>
+	  		<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- service -->
+	<wsdl:service name="ConsultationMesuresV1.1">
+		<wsdl:port name="ConsultationMesuresPort" binding="tns:ConsultationMesuresBinding">
+			<soap:address location="https://sge-b2b.erdf.fr/ConsultationMesures/v1.1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

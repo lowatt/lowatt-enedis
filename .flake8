@@ -1,0 +1,5 @@
+[flake8]
+#format = pylint
+#ignore = W503
+max-line-length = 80
+exclude = doc/*,.tox/*,venv/*

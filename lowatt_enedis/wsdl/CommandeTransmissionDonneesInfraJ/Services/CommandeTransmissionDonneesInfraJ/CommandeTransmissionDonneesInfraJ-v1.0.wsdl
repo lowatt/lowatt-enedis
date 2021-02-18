@@ -1,0 +1,77 @@
+<wsdl:definitions name="CommandeTransmissionDonneesInfraJ-V1.0" 
+	targetNamespace="http://www.enedis.fr/sge/b2b/commandetransmissiondonneesinfraj/v1.0" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://www.enedis.fr/sge/b2b/commandetransmissiondonneesinfraj/v1.0" 
+	xmlns:ope="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" 
+	xmlns:dic="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" 
+	xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+	
+	<!-- Types -->
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xs:import schemaLocation="CommanderTransmissionDonneesInfraJ-v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" />
+			<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+			<xs:import schemaLocation="../../Dictionnaires/Technique/v1.0/ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- Messages -->
+		<wsdl:message name="commanderTransmissionDonneesInfraJ">
+		<wsdl:part name="commanderTransmissionDonneesInfraJ" element="ope:commanderTransmissionDonneesInfraJ"></wsdl:part>
+		</wsdl:message>
+		<wsdl:message name="commanderTransmissionDonneesInfraJResponse">
+		<wsdl:part name="commanderTransmissionDonneesInfraJResponse" element="ope:commanderTransmissionDonneesInfraJResponse"></wsdl:part>
+		</wsdl:message>
+
+	<!-- Erreur -->
+	<wsdl:message name="erreur">
+			<wsdl:part name="Erreur" element="tec:erreur"/>
+		</wsdl:message>
+
+		<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="tec:entete"/>
+	</wsdl:message>
+	
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="tec:acquittement"/>
+	</wsdl:message>
+		
+	<!-- portType -->
+	<wsdl:portType name="CommandeTransmissionDonneesInfraJPortType">
+		<wsdl:operation name="commanderTransmissionDonneesInfraJ">
+			<wsdl:input message="tns:commanderTransmissionDonneesInfraJ" name="commanderTransmissionDonneesInfraJ"/>
+			<wsdl:output message="tns:commanderTransmissionDonneesInfraJResponse" name="commanderTransmissionDonneesInfraJResponse"/>
+			<wsdl:fault message="tns:erreur" name="erreur" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- binding -->
+	<wsdl:binding name="CommandeTransmissionDonneesInfraJBinding" type="tns:CommandeTransmissionDonneesInfraJPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="commanderTransmissionDonneesInfraJ">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="commanderTransmissionDonneesInfraJ">
+			<soap:body use="literal" />
+			<soap:header use="literal" part="entete" message="tns:entete"/>
+			</wsdl:input>
+			<wsdl:output name="commanderTransmissionDonneesInfraJResponse">
+			<soap:body use="literal" />
+			<soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+			</wsdl:output>
+			<wsdl:fault name="erreur">
+			<soap:fault name="erreur" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		</wsdl:binding>
+
+	<!-- service -->
+	<wsdl:service name="CommandeTransmissionDonneesInfraJ-V1.0">
+		<wsdl:port name="CommandeTransmissionDonneesInfraJPort" binding="tns:CommandeTransmissionDonneesInfraJBinding">
+			<soap:address location="https://sge-b2b.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

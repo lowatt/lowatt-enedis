@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Prenom (EDF CGE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:sc="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1" 
+xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" 
+xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" 
+targetNamespace="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1">
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+	<xs:element name="consulterMesures" type="sc:ConsulterMesuresType"/>
+	<xs:complexType name="ConsulterMesuresType">
+		<xs:sequence>
+			<xs:element name="pointId" type="ds:PointIdType"/>
+			<xs:element name="loginDemandeur" type="ds:UtilisateurLoginType"/>
+			<xs:element name="contratId" type="ds:ContratIdType"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="contratConcluNouveauClientSurSite" type="ds:BooleenType"/>
+				<xs:element name="autorisationClient" type="ds:BooleenType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="consulterMesuresResponse" type="sc:ConsulterMesuresResponseType"/>
+	<xs:complexType name="ConsulterMesuresResponseType">
+		<xs:sequence>
+			<xs:element name="seriesMesuresDateesGrilleTurpe" type="sc:SeriesMesuresDateesType" minOccurs="0"/>
+			<xs:element name="seriesMesuresDateesGrilleFrn" type="sc:SeriesMesuresDateesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MesureDateeType">
+		<xs:sequence>
+			<xs:element name="valeur" type="ds:NbEntierType"/>
+			<xs:element name="dateDebut" type="ds:DateType"/>
+			<xs:element name="dateFin" type="ds:DateType"/>
+			<xs:element name="nature" type="dc:MesureNatureType"/>
+			<xs:element name="declencheur" type="dc:MesureDeclencheurType" minOccurs="0"/>
+			<xs:element name="statut" type="dc:MesureStatutType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SeriesMesuresDateesType">
+		<xs:sequence>
+			<xs:element name="serie" type="sc:SerieMesuresDateesType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SerieMesuresDateesType">
+		<xs:sequence>
+			<xs:element name="grandeurPhysique" type="dc:GrandeurPhysiqueType"/>
+			<xs:element name="classeTemporelle" type="dc:ClasseTemporelleType" minOccurs="0"/>
+			<xs:element name="calendrier" type="dc:CalendrierType" minOccurs="0"/>
+			<xs:element name="unite" type="ds:IndexUniteSymboleType"/>
+			<xs:element name="mesuresDatees" type="sc:MesuresDateesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MesuresDateesType">
+		<xs:sequence>
+			<xs:element name="mesure" type="sc:MesureDateeType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

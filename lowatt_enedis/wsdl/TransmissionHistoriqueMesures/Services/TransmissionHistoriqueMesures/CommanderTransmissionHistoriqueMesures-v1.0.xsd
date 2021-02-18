@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0" xmlns:ds="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/ds" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" targetNamespace="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0" version="1.3">
+	<xs:import namespace="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" schemaLocation="../../Dictionnaires/v4.0/ERDF.Dictionnaire.TypeComplexe.v4.0.xsd"/>
+	<xs:import namespace="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/ds" schemaLocation="../../Dictionnaires/v4.0/ERDF.Dictionnaire.TypeSimple.v4.0.xsd"/>
+	<xs:complexType name="DemandeHistoriqueMesuresType">
+		<xs:sequence>
+			<xs:element name="dateDebut" type="ds:DateType"/>
+			<xs:element name="dateFin" type="ds:DateType"/>
+			<xs:element name="declarationAccordClient" type="sc:DeclarationConsentementType"/>
+			<xs:element name="mesureType" type="ds:MesureTypeCodeType"/>
+			<xs:element name="mesureCorrigee" type="ds:BooleenType"/>
+			<xs:element name="pasCdc" type="dc:DureeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrestationType">
+		<xs:sequence>
+			<xs:element name="rang" type="ds:NbEntierType"/>
+			<xs:element name="fiche" type="dc:PrestationFicheType"/>
+			<xs:element name="option" type="dc:PrestationOptionType" minOccurs="0"/>
+			<xs:element name="cas" type="dc:PrestationCasType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeclarationConsentementType">
+		<xs:sequence>
+			<xs:element name="accordClient" type="ds:BooleenType"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="personnePhysique" type="sc:PersonnePhysiqueType"/>
+				<xs:element name="personneMorale" type="sc:PersonneMoraleType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonneMoraleType">
+		<xs:sequence>
+			<xs:element name="denominationSociale" type="ds:Chaine255Type"/>
+			<xs:element name="nomCommercial" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="activiteCodeNaf" type="ds:ActiviteCodeNafType" minOccurs="0"/>
+			<xs:element name="secteurActiviteCode" type="ds:ActiviteSecteurCodeType" minOccurs="0"/>
+			<xs:element name="etablissementPrincipalNumSiret" type="ds:EtablissementNumSiretType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HistoriqueMesuresDemandeType">
+		<xs:sequence>
+			<xs:element name="donneesGenerales" type="sc:DemandeDonneesGeneralesType"/>
+			<xs:element name="historiqueMesures" type="sc:DemandeHistoriqueMesuresType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonnePhysiqueType">
+		<xs:sequence>
+			<xs:element name="civilite" type="ds:CiviliteAbreviationType"/>
+			<xs:element name="nom" type="ds:Chaine255Type"/>
+			<xs:element name="prenom" type="ds:Chaine255Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommanderTransmissionHistoriqueMesuresResponseType">
+		<xs:sequence>
+			<xs:element name="affaireId" type="ds:AffaireIdType"/>
+			<xs:element name="prestations" type="sc:PrestationsType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="commanderTransmissionHistoriqueMesuresResponse" type="sc:CommanderTransmissionHistoriqueMesuresResponseType"/>
+	<xs:complexType name="CommanderTransmissionHistoriqueMesuresType">
+		<xs:sequence>
+			<xs:element name="demande" type="sc:HistoriqueMesuresDemandeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="commanderTransmissionHistoriqueMesures" type="sc:CommanderTransmissionHistoriqueMesuresType"/>
+	<xs:complexType name="PrestationsType">
+		<xs:sequence>
+			<xs:element name="prestation" type="sc:PrestationType" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DemandeDonneesGeneralesType">
+		<xs:sequence>
+			<xs:element name="refFrn" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="refFrnRegroupement" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="affaireLieeId" type="ds:AffaireIdType" minOccurs="0"/>
+			<xs:element name="objetCode" type="ds:DemandeObjetCodeType"/>
+			<xs:element name="contratId" type="ds:ContratIdType"/>
+			<xs:element name="pointId" type="ds:PointIdType"/>
+			<xs:element name="initiateurLogin" type="ds:AdresseEmailType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="prestations">
+		<xs:complexContent>
+			<xs:extension base="sc:PrestationsType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,9 @@
+prune doc
+include COPYING
+include README.md
+include requirements.txt
+include .flake8
+include *.ini
+recursive-include lowatt_enedis *.wsdl
+recursive-include lowatt_enedis *.xsd
+recursive-include test/data *.xml
