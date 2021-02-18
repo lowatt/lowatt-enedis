@@ -1,0 +1,86 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0"
+  targetNamespace="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0" version="1.0.0">
+  <xs:element name="consulterMesuresDetaillees" type="sc:ConsulterMesuresDetailleesType" />
+  <xs:element name="consulterMesuresDetailleesResponse" type="sc:ConsulterMesuresDetailleesResponseType" />
+  <xs:complexType name="ConsulterMesuresDetailleesType">
+    <xs:sequence>
+      <xs:element name="demande" type="sc:DemandeType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsulterMesuresDetailleesResponseType">
+    <xs:sequence>
+      <xs:element name="pointId" type="sc:PointIdType" minOccurs = "0" maxOccurs="1" />
+      <xs:element name="mesuresCorrigees" type="sc:MesuresCorrigeesType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="periode" type="sc:PeriodeType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="grandeur" type="sc:GrandeurType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DemandeType">
+    <xs:sequence>
+      <xs:element name="initiateurLogin" type="xs:string" />
+      <xs:element name="pointId" type="sc:PointIdType" />
+      <xs:element name="mesuresTypeCode" type="sc:MesuresTypeCodeType" />
+	  <xs:element name="grandeurPhysique" type="xs:string" />
+      <xs:element name="soutirage" type="xs:boolean" />
+      <xs:element name="injection" type="xs:boolean" />
+      <xs:element name="dateDebut" type="xs:date" />
+      <xs:element name="dateFin" type="xs:date" />
+      <xs:element name="mesuresPas" type="sc:MesuresPasType" minOccurs="0" />
+      <xs:element name="mesuresCorrigees" type="xs:boolean" />
+      <xs:element name="accordClient" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PeriodeType">
+    <xs:sequence>
+      <xs:element name="dateDebut" type="xs:date" />
+      <xs:element name="dateFin" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GrandeurType">
+    <xs:sequence>
+      <xs:element name="grandeurMetier" type="sc:GrandeurMetierType" />
+	  <xs:element name="grandeurPhysique" type="xs:string" />
+      <xs:element name="unite" type="xs:string" /> 
+      <xs:element name="mesure" type="sc:MesureType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MesureType">
+    <xs:sequence>
+      <xs:element name="v" type="xs:integer" nillable="true"/>
+      <xs:element name="d" type="xs:dateTime" />
+      <xs:element name="p" type="xs:string" minOccurs="0" />
+      <xs:element name="n" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:simpleType name="PointIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{14}" />
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="MesuresTypeCodeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="COURBE" />
+      <xs:enumeration value="PMAX" />
+      <xs:enumeration value="ENERGIE" />    
+   </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="MesuresCorrigeesType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BEST" />
+      <xs:enumeration value="BRUT" />
+   </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MesuresPasType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="P1D" />
+      <xs:enumeration value="P1M" />    
+   </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="GrandeurMetierType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CONS" />
+      <xs:enumeration value="PROD" />
+   </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" targetNamespace="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" version="1.0.1">
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaire/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaire/Metier/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+	<xs:complexType name="AdresseInstallationType">
+		<xs:sequence>
+			<xs:element name="escalierEtEtageEtAppartement" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="batiment" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="numeroEtNomVoie" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="lieuDit" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+			<xs:element name="codePostal" type="ds:CodePostalFrancaisType" minOccurs="0"/>
+			<xs:element name="commune" type="dc:CommuneFranceType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AlimentationPrincipaleType">
+		<xs:sequence>
+			<xs:element name="domaineTension" type="dc:DomaineTensionType"/>
+			<xs:element name="tensionLivraison" type="dc:TensionLivraisonType" minOccurs="0"/>
+			<xs:element name="modeApresCompteur" type="dc:AlimentationModeApresCompteurType" minOccurs="0"/>
+			<xs:element name="puissanceRaccordementSoutirage" type="dc:PuissanceType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompteursType">
+		<xs:sequence>
+			<xs:element name="compteur" type="sc:CompteurType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompteurType">
+		<xs:complexContent>
+			<xs:extension base="sc:EquipementElectriqueType">
+				<xs:sequence>
+					<xs:element name="matricule" type="ds:Chaine255Type" minOccurs="0"/>
+					<xs:element name="ticActivee" type="ds:BooleenType" minOccurs="0"/>
+					<xs:element name="ticStandard" type="ds:BooleenType" minOccurs="0"/>
+					<xs:element name="ticActivable" type="ds:BooleenType" minOccurs="0"/>
+					<xs:element name="plagesHeuresCreuses" type="ds:Chaine255Type" minOccurs="0"/>
+					<xs:element name="parametresTeleAcces" type="sc:ParametresTeleAccesType" minOccurs="0"/>
+					<xs:element name="programmationHoraire" type="sc:ProgrammationHoraireType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="consulterDonneesTechniquesContractuelles" type="sc:ConsulterDonneesTechniquesContractuellesType"/>
+	<xs:element name="consulterDonneesTechniquesContractuellesResponse" type="sc:ConsulterDonneesTechniquesContractuellesResponseType"/>
+	<xs:complexType name="ConsulterDonneesTechniquesContractuellesResponseType">
+		<xs:sequence>
+			<xs:element name="point" type="sc:PointType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsulterDonneesTechniquesContractuellesType">
+		<xs:sequence>
+			<xs:element name="pointId" type="ds:PointIdType"/>
+			<xs:element name="loginUtilisateur" type="ds:UtilisateurLoginType"/>
+			<xs:element name="autorisationClient" type="ds:BooleenType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DenivelePuissancesClassesTemporellesType">
+		<xs:sequence>
+			<xs:element name="classeTemporelle" type="sc:DenivelePuissancesClasseTemporelleType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DenivelePuissancesClasseTemporelleType">
+		<xs:complexContent>
+			<xs:extension base="dc:ClasseTemporelleType">
+				<xs:sequence>
+					<xs:element name="puissance" type="dc:PuissanceType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DisjoncteurType">
+		<xs:sequence>
+			<xs:element name="calibre" type="dc:DisjoncteurCalibreType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DispositifComptageType">
+		<xs:sequence>
+			<xs:element name="typeComptage" type="dc:StructureComptageType"/>
+			<xs:element name="compteurs" type="sc:CompteursType" minOccurs="0"/>
+			<xs:element name="disjoncteur" type="sc:DisjoncteurType" minOccurs="0"/>
+			<xs:element name="relais" type="sc:RelaisType" minOccurs="0"/>
+			<xs:element name="transformateurCourant" type="sc:TransformateurCourantType" minOccurs="0"/>
+			<xs:element name="transformateurTension" type="sc:TransformateurTensionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EquipementElectriqueType">
+		<xs:sequence>
+			<xs:element name="localisation" type="dc:EquipementElectriqueLocalisationType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FenetreEcouteClientType">
+		<xs:sequence>
+			<xs:element name="heureDebut" type="ds:HeureType" minOccurs="0"/>
+			<xs:element name="duree" type="dc:DureeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormuleTarifaireAcheminementEtPostesHorairesType">
+		<xs:complexContent>
+			<xs:extension base="dc:AcheminementTarifType">
+				<xs:sequence>
+					<xs:element name="programmationHoraire" type="sc:ProgrammationHoraireType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FuturesProgrammationsHorairesType">
+		<xs:sequence>
+			<xs:element name="formuleTarifaireAcheminement" type="sc:FormuleTarifaireAcheminementEtPostesHorairesType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LongueUtilisationType">
+		<xs:sequence>
+			<xs:element name="contexte" type="dc:StructureTarifaireContexteUtilisationType"/>
+			<xs:element name="forfait" type="dc:DureeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModalitesReleveType">
+		<xs:sequence>
+			<xs:element name="modeTraitement" type="dc:ReleveTraitementModeType" minOccurs="0"/>
+			<xs:element name="periodicite" type="dc:PeriodiciteType" minOccurs="0"/>
+			<xs:element name="plageReleve" type="dc:RelevePlageType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParametresTeleAccesType">
+		<xs:sequence>
+			<xs:element name="numeroTelephone" type="ds:LigneTelephoniqueNumType" minOccurs="0"/>
+			<xs:element name="numeroVoieAiguillage" type="ds:NbEntierType" minOccurs="0"/>
+			<xs:element name="etatLigneTelephonique" type="ds:Chaine15Type" minOccurs="0"/>
+			<xs:element name="fenetreEcouteClient" type="sc:FenetreEcouteClientType" minOccurs="0"/>
+			<xs:element name="cle" type="ds:CleTeleAccesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PointDonneesGeneralesType">
+		<xs:sequence>
+			<xs:element name="etatContractuel" type="dc:PointEtatContractuelType"/>
+			<xs:element name="adresseInstallation" type="sc:AdresseInstallationType"/>
+			<xs:element name="dateDerniereModificationFormuleTarifaireAcheminement" type="ds:DateType" minOccurs="0"/>
+			<xs:element name="dateDerniereAugmentationPuissanceSouscrite" type="ds:DateType" minOccurs="0"/>
+			<xs:element name="dateDerniereDiminutionPuissanceSouscrite" type="ds:DateType" minOccurs="0"/>
+			<xs:element name="segment" type="dc:PointSegmentClienteleType" minOccurs="0"/>
+			<xs:element name="niveauOuvertureServices" type="ds:NiveauOuvertureServicesCodeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PointType">
+		<xs:sequence>
+			<xs:element name="donneesGenerales" type="sc:PointDonneesGeneralesType"/>
+			<xs:element name="situationAlimentation" type="sc:SituationAlimentationType" minOccurs="0"/>
+			<xs:element name="situationComptage" type="sc:SituationComptageType" minOccurs="0"/>
+			<xs:element name="situationContractuelle" type="sc:SituationContractuelleType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="ds:PointIdType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ProgrammationHoraireType">
+		<xs:sequence>
+			<xs:element name="programmationPosteHoraire" type="sc:ProgrammationPosteHoraireType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProgrammationPosteHoraireType">
+		<xs:sequence>
+			<xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+			<xs:element name="periodesHoraires" type="ds:Chaine255Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="ds:PosteHoraireCodeType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RelaisType">
+		<xs:sequence>
+			<xs:element name="plageHeuresCreuses" type="ds:Chaine255Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SituationAlimentationType">
+		<xs:sequence>
+			<xs:element name="alimentationPrincipale" type="sc:AlimentationPrincipaleType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SituationComptageType">
+		<xs:sequence>
+			<xs:element name="dispositifComptage" type="sc:DispositifComptageType" minOccurs="0"/>
+			<xs:element name="caracteristiquesReleve" type="sc:ModalitesReleveType" minOccurs="0"/>
+			<xs:element name="modeReleve" type="dc:ReleveModeType" minOccurs="0"/>
+			<xs:element name="mediaReleve" type="dc:ReleveMediaType" minOccurs="0"/>
+			<xs:element name="futuresPlagesHeuresCreuses" type="dc:PlageHeuresCreusesType" minOccurs="0"/>
+			<xs:element name="futuresProgrammationsHoraires" type="sc:FuturesProgrammationsHorairesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SituationContractuelleType">
+		<xs:sequence>
+			<xs:element name="structureTarifaire" type="sc:StructureTarifaireType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StructureTarifaireDenivelePuissancesType">
+		<xs:sequence>
+			<xs:element name="classesTemporelles" type="sc:DenivelePuissancesClassesTemporellesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StructureTarifaireType">
+		<xs:sequence>
+			<xs:element name="formuleTarifaireAcheminement" type="dc:AcheminementTarifType" minOccurs="0"/>
+			<xs:element name="longueUtilisation" type="sc:LongueUtilisationType" minOccurs="0"/>
+			<xs:element name="puissanceSouscriteMax" type="dc:PuissanceType" minOccurs="0"/>
+			<xs:element name="denivelePuissances" type="sc:StructureTarifaireDenivelePuissancesType" minOccurs="0"/>
+			<xs:element name="calendrierFrn" type="dc:CalendrierType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransformateurCourantType">
+		<xs:sequence>
+			<xs:element name="calibre" type="dc:TransformateurCalibreType" minOccurs="0"/>
+			<xs:element name="couplage" type="dc:TransformateurCouplageType" minOccurs="0"/>
+			<xs:element name="classePrecision" type="dc:TransformateurPrecisionClasseType" minOccurs="0"/>
+			<xs:element name="position" type="dc:TransformateurCourantPositionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransformateurTensionType">
+		<xs:sequence>
+			<xs:element name="calibre" type="dc:TransformateurCalibreType" minOccurs="0"/>
+			<xs:element name="couplage" type="dc:TransformateurCouplageType" minOccurs="0"/>
+			<xs:element name="classePrecision" type="dc:TransformateurPrecisionClasseType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
