@@ -1,8 +1,8 @@
 # lowatt-enedis
 
 A command-line tool and Python library to access
-(Enedis)[https://www.enedis.fr/] SGE SOAP web-services, provided by
-(LOWATT)[https:.//www.lowatt.fr].
+[Enedis](https://www.enedis.fr/) SGE SOAP web-services, provided by
+[LOWATT](https:.//www.lowatt.fr).
 
 ## Licensing
 
@@ -69,7 +69,7 @@ Python code :
 
 ## Contributions
 
-Contribution are welcome through the (Github
-repository)[https://github.com/lowatt/lowatt_enedis].
+Contribution are welcome through the [Github
+repository](https://github.com/lowatt/lowatt_enedis).
 
 Feel free to contact for more info by writing at info@lowatt.fr.
