@@ -290,14 +290,14 @@ def point_detailed_measures(client, args):
         }, MESURES_OPTIONS_MAP),
     )
     # demande.mesuresPas uniquement pour PMAX sur C5N, valeur P1D ou P1M
-    if args.type == 'PMAX':
+    if get_option(args, 'type') == 'PMAX':
         demande.grandeurPhysique = 'PMA'
         demande.mesuresPas = 'P1D'  # 'P1M'
     else:
         del demande.mesuresPas
-        if args.type == 'ENERGIE':
+        if get_option(args, 'type') == 'ENERGIE':
             demande.grandeurPhysique = 'EA'
-        elif args.type == 'COURBE':
+        elif get_option(args, 'type') == 'COURBE':
             demande.grandeurPhysique = args.courbe_type
     demande.soutirage = _boolean(True)
     demande.injection = _boolean(False)
