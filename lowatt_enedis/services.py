@@ -298,7 +298,7 @@ def point_detailed_measures(client, args):
         if get_option(args, 'type') == 'ENERGIE':
             demande.grandeurPhysique = 'EA'
         elif get_option(args, 'type') == 'COURBE':
-            demande.grandeurPhysique = args.courbe_type
+            demande.grandeurPhysique = get_option(args, 'courbe_type')
     demande.soutirage = _boolean(True)
     demande.injection = _boolean(False)
     demande.accordClient = _boolean(True)
