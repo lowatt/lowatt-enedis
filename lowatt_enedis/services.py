@@ -330,7 +330,7 @@ def measures_resp2py(resp):
             'help': "type de mesure demandé : IDX pour les index, CDC pour la "
             "courbe de charge.",
         },
-        'pas': {
+        '--pas': {
             'choices': ['10', '30'],
             'help': "pas souhaité dans le cas des courbes de charges ; "
             "10 pour C1-C4 / 30 pour C5",
