@@ -43,33 +43,36 @@ process.
 Here is a sample code to access to the ``ConsultationMesuresDetaillees`` from
 Python code :
 
-    import datetime
-    import lowatt_enedis
-    import lowatt_enedis.services
+```python
+import datetime
+import lowatt_enedis
+import lowatt_enedis.services
 
-    config = {
-        'login': 'api.sge@lowatt.fr',
-        'certificateFile': 'fullchain.pem',
-        'keyFile': 'privkey.pem',
-        'prm': 30000123456789',
-    }
-    # get client for the 'details' service using appropriate client
-    # certificate and key
-    client = lowatt_enedis.get_client(
-        lowatt_enedis.COMMAND_SERVICE['details'][0],
-        config['certificateFile'], config['keyFile'],
-    )
-    # actually call the web to get values for the past week
-    resp = lowatt_enedis.services.point_detailed_measures(client, {
-        'login': config['login'],
-        'prm': config['prm'],
-        'type': 'COURBE',
-        'corrigee': True,
-        'from': datetime.date.today() - datetime.interval(days=7),
-        'to': datetime.date.today(),
-    })
-    # get a list of (UTC timestamp, value(W))
-    data = lowatt_enedis.services.measures_resp2py(resp)
+config = {
+    'login': 'api.sge@lowatt.fr',
+    'certificateFile': 'fullchain.pem',
+    'keyFile': 'privkey.pem',
+    'prm': '30000123456789',
+}
+# get client for the 'details' service using appropriate client
+# certificate and key
+client = lowatt_enedis.get_client(
+    lowatt_enedis.COMMAND_SERVICE['details'][0],
+    config['certificateFile'], config['keyFile'],
+)
+# actually call the web to get values for the past week
+resp = lowatt_enedis.services.point_detailed_measures(client, {
+    'login': config['login'],
+    'prm': config['prm'],
+    'type': 'COURBE',
+    'courbe_type': 'PA',
+    'corrigee': True,
+    'from': datetime.date.today() - datetime.timedelta(days=7),
+    'to': datetime.date.today(),
+})
+# get a list of (UTC timestamp, value(W))
+data = lowatt_enedis.services.measures_resp2py(resp)
+```
 
 ## Contributions
 

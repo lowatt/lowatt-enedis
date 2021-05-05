@@ -274,6 +274,10 @@ def point_measures(client, args):
         "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
         "tension (E), tout).",
     },
+    '--injection' : {
+        'action': 'store_true',
+        'help': "demander les données en injection (soutirage par défaut).",
+    },
 }, MESURES_OPTIONS))
 def cli_point_detailed_measures(client, args):
     resp = point_detailed_measures(client, args)
@@ -299,8 +303,12 @@ def point_detailed_measures(client, args):
             demande.grandeurPhysique = 'EA'
         elif get_option(args, 'type') == 'COURBE':
             demande.grandeurPhysique = get_option(args, 'courbe_type')
-    demande.soutirage = _boolean(True)
-    demande.injection = _boolean(False)
+    if get_option(args, 'injection'):
+        demande.soutirage = _boolean(False)
+        demande.injection = _boolean(True)
+    else:
+        demande.soutirage = _boolean(True)
+        demande.injection = _boolean(False)
     demande.accordClient = _boolean(True)
 
     return client.service.consulterMesuresDetaillees(demande)

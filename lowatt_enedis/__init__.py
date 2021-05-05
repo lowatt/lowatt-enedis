@@ -92,23 +92,11 @@ def handle_cli_command(command, args):
 
     """
     service, _, handler = COMMAND_SERVICE[command]
-
-    client = get_client(service, args.cert_file, args.key_file)
-
-    if args.homologation:
-        # change service URL to use enedis homologation sandbox. Could be
-        # overrided using 'location' kwargs at client construction time but
-        # would require to know the full port URL - like this we can simply
-        # replace the host part.
-        for method in iter_methods(client):
-            method.location = method.location.replace(
-                b'/sge-b2b.', b'/sge-homologation-b2b.',
-            )
-
+    client = get_client(service, args.cert_file, args.key_file, args.homologation)
     handler(client, args)
 
 
-def get_client(service, cert_file, key_file):
+def get_client(service, cert_file, key_file, homologation=False):
     # Need custom plugin to handle `xs:choice` potentially expected in service
     # arguments. Non-handling this seems to be an outstanding suds bug, see
     # https://stackoverflow.com/questions/5963404/suds-and-choice-tag
@@ -127,6 +115,13 @@ def get_client(service, cert_file, key_file):
         # misconfigured and use .enedis.fr certificate causing
         # verification failure.
         method.location = method.location.replace(b'.erdf.fr', b'.enedis.fr')
+
+        # ConsultationMesuresDetaillees location is also misconfigured
+        if method.location == b'http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0':
+            method.location = b'https://sge-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0'
+
+        if homologation:
+            method.location = method.location.replace(b'/sge-b2b.', b'/sge-homologation-b2b.')
 
     return client
 
