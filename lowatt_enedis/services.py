@@ -347,7 +347,12 @@ def point_detailed_measures(client, args):
         if get_option(args, "type") == "ENERGIE":
             demande.grandeurPhysique = "EA"
         elif get_option(args, "type") == "COURBE":
-            demande.grandeurPhysique = get_option(args, "courbe_type")
+            courbe_type = get_option(args, "courbe_type")
+            if not courbe_type:
+                raise ValueError(
+                    "l'option courbe-type doit être spécifié pour le type de mesure COURBE",
+                )
+            demande.grandeurPhysique = courbe_type
     if get_option(args, "injection"):
         demande.soutirage = _boolean(False)
         demande.injection = _boolean(True)
