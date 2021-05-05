@@ -20,26 +20,30 @@ import sys
 from suds.client import Client
 
 from lowatt_enedis import (
-    COMMAND_SERVICE, WSException, handle_cli_command, init_cli, wsdl,
+    COMMAND_SERVICE,
+    WSException,
+    handle_cli_command,
+    init_cli,
+    wsdl,
 )
 import lowatt_enedis.services  # noqa: register services
 
 
 def _cli_parser():
     parser = argparse.ArgumentParser(
-        description='CLI access to Enedis SGE web-services.')
+        description="CLI access to Enedis SGE web-services.",
+    )
 
-    subparsers = parser.add_subparsers(
-        dest='command')
+    subparsers = parser.add_subparsers(dest="command")
     init_cli(subparsers)
 
     subparser = subparsers.add_parser(
-        'wsdl',
-        help='Display WSDL information about some ws command.',
+        "wsdl",
+        help="Display WSDL information about some ws command.",
     )
     subparser.add_argument(
-        'service_command',
-        help='Command name.',
+        "service_command",
+        help="Command name.",
     )
 
     return parser
@@ -49,7 +53,7 @@ def run():
     parser = _cli_parser()
     args = parser.parse_args()
 
-    if args.command == 'wsdl':
+    if args.command == "wsdl":
         try:
             service_name = COMMAND_SERVICE[args.service_command][0]
         except KeyError:
@@ -71,5 +75,5 @@ def run():
     sys.exit(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()

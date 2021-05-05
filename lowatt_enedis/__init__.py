@@ -38,10 +38,8 @@ logging.basicConfig(level=logging.INFO)
 # logging.getLogger('suds.transport').setLevel(logging.DEBUG)
 
 
-WSDL_DIR = PurePath(__file__).parent.joinpath('wsdl')
-SERVICES = {
-    x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")
-}
+WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
+SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")}
 COMMAND_SERVICE = {}
 
 
@@ -52,45 +50,46 @@ def wsdl(service_name):
     except KeyError:
         raise KeyError(
             "Unknown service name {!r}, available services are {}".format(
-                service_name, ', '.join(sorted(SERVICES)),
+                service_name,
+                ", ".join(sorted(SERVICES)),
             ),
         ) from None
 
 
 def init_cli(subparsers):
-    """Init CLI subparsers according to registered services.
-
-    """
+    """Init CLI subparsers according to registered services."""
     for command, (service, options, _) in COMMAND_SERVICE.items():
         subparser = subparsers.add_parser(
             command,
             help='Query the "{}" web-service.'.format(service),
         )
         subparser.add_argument(
-            'login',
-            help='User login.',
+            "login",
+            help="User login.",
         )
         for option_name, option_kwargs in options.items():
             subparser.add_argument(option_name, **option_kwargs)
 
         subparser.add_argument(
-            '--cert-file', default='fullchain.pem',
-            help='Client certificate file.',
+            "--cert-file",
+            default="fullchain.pem",
+            help="Client certificate file.",
         )
         subparser.add_argument(
-            '--key-file', default='privkey.pem',
-            help='Client private key file.',
+            "--key-file",
+            default="privkey.pem",
+            help="Client private key file.",
         )
         subparser.add_argument(
-            '--homologation', default=False, action='store_true',
-            help='Change service host to use homologation sandbox.',
+            "--homologation",
+            default=False,
+            action="store_true",
+            help="Change service host to use homologation sandbox.",
         )
 
 
 def handle_cli_command(command, args):
-    """Run `command` service using configuration in `args`.
-
-    """
+    """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
     handler(client, args)
@@ -114,21 +113,29 @@ def get_client(service, cert_file, key_file, homologation=False):
         # some services are still using .erdf.fr domain, but it's
         # misconfigured and use .enedis.fr certificate causing
         # verification failure.
-        method.location = method.location.replace(b'.erdf.fr', b'.enedis.fr')
+        method.location = method.location.replace(b".erdf.fr", b".enedis.fr")
 
         # ConsultationMesuresDetaillees location is also misconfigured
-        if method.location == b'http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0':
-            method.location = b'https://sge-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0'
+        if (
+            method.location
+            == b"http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0"
+        ):
+            method.location = (
+                b"https://sge-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0"
+            )
 
         if homologation:
-            method.location = method.location.replace(b'/sge-b2b.', b'/sge-homologation-b2b.')
+            method.location = method.location.replace(
+                b"/sge-b2b.",
+                b"/sge-homologation-b2b.",
+            )
 
     return client
 
 
 class _SetChoicePlugin(DocumentPlugin):
     def __init__(self):
-        self.choosen_tags = {'autorisationClient'}
+        self.choosen_tags = {"autorisationClient"}
 
     def parsed(self, context):
         self._rec_set_choices(context.document)
@@ -137,7 +144,7 @@ class _SetChoicePlugin(DocumentPlugin):
         for i in document.children:
             if i.name == "choice":
                 for j in i.children:
-                    if j.getAttribute('name').value in self.choosen_tags:
+                    if j.getAttribute("name").value in self.choosen_tags:
                         i.parent.append(j)
 
             else:
@@ -163,30 +170,31 @@ class WSException(Exception):
     pass
 
 
-def ws(service, header_ns_prefix='ns4'):
+def ws(service, header_ns_prefix="ns4"):
     """Decorator around sge web service call, returning a wrapper that properly set
     SOAP headers required by the service
 
     """
+
     def decorator(func):
-        service_version = service.split('-')[1][1:]
+        service_version = service.split("-")[1][1:]
 
         @wraps(func)
         def call_service(client, args):
             client.xstypes_map = build_xstypes_map(client)
-            header = client.factory.create('{}:entete'.format(header_ns_prefix))
+            header = client.factory.create("{}:entete".format(header_ns_prefix))
             header.version = service_version
             header.infoDemandeur = client.factory.create(
-                '{}:infoDemandeur'.format(header_ns_prefix),
+                "{}:infoDemandeur".format(header_ns_prefix),
             )
-            header.infoDemandeur.loginDemandeur = get_option(args, 'login')
+            header.infoDemandeur.loginDemandeur = get_option(args, "login")
             client.set_options(soapheaders=header)
 
             try:
                 return func(client, args)
             except WebFault as exc:
                 res = exc.fault.detail.erreur.resultat
-                raise WSException('{}: {}'.format(res._code, res.value))
+                raise WSException("{}: {}".format(res._code, res.value))
 
         return call_service
 
@@ -201,7 +209,7 @@ def create_from_options(client, args, xstype_name, options_map):
     """
     xstype, prefix = client.xstypes_map[xstype_name]
     children_map = xstype_children_map(xstype)
-    instance = client.factory.create('{}:{}'.format(prefix, xstype_name))
+    instance = client.factory.create("{}:{}".format(prefix, xstype_name))
 
     has_value = False
     for option in options_map:
@@ -211,17 +219,15 @@ def create_from_options(client, args, xstype_name, options_map):
         try:
             element = children_map[element_name]
         except KeyError as exc:
-            exc.args = (
-                "No element {} in {}".format(exc, list(children_map)),
-            )
+            exc.args = ("No element {} in {}".format(exc, list(children_map)),)
             raise
 
         if value is not None:
-            if element.type[0] == 'BooleenType':
-                value = 'true' if value else 'false'
+            if element.type[0] == "BooleenType":
+                value = "true" if value else "false"
             setattr(instance, element_name, value)
             has_value = True
-        elif element.min == '0':
+        elif element.min == "0":
             if hasattr(instance, element_name):
                 # factory created some default subelement (e.g. xsd:enum) but
                 # enedis web-service doesn't like those empty tags
@@ -274,8 +280,7 @@ def xstype_children_map(xstype):
 
 
 def iter_methods(client):
-    """Return an iterator on exposerd methods suds instances.
-    """
+    """Return an iterator on exposerd methods suds instances."""
     for service in client.wsdl.services:
         for port in service.ports:
             for method in port.methods.values():

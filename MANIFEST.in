@@ -1,6 +1,7 @@
 prune doc
 include COPYING
 include README.md
+include pyproject.toml
 include requirements.txt
 include .flake8
 include *.ini
