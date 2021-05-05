@@ -128,6 +128,10 @@ def get_client(service, cert_file, key_file):
         # verification failure.
         method.location = method.location.replace(b'.erdf.fr', b'.enedis.fr')
 
+        # ConsultationMesuresDetaillees location is also misconfigured
+        if method.location == b'http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0':
+            method.location = b'https://sge-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0'
+
     return client
 
 
