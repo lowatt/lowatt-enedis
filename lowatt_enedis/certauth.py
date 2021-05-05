@@ -44,7 +44,9 @@ class _HTTPSClientAuthHandler(HTTPSHandler):
 
     def get_connection(self, host, timeout=300):
         return HTTPSConnection(
-            host, key_file=self.key_file, cert_file=self.cert_file,
+            host,
+            key_file=self.key_file,
+            cert_file=self.cert_file,
         )
 
 
@@ -65,6 +67,7 @@ class HTTPSClientCertTransport(HttpTransport):
 
     .. _SUDS: https://suds-py3.readthedocs.io/en/latest
     """
+
     def __init__(self, cert_file, key_file, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.url_open = build_opener(

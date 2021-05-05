@@ -1,5 +1,25 @@
 [flake8]
 #format = pylint
-#ignore = W503
-max-line-length = 80
-exclude = doc/*,.tox/*,venv/*
+ignore =
+  A003, # attribute overriding builtin name
+  B006, # [bugbear] Do not use mutable data structures for argument defaults (I choose by myself)
+  E123, # closing bracket does not match indentation of opening bracket's line (disagree with emacs python mode)
+  E126, # continuation line over-indented for hanging indent line (disagree with emacs python mode)
+  E226, # missing whitespace around arithmetic operator (disagree when in parameter)
+  P101, # [string-format] format string does contain unindexed parameters (don't care of py2.6)
+  P103, # [string-format] other string does contain unindexed parameters
+  P102, # [string-format] docstring does contain unindexed parameters
+  W503, # Line break occurred before a binary operator (to keep operators aligned)
+max-line-length = 100
+exclude = doc/*,.tox/*,.eggs
+rst-roles =
+  class,
+  envvar,
+  func,
+  meth,
+  ref,
+rst-directives =
+  autoattribute,
+  autoclass,
+  autofunction,
+  automethod,
