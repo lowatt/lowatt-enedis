@@ -1,6 +1,6 @@
 name: tox
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
       matrix:
         include:
           - tox_env: check-manifest
-          - tox_env: flake8
+          - tox_env: lint
           - tox_env: py37
           - tox_env: py38
           - tox_env: py39
