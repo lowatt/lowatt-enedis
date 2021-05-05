@@ -51,7 +51,7 @@ Python code :
         'login': 'api.sge@lowatt.fr',
         'certificateFile': 'fullchain.pem',
         'keyFile': 'privkey.pem',
-        'prm': 30000123456789',
+        'prm': '30000123456789',
     }
     # get client for the 'details' service using appropriate client
     # certificate and key
@@ -64,8 +64,9 @@ Python code :
         'login': config['login'],
         'prm': config['prm'],
         'type': 'COURBE',
+        'courbe_type': 'PA',
         'corrigee': True,
-        'from': datetime.date.today() - datetime.interval(days=7),
+        'from': datetime.date.today() - datetime.timedelta(days=7),
         'to': datetime.date.today(),
     })
     # get a list of (UTC timestamp, value(W))
