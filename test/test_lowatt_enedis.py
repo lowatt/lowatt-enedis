@@ -108,14 +108,14 @@ def test_cli_help():
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 
-def test_service_details_response():
+def test_detailed_measures_resp2py():
     service, options, handler = le.COMMAND_SERVICE["details"]
     client = Client(le.wsdl(service))
     soap = SoapClient(client, client.service.consulterMesuresDetaillees.method)
     resp_file = os.path.join(DATA_DIR, "consulterMesuresDetailleesResponse.xml")
     with open(resp_file) as stream:
         resp = soap.succeeded(soap.method.binding.input, stream.read())
-        data = list(le.services.measures_resp2py(resp))
+        data = list(le.services.detailed_measures_resp2py(resp))
         assert len(data) == 8
         assert data[0] == (
             datetime.datetime(2020, 2, 29, 23, tzinfo=le.services.UTC),
