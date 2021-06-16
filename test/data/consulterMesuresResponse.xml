@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header>
+    <v1:acquittement xmlns:v1="http://www.enedis.fr/sge/b2b/technique/v1.0">
+      <resultat code="SGT200">Succès
+      </resultat>
+      <infoFonctionnelles>
+        <pointId>07151808919109
+        </pointId>
+      </infoFonctionnelles>
+      <infoDemandeur>
+        <loginDemandeur>api.sge@lowatt.fr
+        </loginDemandeur>
+      </infoDemandeur>
+    </v1:acquittement>
+  </soapenv:Header>
+  <soapenv:Body>
+    <v1:consulterMesuresResponse xmlns:v1="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1">
+      <seriesMesuresDateesGrilleTurpe>
+        <serie>
+          <grandeurPhysique code="EA">
+            <libelle>Energie Active
+            </libelle>
+          </grandeurPhysique>
+          <classeTemporelle code="BASE">
+            <libelle>Base
+            </libelle>
+          </classeTemporelle>
+          <calendrier code="DI000001">
+            <libelle>Base
+            </libelle>
+          </calendrier>
+          <unite>kWh</unite>
+          <mesuresDatees>
+            <mesure>
+              <valeur>483
+              </valeur>
+              <dateDebut>2021-02-03
+              </dateDebut>
+              <dateFin>2021-03-05
+              </dateFin>
+              <nature code="REEL">
+                <libelle>Réelle
+                </libelle>
+              </nature>
+              <declencheur code="CYCLIQUE">
+                <libelle>Publication cyclique
+                </libelle>
+              </declencheur>
+              <statut code="INITIALE">
+                <libelle>Initiale
+                </libelle>
+              </statut>
+            </mesure>
+            <mesure>
+              <valeur>494
+              </valeur>
+              <dateDebut>2021-01-05
+              </dateDebut>
+              <dateFin>2021-02-03
+              </dateFin>
+              <nature code="REEL">
+                <libelle>Réelle
+                </libelle>
+              </nature>
+              <declencheur code="CYCLIQUE">
+                <libelle>Publication cyclique
+                </libelle>
+              </declencheur>
+              <statut code="INITIALE">
+                <libelle>Initiale
+                </libelle>
+              </statut>
+            </mesure>
+          </mesuresDatees>
+        </serie>
+      </seriesMesuresDateesGrilleTurpe>
+      <seriesMesuresDateesGrilleFrn>
+        <serie>
+          <grandeurPhysique code="EA">
+            <libelle>Energie Active
+            </libelle>
+          </grandeurPhysique>
+          <classeTemporelle code="BASE">
+            <libelle>BASE
+            </libelle>
+          </classeTemporelle>
+          <calendrier code="FC000013">
+            <libelle>FC000013
+            </libelle>
+          </calendrier>
+          <unite>kWh</unite>
+          <mesuresDatees>
+            <mesure>
+              <valeur>483
+              </valeur>
+              <dateDebut>2021-02-03
+              </dateDebut>
+              <dateFin>2021-03-05
+              </dateFin>
+              <nature code="REEL">
+                <libelle>Réelle
+                </libelle>
+              </nature>
+              <declencheur code="CYCLIQUE">
+                <libelle>Publication cyclique
+                </libelle>
+              </declencheur>
+              <statut code="INITIALE">
+                <libelle>Initiale
+                </libelle>
+              </statut>
+            </mesure>
+            <mesure>
+              <valeur>494
+              </valeur>
+              <dateDebut>2021-01-05
+              </dateDebut>
+              <dateFin>2021-02-03
+              </dateFin>
+              <nature code="REEL">
+                <libelle>Réelle
+                </libelle>
+              </nature>
+              <declencheur code="CYCLIQUE">
+                <libelle>Publication cyclique
+                </libelle>
+              </declencheur>
+              <statut code="INITIALE">
+                <libelle>Initiale
+                </libelle>
+              </statut>
+            </mesure>
+          </mesuresDatees>
+        </serie>
+      </seriesMesuresDateesGrilleFrn>
+    </v1:consulterMesuresResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -281,6 +281,54 @@ def point_measures(client, args):
     )
 
 
+def parse_date(value):
+    return date(*(int(part) for part in value.split("-")))
+
+
+def measures_resp2py(resp):
+    """Return a list of dictionaries given a response from
+    ConsultationMesures web-service. Each dict contains the following keys:
+    - `grille`: "frn" or "turpe",
+    - `grandeurPhysique`: "EA" for active energy,
+    - `classeTemporelle`: eg. "BASE", "HP", "HC",
+    - `calendrier`: calendar id,
+    - `unit`: "kWh",
+    - `mesures`: a list of point, each one being a 5-uple with:
+
+      - begin date,
+      - end date,
+      - value,
+      - nature,
+      - trigger,
+      - status.
+    """
+    for grille, series in (
+        ("turpe", resp.seriesMesuresDateesGrilleTurpe.serie),
+        ("frn", resp.seriesMesuresDateesGrilleFrn.serie),
+    ):
+        for serie in series:
+            mesures = []
+            for point in serie.mesuresDatees.mesure:
+                mesures.append(
+                    (
+                        parse_date(point.dateDebut),
+                        parse_date(point.dateFin),
+                        int(point.valeur),
+                        point.nature._code,
+                        point.declencheur._code,
+                        point.statut._code,
+                    ),
+                )
+            yield {
+                "grille": grille,
+                "grandeurPhysique": serie.grandeurPhysique._code,
+                "classeTemporelle": serie.classeTemporelle._code,
+                "calendrier": serie.calendrier._code,
+                "unit": serie.unite,
+                "mesures": mesures,
+            }
+
+
 @register(
     "details",
     "ConsultationMesuresDetaillees-v2.0",
