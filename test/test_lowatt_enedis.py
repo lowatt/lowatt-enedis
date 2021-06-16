@@ -121,3 +121,65 @@ def test_detailed_measures_resp2py():
             datetime.datetime(2020, 2, 29, 23, tzinfo=le.services.UTC),
             100,
         )
+
+
+def test_measures_resp2py():
+    service, options, handler = le.COMMAND_SERVICE["measures"]
+    client = Client(le.wsdl(service))
+    soap = SoapClient(client, client.service.consulterMesures.method)
+    resp_file = os.path.join(DATA_DIR, "consulterMesuresResponse.xml")
+    with open(resp_file) as stream:
+        resp = soap.succeeded(soap.method.binding.input, stream.read())
+        data = list(le.services.measures_resp2py(resp))
+        assert data == [
+            {
+                "calendrier": "DI000001",
+                "classeTemporelle": "BASE",
+                "grandeurPhysique": "EA",
+                "grille": "turpe",
+                "mesures": [
+                    (
+                        datetime.date(2021, 2, 3),
+                        datetime.date(2021, 3, 5),
+                        483,
+                        "REEL",
+                        "CYCLIQUE",
+                        "INITIALE",
+                    ),
+                    (
+                        datetime.date(2021, 1, 5),
+                        datetime.date(2021, 2, 3),
+                        494,
+                        "REEL",
+                        "CYCLIQUE",
+                        "INITIALE",
+                    ),
+                ],
+                "unit": "kWh",
+            },
+            {
+                "calendrier": "FC000013",
+                "classeTemporelle": "BASE",
+                "grandeurPhysique": "EA",
+                "grille": "frn",
+                "mesures": [
+                    (
+                        datetime.date(2021, 2, 3),
+                        datetime.date(2021, 3, 5),
+                        483,
+                        "REEL",
+                        "CYCLIQUE",
+                        "INITIALE",
+                    ),
+                    (
+                        datetime.date(2021, 1, 5),
+                        datetime.date(2021, 2, 3),
+                        494,
+                        "REEL",
+                        "CYCLIQUE",
+                        "INITIALE",
+                    ),
+                ],
+                "unit": "kWh",
+            },
+        ]
