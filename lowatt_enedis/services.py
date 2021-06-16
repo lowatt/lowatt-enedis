@@ -353,18 +353,18 @@ def point_detailed_measures(client, args):
                     "l'option courbe-type doit être spécifié pour le type de mesure COURBE",
                 )
             demande.grandeurPhysique = courbe_type
-    if get_option(args, "injection"):
-        demande.soutirage = _boolean(False)
-        demande.injection = _boolean(True)
-    else:
-        demande.soutirage = _boolean(True)
-        demande.injection = _boolean(False)
+    injection = get_option(args, "injection")
+    demande.soutirage = _boolean(not injection)
+    demande.injection = _boolean(injection)
     demande.accordClient = _boolean(True)
 
     return client.service.consulterMesuresDetaillees(demande)
 
 
-def measures_resp2py(resp):
+def detailed_measures_resp2py(resp):
+    """Return an iterator on (UTC tz naive datetime, value) given a response from
+    ConsultationMesuresDetaillees web-service.
+    """
     # start = resp.periode.dateDebut
     # end = resp.periode.dateFin
     assert len(resp.grandeur) == 1
