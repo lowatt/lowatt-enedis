@@ -304,10 +304,12 @@ def measures_resp2py(resp):
       - trigger,
       - status.
     """
-    for grille, series in (
-        ("turpe", resp.seriesMesuresDateesGrilleTurpe.serie),
-        ("frn", resp.seriesMesuresDateesGrilleFrn.serie),
-    ):
+    for attr in ("seriesMesuresDateesGrilleTurpe", "seriesMesuresDateesGrilleFrn"):
+        try:
+            series = getattr(resp, attr).serie
+        except AttributeError:
+            continue
+        grille = attr.split("Grille")[1].lower()
         for serie in series:
             mesures = []
             for point in serie.mesuresDatees.mesure:
@@ -321,11 +323,15 @@ def measures_resp2py(resp):
                         point.statut._code,
                     ),
                 )
+            try:
+                calendrier = serie.calendrier._code
+            except AttributeError:
+                calendrier = None
             yield {
                 "grille": grille,
                 "grandeurPhysique": serie.grandeurPhysique._code,
                 "classeTemporelle": serie.classeTemporelle._code,
-                "calendrier": serie.calendrier._code,
+                "calendrier": calendrier,
                 "unit": serie.unite,
                 "mesures": mesures,
             }
