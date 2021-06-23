@@ -269,15 +269,17 @@ def point_technical_data(client, args):
         },
     },
 )
+def cli_point_measures(client, args):
+    print(point_measures(client, args))
+
+
 @ws("ConsultationMesures-v1.1")
 def point_measures(client, args):
-    print(
-        client.service.consulterMesures(
-            get_option(args, "prm"),
-            get_option(args, "login"),
-            get_option(args, "contrat"),
-            _boolean(get_option(args, "autorisation")),
-        ),
+    return client.service.consulterMesures(
+        get_option(args, "prm"),
+        get_option(args, "login"),
+        get_option(args, "contrat"),
+        _boolean(get_option(args, "autorisation")),
     )
 
 
