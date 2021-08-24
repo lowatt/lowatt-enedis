@@ -2,7 +2,7 @@
 
 A command-line tool and Python library to access
 [Enedis](https://www.enedis.fr/) SGE SOAP web-services, provided by
-[LOWATT](https:.//www.lowatt.fr).
+[LOWATT](https://www.lowatt.fr).
 
 Disclaimer: this package is *NOT* affiliated to Enedis, but provided by Lowatt
 in case it could be useful to other users of the SGE web-services provided by
