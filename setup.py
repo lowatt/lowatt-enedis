@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 #
-# Copyright (c) 2019 by Sylvain Thénault sylvain@lowatt.fr
+# Copyright (c) 2019 by Lowatt info@lowatt.fr
 #
 # This program is part of lowatt_enedis, which is *NOT* free software.
 
