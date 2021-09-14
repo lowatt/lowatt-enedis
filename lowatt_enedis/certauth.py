@@ -27,6 +27,7 @@ a client SSL certificate.
 
 """
 
+import ssl
 from http.client import HTTPSConnection
 from urllib.request import HTTPSHandler, build_opener
 
@@ -43,11 +44,9 @@ class _HTTPSClientAuthHandler(HTTPSHandler):
         return self.do_open(self.get_connection, req)
 
     def get_connection(self, host, timeout=300):
-        return HTTPSConnection(
-            host,
-            key_file=self.key_file,
-            cert_file=self.cert_file,
-        )
+        context = ssl.SSLContext()
+        context.load_cert_chain(self.cert_file, self.key_file)
+        return HTTPSConnection(host, context=context)
 
 
 class HTTPSClientCertTransport(HttpTransport):
