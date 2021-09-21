@@ -21,8 +21,8 @@
 Command line interface to enedis SGE web-services.
 """
 
-from functools import wraps
 import logging
+from functools import wraps
 from pathlib import Path, PurePath
 
 from suds import WebFault
@@ -207,8 +207,16 @@ def ws(service, header_ns_prefix="ns4"):
             try:
                 return func(client, args)
             except WebFault as exc:
-                res = exc.fault.detail.erreur.resultat
-                raise WSException("{}: {}".format(res._code, res.value))
+                fault = exc.fault
+                try:
+                    detail = fault.detail
+                except AttributeError:
+                    # AttributeError: 'Fault' object has no attribute 'detail',
+                    # at least when server's response isn't properly parseable.
+                    raise WSException(str(exc))
+                else:
+                    res = detail.erreur.resultat
+                    raise WSException("{}: {}".format(res._code, res.value))
 
         return call_service
 
