@@ -22,6 +22,7 @@ SGE web-service mapping to plug them into the CLI.
 """
 
 from datetime import date, timedelta
+
 from dateutil import tz
 
 from . import create_from_options, dict_from_dicts, get_option, register, ws

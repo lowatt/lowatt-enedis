@@ -1,11 +1,11 @@
 import contextlib
-from dataclasses import dataclass
 import datetime
 import io
 import os
-import pkg_resources
 import sys
+from dataclasses import dataclass
 
+import pkg_resources
 import pytest
 from suds.client import Client, SoapClient
 
