@@ -224,8 +224,7 @@ def search_point(client, args):
     )
     if address is not None:
         criteria.adresseInstallation = address
-
-    print(client.service.rechercherPoint(criteria, get_option(args, "login")))
+    return client.service.rechercherPoint(criteria, get_option(args, "login"))
 
 
 @register(
@@ -244,12 +243,10 @@ def search_point(client, args):
 )
 @ws("ConsultationDonneesTechniquesContractuelles-v1.0")
 def point_technical_data(client, args):
-    print(
-        client.service.consulterDonneesTechniquesContractuelles(
-            get_option(args, "prm"),
-            get_option(args, "login"),
-            _boolean(get_option(args, "autorisation")),
-        ),
+    return client.service.consulterDonneesTechniquesContractuelles(
+        get_option(args, "prm"),
+        get_option(args, "login"),
+        _boolean(get_option(args, "autorisation")),
     )
 
 
@@ -271,7 +268,7 @@ def point_technical_data(client, args):
     },
 )
 def cli_point_measures(client, args):
-    print(point_measures(client, args))
+    return point_measures(client, args)
 
 
 @ws("ConsultationMesures-v1.1")
@@ -376,8 +373,7 @@ def measures_resp2py(resp):
     ),
 )
 def cli_point_detailed_measures(client, args):
-    resp = point_detailed_measures(client, args)
-    print(resp)
+    return point_detailed_measures(client, args)
 
 
 @ws("ConsultationMesuresDetaillees-v2.0", header_ns_prefix="ns2")
@@ -507,7 +503,7 @@ def point_cmd_histo(client, args):
         "ns0:DeclarationConsentementType",
     )
 
-    print(client.service.commanderTransmissionHistoriqueMesures(demande))
+    return client.service.commanderTransmissionHistoriqueMesures(demande)
 
 
 @register(
@@ -583,8 +579,7 @@ def point_cmd_infra_j(client, args):
     )
     accord.injection = _boolean(False)
     accord.soutirage = _boolean(False)
-
-    print(client.service.commanderTransmissionDonneesInfraJ(demande))
+    return client.service.commanderTransmissionDonneesInfraJ(demande)
 
 
 def _boolean(b):

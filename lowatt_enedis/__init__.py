@@ -21,10 +21,14 @@
 Command line interface to enedis SGE web-services.
 """
 
+import json
 import logging
+import sys
 from functools import wraps
 from pathlib import Path, PurePath
+from typing import Any
 
+import suds.sudsobject
 from suds import WebFault
 from suds.client import Client
 from suds.plugin import DocumentPlugin
@@ -86,13 +90,30 @@ def init_cli(subparsers):
             action="store_true",
             help="Change service host to use homologation sandbox.",
         )
+        subparser.add_argument(
+            "--output",
+            choices=["print", "xml", "json"],
+            help="Output type. Default is to print the suds object",
+        )
+
+
+def json_encode_default(obj: Any) -> dict[Any, Any]:
+    if isinstance(obj, suds.sudsobject.Object):
+        return suds.sudsobject.asdict(obj)
+    raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
 def handle_cli_command(command, args):
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
-    handler(client, args)
+    obj = handler(client, args)
+    if args.output == "xml":
+        print(client.last_received().str())  # noqa: T001
+    elif args.output == "json":
+        json.dump(obj, sys.stdout, indent=2, default=json_encode_default)
+    else:
+        print(obj)  # noqa: T001
 
 
 def get_client(service, cert_file, key_file, homologation=False):

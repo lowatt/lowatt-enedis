@@ -19,6 +19,7 @@ class args:
     key_file = None
     login = "bob"
     homologation = False
+    output = "print"
 
 
 @contextlib.contextmanager
