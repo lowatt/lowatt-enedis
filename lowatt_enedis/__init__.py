@@ -27,7 +27,7 @@ from pathlib import Path, PurePath
 
 from suds import WebFault
 from suds.client import Client
-from suds.plugin import DocumentPlugin, MessagePlugin
+from suds.plugin import DocumentPlugin
 
 from .certauth import HTTPSClientCertTransport
 
@@ -86,36 +86,22 @@ def init_cli(subparsers):
             action="store_true",
             help="Change service host to use homologation sandbox.",
         )
-        subparser.add_argument(
-            "--dump",
-            action="store_true",
-            help="Dump XML response into /tmp/enedis-response.xml.",
-        )
 
 
 def handle_cli_command(command, args):
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
-    client = get_client(
-        service,
-        args.cert_file,
-        args.key_file,
-        args.homologation,
-        args.dump,
-    )
+    client = get_client(service, args.cert_file, args.key_file, args.homologation)
     handler(client, args)
 
 
-def get_client(service, cert_file, key_file, homologation=False, dump=False):
+def get_client(service, cert_file, key_file, homologation=False):
     # Need custom plugin to handle `xs:choice` potentially expected in service
     # arguments. Non-handling this seems to be an outstanding suds bug, see
     # https://stackoverflow.com/questions/5963404/suds-and-choice-tag
-    plugins = [_SetChoicePlugin()]
-    if dump:
-        plugins.append(StoreXMLResponsePlugin())
     client = Client(
         wsdl(service),
-        plugins=plugins,
+        plugins=[_SetChoicePlugin()],
         transport=HTTPSClientCertTransport(cert_file, key_file),
     )
     # XXX unclear why this has to be done to properly consider port's
@@ -319,9 +305,3 @@ def dict_from_dicts(*dicts):
         result.update(d)
 
     return result
-
-
-class StoreXMLResponsePlugin(MessagePlugin):
-    def received(self, context):
-        with open("/tmp/enedis-response.xml", "wb") as stream:
-            stream.write(context.reply)
