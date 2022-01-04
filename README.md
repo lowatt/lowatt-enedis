@@ -49,7 +49,7 @@ import lowatt_enedis
 import lowatt_enedis.services
 
 config = {
-    'login': 'api.sge@lowatt.fr',
+    'login': 'you@example.com',
     'certificateFile': 'fullchain.pem',
     'keyFile': 'privkey.pem',
     'prm': '30000123456789',
