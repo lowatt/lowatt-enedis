@@ -26,7 +26,7 @@ import logging
 import sys
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any
+from typing import Any, Dict, Tuple
 
 import suds.sudsobject
 from suds import WebFault
@@ -44,7 +44,7 @@ logging.basicConfig(level=logging.INFO)
 
 WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
 SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")}
-COMMAND_SERVICE = {}
+COMMAND_SERVICE: Dict[str, Tuple[str, Dict[str, Any], Any]] = {}
 
 
 def wsdl(service_name):
@@ -97,7 +97,7 @@ def init_cli(subparsers):
         )
 
 
-def json_encode_default(obj: Any) -> dict[Any, Any]:
+def json_encode_default(obj: Any) -> Any:
     if isinstance(obj, suds.sudsobject.Object):
         return suds.sudsobject.asdict(obj)
     raise TypeError(f"Object {obj!r} is not JSON serializable")
@@ -154,7 +154,7 @@ def get_client(service, cert_file, key_file, homologation=False):
     return client
 
 
-class _SetChoicePlugin(DocumentPlugin):
+class _SetChoicePlugin(DocumentPlugin):  # type: ignore[misc]
     def __init__(self):
         self.choosen_tags = {"autorisationClient"}
 
