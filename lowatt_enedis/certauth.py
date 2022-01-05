@@ -49,7 +49,7 @@ class _HTTPSClientAuthHandler(HTTPSHandler):
         return HTTPSConnection(host, context=context)
 
 
-class HTTPSClientCertTransport(HttpTransport):
+class HTTPSClientCertTransport(HttpTransport):  # type: ignore[misc]
     """SUDS_ transport class to connect through an HTTPS connection using
     a client SSL certificate.
 

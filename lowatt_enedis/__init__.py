@@ -21,13 +21,17 @@
 Command line interface to enedis SGE web-services.
 """
 
+import json
 import logging
+import sys
 from functools import wraps
 from pathlib import Path, PurePath
+from typing import Any, Dict, Tuple
 
+import suds.sudsobject
 from suds import WebFault
 from suds.client import Client
-from suds.plugin import DocumentPlugin, MessagePlugin
+from suds.plugin import DocumentPlugin
 
 from .certauth import HTTPSClientCertTransport
 
@@ -40,7 +44,7 @@ logging.basicConfig(level=logging.INFO)
 
 WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
 SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")}
-COMMAND_SERVICE = {}
+COMMAND_SERVICE: Dict[str, Tuple[str, Dict[str, Any], Any]] = {}
 
 
 def wsdl(service_name):
@@ -87,35 +91,38 @@ def init_cli(subparsers):
             help="Change service host to use homologation sandbox.",
         )
         subparser.add_argument(
-            "--dump",
-            action="store_true",
-            help="Dump XML response into /tmp/enedis-response.xml.",
+            "--output",
+            choices=["print", "xml", "json"],
+            help="Output type. Default is to print the suds object",
         )
+
+
+def json_encode_default(obj: Any) -> Any:
+    if isinstance(obj, suds.sudsobject.Object):
+        return suds.sudsobject.asdict(obj)
+    raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
 def handle_cli_command(command, args):
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
-    client = get_client(
-        service,
-        args.cert_file,
-        args.key_file,
-        args.homologation,
-        args.dump,
-    )
-    handler(client, args)
+    client = get_client(service, args.cert_file, args.key_file, args.homologation)
+    obj = handler(client, args)
+    if args.output == "xml":
+        print(client.last_received().str())  # noqa: T001
+    elif args.output == "json":
+        json.dump(obj, sys.stdout, indent=2, default=json_encode_default)
+    else:
+        print(obj)  # noqa: T001
 
 
-def get_client(service, cert_file, key_file, homologation=False, dump=False):
+def get_client(service, cert_file, key_file, homologation=False):
     # Need custom plugin to handle `xs:choice` potentially expected in service
     # arguments. Non-handling this seems to be an outstanding suds bug, see
     # https://stackoverflow.com/questions/5963404/suds-and-choice-tag
-    plugins = [_SetChoicePlugin()]
-    if dump:
-        plugins.append(StoreXMLResponsePlugin())
     client = Client(
         wsdl(service),
-        plugins=plugins,
+        plugins=[_SetChoicePlugin()],
         transport=HTTPSClientCertTransport(cert_file, key_file),
     )
     # XXX unclear why this has to be done to properly consider port's
@@ -147,7 +154,7 @@ def get_client(service, cert_file, key_file, homologation=False, dump=False):
     return client
 
 
-class _SetChoicePlugin(DocumentPlugin):
+class _SetChoicePlugin(DocumentPlugin):  # type: ignore[misc]
     def __init__(self):
         self.choosen_tags = {"autorisationClient"}
 
@@ -319,9 +326,3 @@ def dict_from_dicts(*dicts):
         result.update(d)
 
     return result
-
-
-class StoreXMLResponsePlugin(MessagePlugin):
-    def received(self, context):
-        with open("/tmp/enedis-response.xml", "wb") as stream:
-            stream.write(context.reply)

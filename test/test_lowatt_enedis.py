@@ -1,11 +1,11 @@
 import contextlib
-from dataclasses import dataclass
 import datetime
 import io
 import os
-import pkg_resources
 import sys
+from dataclasses import dataclass
 
+import pkg_resources
 import pytest
 from suds.client import Client, SoapClient
 
@@ -19,7 +19,7 @@ class args:
     key_file = None
     login = "bob"
     homologation = False
-    dump = False
+    output = "print"
 
 
 @contextlib.contextmanager

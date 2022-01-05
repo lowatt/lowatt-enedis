@@ -19,6 +19,7 @@ import sys
 
 from suds.client import Client
 
+import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis import (
     COMMAND_SERVICE,
     WSException,
@@ -26,7 +27,6 @@ from lowatt_enedis import (
     init_cli,
     wsdl,
 )
-import lowatt_enedis.services  # noqa: register services
 
 
 def _cli_parser():
