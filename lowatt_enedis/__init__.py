@@ -21,6 +21,7 @@
 Command line interface to enedis SGE web-services.
 """
 
+import datetime
 import json
 import logging
 import sys
@@ -100,6 +101,8 @@ def init_cli(subparsers):
 def json_encode_default(obj: Any) -> Any:
     if isinstance(obj, suds.sudsobject.Object):
         return suds.sudsobject.asdict(obj)
+    elif isinstance(obj, (datetime.date, datetime.datetime)):
+        return obj.isoformat()
     raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
