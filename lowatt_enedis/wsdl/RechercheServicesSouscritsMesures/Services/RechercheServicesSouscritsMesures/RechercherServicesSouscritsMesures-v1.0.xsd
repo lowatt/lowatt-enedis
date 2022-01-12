@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:sc="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0"
+	xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"
+	xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"
+	targetNamespace="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0"
+	version="1.0">
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd" />
+	<xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd" />
+	<xs:complexType name="CriteresType">
+		<xs:sequence>
+			<xs:element name="pointId" type="ds:PointIdType" />
+			<xs:element name="contratId" type="ds:ContratIdType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="rechercherServicesSouscritsMesures" type="sc:RechercherServicesSouscritsMesuresType" />
+	<xs:element name="rechercherServicesSouscritsMesuresResponse" type="sc:RechercherServicesSouscritsMesuresResponseType" />
+	<xs:complexType name="RechercherServicesSouscritsMesuresResponseType">
+		<xs:sequence>
+			<xs:element name="servicesSouscritsMesures" type="sc:ServicesSouscritsMesuresType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechercherServicesSouscritsMesuresType">
+		<xs:sequence>
+			<xs:element name="criteres" type="sc:CriteresType" />
+			<xs:element name="loginUtilisateur" type="ds:UtilisateurLoginType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceSouscritMesuresType">
+		<xs:sequence>
+			<xs:element name="serviceSouscritId" type="ds:Chaine15Type" />
+			<xs:element name="pointId" type="ds:PointIdType" />			
+			<xs:element name="serviceSouscritType" type="sc:ServiceSouscritType" />
+
+			<xs:element name="serviceSouscritLibelle" type="ds:Chaine255Type" />
+			<xs:element minOccurs="0" name="injection" type="ds:BooleenType" />
+			<xs:element minOccurs="0" name="soutirage" type="ds:BooleenType" />
+			<xs:element name="contratId" type="ds:ContratIdType" minOccurs="0"/>
+			<xs:element name="contratLibelle" type="ds:Chaine255Type" minOccurs="0"/>
+
+			<xs:element name="etatCode" type="ds:Chaine15Type" />
+			<xs:element name="dateDebut" type="ds:DateType" />
+			<xs:element minOccurs="0" name="dateFin" type="ds:DateType" />
+			<xs:element minOccurs="0" name="motifFinLibelle" type="ds:Chaine255Type" />
+			<xs:element minOccurs="0" name="mesuresTypeCode" type="ds:MesureTypeCodeType" />
+			<xs:element minOccurs="0" name="mesuresPas" type="ds:Chaine15Type" />
+			<xs:element minOccurs="0" name="mesuresCorrigees" type="ds:BooleenType" />
+			<xs:element minOccurs="0" name="periodiciteTransmission"
+				type="ds:Chaine15Type" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceSouscritType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="libelle" type="ds:Chaine255Type" />
+		</xs:sequence>
+		<xs:attribute name="code" type="ds:Chaine15Type" use="required" />
+	</xs:complexType>
+	<xs:complexType name="ServicesSouscritsMesuresType">
+		<xs:sequence>
+			<xs:element name="serviceSouscritMesures" type="sc:ServiceSouscritMesuresType"
+				maxOccurs="200" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
