@@ -119,3 +119,12 @@ RechercherServicesSouscritsMesures v1.0
 |---------------|----------------------------------------------|
 | RS-R1 (C5)    | `lowatt-enedis subscriptions 25884515170669` |
 | RS-R1 (C1-C4) | `lowatt-enedis subscriptions 98800000000246` |
+
+CommandeArretServiceSouscritMesures v1.0
+----------------------------------------
+
+| Case      | Command                                                   |
+|-----------|-----------------------------------------------------------|
+| ASS-R1 \* |  `lowatt-enedis unsubscribe 25884515170669 --id 47761068` |
+
+\* use an id returned by RS-R1.
