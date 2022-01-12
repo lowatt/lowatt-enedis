@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" version="5.0.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds">
+  <xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+  <xs:complexType name="AcceptabiliteResultatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AcceptabiliteResultatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AcheminementTarifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AcheminementTarifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ActiviteSecteurType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ActiviteSecteurCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ActiviteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ActiviteCodeNafType"/>
+  </xs:complexType>
+  <xs:complexType name="AdresseAfnorType">
+    <xs:sequence>
+      <xs:element name="ligne1" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+      <xs:element name="ligne2" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+      <xs:element name="ligne3" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+      <xs:element name="ligne4" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+      <xs:element name="ligne5" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+      <xs:element name="ligne6" type="ds:AdresseAfnorLigneType"/>
+      <xs:element name="ligne7" type="ds:AdresseAfnorLigneType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AffaireAnnulationMotifRefusType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AffaireAnnulationMotifRefusCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AffaireAnnulationMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AffaireAnnulationMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AffaireClotureMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AffaireClotureMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AffaireEtatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AffaireEtatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AffaireModificationMotifRefusType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+      <xs:element name="code" type="ds:AffaireModificationMotifRefusCodeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AffaireNatureModificationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+      <xs:element name="code" type="ds:AffaireNatureModificationCodeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AffaireStatutType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AffaireStatutCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AlimentationEtatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AlimentationEtatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AlimentationModeApresCompteurType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AlimentationModeApresCompteurCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="AlimentationSecoursModeBasculeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:AlimentationSecoursModeBasculeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ApplicationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ApplicationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="BilanContinuiteFournitureCoupureTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:OptionBilanContinuiteFournitureCoupureTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="BilanContinuiteFournitureTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:OptionBilanContinuiteFournitureTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CalendrierType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CalendrierCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CentreGeographiqueType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CentreGeographiqueCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CircuitTempoType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CircuitTempoCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ClasseTemporelleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ClasseTemporelleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ClientFinalCategorieType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ClientFinalCategorieCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ClientPrioritaireTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ClientPrioritaireTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CommuneFranceType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CommuneFranceCodeInseeType"/>
+  </xs:complexType>
+  <xs:complexType name="CompteurIntensiteNominaleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CompteurIntensiteNominaleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CompteurSousTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CompteurModeleSousTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CompteurTensionNominaleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CompteurTensionNominaleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ConsommationTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ConsommationTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ConsuelMotifNonExigibiliteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ConsuelMotifNonExigibiliteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CoordonnesGpsType">
+    <xs:sequence>
+      <xs:element name="latitude" type="ds:NbDecimalType"/>
+      <xs:element name="longitude" type="ds:NbDecimalType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CoupureLocalisationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CoupureLocalisationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CoupureMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CoupureMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CourrierModeleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CourrierModeleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="CreneauHoraireType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:CreneauHoraireCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeChangementFrnCorrectifMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeChangementFrnCorrectifMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeCommunicationDistributeurTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeCommunicationDistributeurTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeDiverseComptageTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeDiverseComptageTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeDiverseInformationsTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeDiverseInformationsTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeDiverseQualiteFournitureTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeDiverseQualiteFournitureTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeDiverseReseauTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeDiverseReseauTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeMediaType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeMediaCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeMiseEnServiceCorrectiveMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeMiseEnServiceCorrectifMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeObjetType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeObjetCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DemandeTechniqueTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DemandeTechniqueTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DisjoncteurCalibreType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DisjoncteurCalibreCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DisjoncteurNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DisjoncteurNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DispositifComptageParticulariteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DispositifComptageParticulariteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DispositifParticulierLimitationPerturbationsType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DispositifParticulierLimitationPerturbationsCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DomaineTensionType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DomaineTensionCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="DureeType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:DureeUniteSymboleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DysfonctionnementNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:DysfonctionnementNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="EquipementElectriqueLocalisationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:EquipementElectriqueLocalisationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="EquipementElectriqueRegimeProprieteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:EquipementElectriqueRegimeProprieteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FaisabiliteMotifImpossibiliteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="optional" type="ds:FaisabiliteMotifImpossibiliteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FaisabiliteReserveMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FaisabiliteReserveMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FaisabiliteResultatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:BooleenType"/>
+  </xs:complexType>
+  <xs:complexType name="FinaliteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FinaliteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FraisType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FraisCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FraudeNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FraudeNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FraudeOuDysfonctionnementMethodeCalculType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FraudeOuDysfonctionnementMethodeCalculCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="FraudeOuDysfonctionnementnMethodeFacturationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:FraudeOuDysfonctionnementMethodeFacturationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="GeneriqueType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:Chaine15Type"/>
+  </xs:complexType>
+  <xs:complexType name="GrandeurPhysiqueType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:GrandeurPhysiqueCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="GroupePeriodeMobileType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:GroupePeriodeMobileCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="IntensiteType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:IntensiteUniteSymboleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IntervenantTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:IntervenantTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionDemandeMotifRefusType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionDemandeMotifRefusCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionDeplanificationMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionDeplanificationMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionEtatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionEtatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionNonRealisationMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionNonRealisationMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionPeriodeTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionPeriodeTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionPlanificationHorsDelaiMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionPlanificationHorsDelaiMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionRealisationEtatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionRealisationEtatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="InterventionReplanificationMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:InterventionReplanificationMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="LigneFraisType">
+    <xs:sequence>
+      <xs:element name="frais" type="dc:FraisType"/>
+      <xs:element name="quantite" type="ds:NbEntierType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LignesFraisType">
+    <xs:sequence>
+      <xs:element name="ligneFrais" type="dc:LigneFraisType" maxOccurs="200"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LimiteurTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:LimiteurTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="LongueurType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:LongueurUniteSymboleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MesureDeclencheurType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:MesureDeclencheurCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="MesureNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:MesureNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="MesureOrigineType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:MesureOrigineCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="MesureStatutType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:MesureStatutCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="MesureTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:MesureTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="MontantType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:DeviseAbreviationType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NonPriseEnCompteAutoreleveMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:NonPriseEnCompteAutoreleveMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="OffreTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:OffreTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="OperationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:OperationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PeriodiciteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PeriodiciteCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PlageHeuresCreusesType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PlageHeuresCreusesCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PointAppartenanceRegroupementHebergeurDecomptantType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PointAppartenanceRegroupementHebergeurDecomptantCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PointAppartenanceRegroupementTurpeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PointAppartenanceRegroupementTurpeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PointEtatContractuelType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PointEtatContractuelCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PointSegmentClienteleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PointSegmentClienteleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrejudiceNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrejudiceNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationCasType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrestationCasCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationFacturationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:BooleenType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationFicheType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrestationFicheCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationMotifNonFacturationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrestationMotifNonFacturationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationMotifNonRealisationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrestationMotifNonRealisationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationOptionType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:PrestationOptionCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PrestationRealisationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:BooleenType"/>
+  </xs:complexType>
+  <xs:complexType name="ProductionAutonomeCouplageModeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ProductionAutonomeCouplageModeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ProgrammeCircuitChauffageTempoType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ProgrammeCircuitChauffageTempoCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ProgrammeCircuitEauTempoType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ProgrammeCircuitEauTempoCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="PuissanceType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:PuissanceUniteSymboleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RattachementPointRoleType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RattachementPointRoleCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RattachementTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RattachementTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RecevabiliteMotifRefusType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RecevabiliteMotifRefusCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RecevabilitePremiereMiseEnServicePourEssaiMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RecevabilitePremiereMiseEnServicePourEssaiMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RecevabiliteResultatType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RecevabiliteResultatCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReclamationSousTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReclamationSousTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReclamationTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReclamationTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RectificationMotifType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RectificationMotifCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RelaisCommandeTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RelaisCommandeTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RelaisNatureType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RelaisNatureCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReleveMediaType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReleveMediaCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReleveModeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReleveModeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="RelevePlageType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:RelevePlageCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReleveQualificationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReleveQualificationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ReleveTraitementModeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ReleveTraitementModeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ResidenceTypeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ResidenceTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="SecteurGeographiqueType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:SecteurGeographiqueCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="SituationContractuelleGestionModeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:SituationContractuelleGestionModeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="StructureComptageType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:StructureComptageCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="StructureTarifaireContexteUtilisationType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:StructureTarifaireContexteUtilisationCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TensionLivraisonType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TensionLivraisonCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TensionType">
+    <xs:sequence>
+      <xs:element name="valeur" type="ds:NbDecimalType"/>
+      <xs:element name="unite" type="ds:TensionUniteSymboleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TourneeType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TourneeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TransformateurCalibreType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TransformateurCalibreCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TransformateurCouplageType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TransformateurCouplageTypeCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TransformateurCourantPositionType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TransformateurCourantPositionCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="TransformateurPrecisionClasseType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:TransformateurPrecisionClasseCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="UsageChantierType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:UsageChantierCodeType"/>
+  </xs:complexType>
+  <xs:complexType name="ZoneQualiteDesserteType">
+    <xs:sequence>
+      <xs:element name="libelle" type="ds:Chaine255Type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" use="required" type="ds:ZoneQualiteDesserteCodeType"/>
+  </xs:complexType>
+</xs:schema>
