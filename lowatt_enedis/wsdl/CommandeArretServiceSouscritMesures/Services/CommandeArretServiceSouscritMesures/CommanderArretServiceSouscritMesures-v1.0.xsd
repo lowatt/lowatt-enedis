@@ -1,0 +1,50 @@
+<xs:schema targetNamespace="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0" version="1.0.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" xmlns:dc="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc">
+   <xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+   <xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+   <xs:element name="commanderArretServiceSouscritMesures" type="sc:CommanderArretServiceSouscritMesuresType"/>
+   <xs:element name="commanderArretServiceSouscritMesuresResponse" type="sc:CommanderArretServiceSouscritMesuresResponseType"/>
+   <xs:complexType name="CommanderArretServiceSouscritMesuresType">
+      <xs:sequence>
+         <xs:element name="demande" type="sc:DemandeType"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CommanderArretServiceSouscritMesuresResponseType">
+      <xs:sequence>
+         <xs:element name="affaireId" type="ds:AffaireIdType" minOccurs="0"/>
+         <xs:element name="prestations" type="sc:PrestationsType" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DemandeType">
+      <xs:sequence>
+         <xs:element name="donneesGenerales" type="sc:DonneesGeneralesType"/>
+         <xs:element name="arretServiceSouscrit" type="sc:ArretServiceSouscritType"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DonneesGeneralesType">
+      <xs:sequence>
+         <xs:element name="refFrn" type="ds:Chaine255Type" minOccurs="0"/>
+         <xs:element name="objetCode" type="ds:DemandeObjetCodeType"/>
+         <xs:element name="pointId" type="ds:PointIdType"/>
+         <xs:element name="initiateurLogin" type="ds:UtilisateurLoginType"/>
+         <xs:element name="contratId" type="ds:ContratIdType"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ArretServiceSouscritType">
+      <xs:sequence>
+         <xs:element name="serviceSouscritId" type="ds:Chaine15Type"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PrestationsType">
+      <xs:sequence>
+         <xs:element name="prestation" type="sc:PrestationType" maxOccurs="200"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PrestationType">
+      <xs:sequence>
+         <xs:element name="rang" type="ds:NbEntierType"/>
+         <xs:element name="fiche" type="dc:PrestationFicheType"/>
+         <xs:element name="option" type="dc:PrestationOptionType" minOccurs="0"/>
+         <xs:element name="cas" type="dc:PrestationCasType" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
