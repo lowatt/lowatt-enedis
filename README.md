@@ -16,21 +16,6 @@ It is published under the terms of the GPL 3 license.
 
 ``pip install lowatt-enedis``
 
-## Limitations
-
-For now it implements the following web services:
-
-- ``RecherchePoint-v2.0``
-- ``ConsultationDonneesTechniquesContractuelles-v1.0``
-- ``ConsultationMesures-v1.1``
-- ``ConsultationMesuresDetaillees-v2.0``
-- ``CommandeTransmissionHistoriqueMesures-v1.0``
-- ``CommandeTransmissionDonneesInfraJ-v1.0``
-- ``CommandeCollectePublicationMesures-v3.0``
-- ``RechercherServicesSouscritsMesures-v1.0``
-
-In other words, ``CommandeArretServiceSouscritMesures`` is not yet implemented.
-
 ## Command line usage
 
 See ``lowatt-enedis --help`` for CLI usage. You'll be able to call the services

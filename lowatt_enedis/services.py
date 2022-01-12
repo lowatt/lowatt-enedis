@@ -763,5 +763,47 @@ def point_search_subscriptions(client, args):
     )
 
 
+@register(
+    "unsubscribe",
+    "CommandeArretServiceSouscritMesures-v1.0",
+    dict_from_dicts(
+        {
+            "prm": {
+                "help": "identifiant PRM du point",
+            },
+            "--id": {
+                "help": "identifiant du service souscrit de mesures à arrêter",
+            },
+        },
+        CONTRAT_OPTIONS,
+    ),
+)
+@ws("CommandeArretServiceSouscritMesures-v1.0")
+def point_unsubscribe(client, args):
+    demande = client.factory.create("ns1:DemandeType")
+
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            # XXX missing: refExterne
+            "contrat": "contratId",
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.objetCode = "ASS"
+
+    demande.arretServiceSouscrit = create_from_options(
+        client,
+        args,
+        "ArretServiceSouscritType",
+        {"id": "serviceSouscritId"},
+    )
+
+    return client.service.commanderArretServiceSouscritMesures(demande)
+
+
 def _boolean(b):
     return "true" if b else "false"
