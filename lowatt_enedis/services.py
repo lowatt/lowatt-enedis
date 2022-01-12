@@ -51,6 +51,10 @@ ACCORD_CLIENT_OPTIONS = {
         "choices": ["M", "Mme", "Mlle"],
         "help": "Civilité de la personne physique",
     },
+    "--no-autorisation": {
+        "action": "store_true",
+        "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
+    },
 }
 ACCORD_CLIENT_EXTENDED_OPTIONS = {
     "--naf": {
@@ -115,7 +119,12 @@ def _accord_client(
         )
 
     accord = client.factory.create(xs_accord_type)
-    accord.accordClient = _boolean(autorisation)
+
+    if hasattr(accord, "accordClient"):
+        accord.accordClient = _boolean(autorisation)
+    elif hasattr(accord, "accord"):
+        # tag name used by CommandeCollectePublicationMesures
+        accord.accord = _boolean(autorisation)
 
     if ptype is not None:
         for option in unavailable_options:
@@ -549,11 +558,7 @@ def point_cmd_histo(client, args):
             "--ptd": {
                 "action": "store_true",
                 "help": "demander les paramètres de tarification dynamique.",
-            },
-            "--no-autorisation": {
-                "action": "store_true",
-                "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
-            },
+            }
         },
         CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
@@ -597,6 +602,135 @@ def point_cmd_infra_j(client, args):
     accord.injection = _boolean(False)
     accord.soutirage = _boolean(False)
     return client.service.commanderTransmissionDonneesInfraJ(demande)
+
+
+@register(
+    "subscribe",
+    "CommandeCollectePublicationMesures-v3.0",
+    dict_from_dicts(
+        {
+            "prm": {
+                "help": "identifiant PRM du point",
+            },
+            "--cdc-enable": {
+                "action": "store_true",
+                "help": "demander la collecte de la courbe de charge.",
+            },
+            "--cdc": {
+                "action": "store_true",
+                "help": "demander la transmission données les courbes de charge.",
+            },
+            "--idx": {
+                "action": "store_true",
+                "help": "demander la transmission des données d'index index et autres "
+                "données du compteur.",
+            },
+            "--period": {
+                "choices": ["daily", "weekly", "monthly"],
+                "default": "daily",
+                "help": "périodicité de réception pour la courbe de charge "
+                "(quotidienne par défaut).",
+            },
+            "--injection": {
+                "action": "store_true",
+                "help": "demander les données en injection (soutirage par défaut).",
+            },
+            "--linky": {
+                "action": "store_true",
+                "help": "la demande concerne le segment C5 ou P4"
+                "(segment C1-C4 ou P1-P3 par défaut).",
+            },
+        },
+        ACCORD_CLIENT_OPTIONS,
+        MESURES_OPTIONS,
+        CONTRAT_OPTIONS,
+        {
+            # override --from --to
+            "--from": {
+                "default": date.today().isoformat(),
+                "help": "date de début, postérieure ou égale à la date du jour",
+            },
+            "--to": {
+                "default": (date.today() + timedelta(days=365)).isoformat(),
+                "help": "date de fin souhaitée, "
+                "supérieure à la date de fin précédente lors d’un renouvellement, "
+                "un an max pour les compteurs linky",
+            },
+        },
+    ),
+)
+@ws("CommandeCollectePublicationMesures-v3.0")
+def point_cmd_publication(client, args):
+    demande = client.factory.create("ns1:DemandeType")
+
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            # XXX missing: refExterne
+            "contrat": "contratId",
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.objetCode = "AME"
+
+    demande.accesMesures = acces = create_from_options(
+        client,
+        args,
+        "DemandeAccesMesures",
+        dict_from_dicts(MESURES_OPTIONS_MAP),
+    )
+
+    supported_actions = ["cdc_enable", "cdc", "idx"]
+    action = [a for a in supported_actions if get_option(args, a)]
+
+    if not action or len(action) > 1:
+        raise ValueError(f"Une action doit être selectionnée parmi {supported_actions}")
+
+    action = action[0]
+
+    if action == "idx":
+        code = "IDX"
+        transmission = True
+        pas = "P1D"
+        period = "P1D"
+    else:
+        code = "CDC"
+        transmission = action == "cdc"
+        if get_option(args, "linky"):
+            pas = "PT30M"
+        else:
+            pas = "PT10M"
+        period = get_option(args, "period")
+        if period == "monthly":
+            period = "P1M"
+        elif period == "weekly":
+            period = "P7D"
+        else:
+            period = "P1D"
+
+    injection = get_option(args, "injection")
+
+    acces.mesuresTypeCode = code
+    acces.transmissionRecurrente = _boolean(transmission)
+    acces.mesuresPas = pas
+    acces.periodiciteTransmission = period
+    acces.injection = _boolean(injection)
+    acces.soutirage = _boolean(not injection)
+
+    if injection and get_option(args, "linky"):
+        del demande.periodiciteTransmission
+
+    demande.accesMesures.declarationAccordClient = _accord_client(
+        client,
+        args,
+        xs_accord_type="ns1:DeclarationAccordClientType",
+        autorisation=not get_option(args, "no_autorisation"),
+    )
+
+    return client.service.commanderCollectePublicationMesures(demande)
 
 
 def _boolean(b):

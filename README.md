@@ -26,9 +26,9 @@ For now it implements the following web services:
 - ``ConsultationMesuresDetaillees-v2.0``
 - ``CommandeTransmissionHistoriqueMesures-v1.0``
 - ``CommandeTransmissionDonneesInfraJ-v1.0``
+- ``CommandeCollectePublicationMesures v3.0``
 
-In other words, ``CommandeCollectePublicationMesures``,
-``RechercheServicesSouscritsMesures``, and
+In other words, ``RechercheServicesSouscritsMesures``, and
 ``CommandeArretServiceSouscritMesures`` are not yet implemented.
 
 ## Command line usage
