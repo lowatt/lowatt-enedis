@@ -733,5 +733,35 @@ def point_cmd_publication(client, args):
     return client.service.commanderCollectePublicationMesures(demande)
 
 
+@register(
+    "subscriptions",
+    "RechercherServicesSouscritsMesures-v1.0",
+    dict_from_dicts(
+        {
+            "prm": {
+                "help": "identifiant PRM du point",
+            },
+        },
+        CONTRAT_OPTIONS,
+    ),
+)
+@ws("RechercherServicesSouscritsMesures-v1.0")
+def point_search_subscriptions(client, args):
+    criteria = create_from_options(
+        client,
+        args,
+        "CriteresType",
+        {
+            "contrat": "contratId",
+            "prm": "pointId",
+        },
+    )
+
+    return client.service.rechercherServicesSouscritsMesures(
+        criteria,
+        get_option(args, "login"),
+    )
+
+
 def _boolean(b):
     return "true" if b else "false"

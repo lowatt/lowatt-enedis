@@ -111,3 +111,11 @@ CommandeCollectePublicationMesures v3.0
 | F305A-NR    | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation``                              |
 
 \* test cases for C1-C4 fail on homologation environment 22.1 (SGT500: Une erreur technique est survenue).
+
+RechercherServicesSouscritsMesures v1.0
+---------------------------------------
+
+| Case          | Command                                      |
+|---------------|----------------------------------------------|
+| RS-R1 (C5)    | `lowatt-enedis subscriptions 25884515170669` |
+| RS-R1 (C1-C4) | `lowatt-enedis subscriptions 98800000000246` |
