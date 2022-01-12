@@ -25,7 +25,7 @@ from datetime import date, timedelta
 
 from dateutil import tz
 
-from . import LOGGER, create_from_options, dict_from_dicts, get_option, register, ws
+from . import create_from_options, dict_from_dicts, get_option, register, ws
 
 UTC = tz.tzutc()
 ACCORD_CLIENT_OPTIONS = {
@@ -417,21 +417,12 @@ def point_detailed_measures(client, args):
 def detailed_measures_resp2py(resp):
     """Return an iterator on (UTC tz naive datetime, value) given a response from
     ConsultationMesuresDetaillees web-service.
-
-    Also fix repetition of timestamp due to wrong tz offset returned by Enedis :/
     """
     # start = resp.periode.dateDebut
     # end = resp.periode.dateFin
     assert len(resp.grandeur) == 1
-    dst_end_set = set()
     for point in resp.grandeur[0].mesure:
-        dt = point.d.astimezone(UTC)
-        if dt.month == 10:
-            if dt in dst_end_set:
-                LOGGER.info("Automatically fix DST end date %s", dt)
-                dt = dt + timedelta(seconds=60 * 60)
-            dst_end_set.add(dt)
-        yield (dt, point.v)
+        yield (point.d.astimezone(UTC), point.v)
 
 
 @register(

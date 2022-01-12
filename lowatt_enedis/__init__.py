@@ -42,7 +42,6 @@ logging.basicConfig(level=logging.INFO)
 # logging.getLogger('suds.mx').setLevel(logging.DEBUG)
 # logging.getLogger('suds.transport').setLevel(logging.DEBUG)
 
-LOGGER = logging.getLogger(__name__)
 
 WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
 SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")}
