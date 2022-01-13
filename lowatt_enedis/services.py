@@ -450,14 +450,43 @@ def detailed_measures_resp2py(resp):
         yield (point.d.astimezone(UTC), point.v)
 
 
+def _donnees_generales(
+    client,
+    args,
+    code,
+    tag_name,
+):
+    obj = create_from_options(
+        client,
+        args,
+        tag_name,
+        {
+            # XXX missing: refFrn, refFrnRegroupement, affaireLieeId
+            "contrat": "contratId",
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    obj.objetCode = code
+    return obj
+
+
+DONNEES_GENERALES_OPTIONS = dict_from_dicts(
+    {
+        "prm": {
+            "help": "identifiant PRM du point",
+        },
+    },
+    CONTRAT_OPTIONS,
+)
+
+
 @register(
     "cmdHisto",
     "CommandeTransmissionHistoriqueMesures-v1.0",
     dict_from_dicts(
+        DONNEES_GENERALES_OPTIONS,
         {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
             "type": {
                 "choices": ["IDX", "CDC"],
                 "help": "type de mesure demandé : IDX pour les index, CDC pour la "
@@ -469,7 +498,6 @@ def detailed_measures_resp2py(resp):
                 "10 pour C1-C4 / 30 pour C5",
             },
         },
-        CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
         ACCORD_CLIENT_EXTENDED_OPTIONS,
         MESURES_OPTIONS,
@@ -493,18 +521,12 @@ def point_cmd_histo(client, args):
 
     demande = client.factory.create("ns0:HistoriqueMesuresDemandeType")
 
-    demande.donneesGenerales = create_from_options(
+    demande.donneesGenerales = _donnees_generales(
         client,
         args,
+        "HDM",
         "DemandeDonneesGeneralesType",
-        {
-            # XXX missing: refFrn, refFrnRegroupement, affaireLieeId
-            "contrat": "contratId",
-            "prm": "pointId",
-            "login": "initiateurLogin",
-        },
     )
-    demande.donneesGenerales.objetCode = "HDM"
 
     demande.historiqueMesures = create_from_options(
         client,
@@ -533,10 +555,8 @@ def point_cmd_histo(client, args):
     "cmdInfraJ",
     "CommandeTransmissionDonneesInfraJ-v1.0",
     dict_from_dicts(
+        DONNEES_GENERALES_OPTIONS,
         {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
             "--injection": {
                 "action": "store_true",
                 "help": "demander les données en injection (courbe de charge, "
@@ -558,9 +578,8 @@ def point_cmd_histo(client, args):
             "--ptd": {
                 "action": "store_true",
                 "help": "demander les paramètres de tarification dynamique.",
-            }
+            },
         },
-        CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
     ),
 )
@@ -568,18 +587,12 @@ def point_cmd_histo(client, args):
 def point_cmd_infra_j(client, args):
     demande = client.factory.create("ns1:DemandeType")
 
-    demande.donneesGenerales = create_from_options(
+    demande.donneesGenerales = _donnees_generales(
         client,
         args,
+        "AME",
         "DonneesGeneralesType",
-        {
-            # XXX missing: refExterne
-            "contrat": "contratId",
-            "prm": "pointId",
-            "login": "initiateurLogin",
-        },
     )
-    demande.donneesGenerales.objetCode = "AME"
 
     demande.accesDonnees = create_from_options(
         client,
@@ -608,10 +621,8 @@ def point_cmd_infra_j(client, args):
     "subscribe",
     "CommandeCollectePublicationMesures-v3.0",
     dict_from_dicts(
+        DONNEES_GENERALES_OPTIONS,
         {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
             "--cdc-enable": {
                 "action": "store_true",
                 "help": "demander la collecte de la courbe de charge.",
@@ -643,7 +654,6 @@ def point_cmd_infra_j(client, args):
         },
         ACCORD_CLIENT_OPTIONS,
         MESURES_OPTIONS,
-        CONTRAT_OPTIONS,
         {
             # override --from --to
             "--from": {
@@ -663,18 +673,12 @@ def point_cmd_infra_j(client, args):
 def point_cmd_publication(client, args):
     demande = client.factory.create("ns1:DemandeType")
 
-    demande.donneesGenerales = create_from_options(
+    demande.donneesGenerales = _donnees_generales(
         client,
         args,
+        "AME",
         "DonneesGeneralesType",
-        {
-            # XXX missing: refExterne
-            "contrat": "contratId",
-            "prm": "pointId",
-            "login": "initiateurLogin",
-        },
     )
-    demande.donneesGenerales.objetCode = "AME"
 
     demande.accesMesures = acces = create_from_options(
         client,
@@ -736,14 +740,7 @@ def point_cmd_publication(client, args):
 @register(
     "subscriptions",
     "RechercherServicesSouscritsMesures-v1.0",
-    dict_from_dicts(
-        {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
-        },
-        CONTRAT_OPTIONS,
-    ),
+    DONNEES_GENERALES_OPTIONS,
 )
 @ws("RechercherServicesSouscritsMesures-v1.0")
 def point_search_subscriptions(client, args):
@@ -767,33 +764,24 @@ def point_search_subscriptions(client, args):
     "unsubscribe",
     "CommandeArretServiceSouscritMesures-v1.0",
     dict_from_dicts(
+        DONNEES_GENERALES_OPTIONS,
         {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
             "--id": {
                 "help": "identifiant du service souscrit de mesures à arrêter",
             },
         },
-        CONTRAT_OPTIONS,
     ),
 )
 @ws("CommandeArretServiceSouscritMesures-v1.0")
 def point_unsubscribe(client, args):
     demande = client.factory.create("ns1:DemandeType")
 
-    demande.donneesGenerales = create_from_options(
+    demande.donneesGenerales = _donnees_generales(
         client,
         args,
+        "ASS",
         "DonneesGeneralesType",
-        {
-            # XXX missing: refExterne
-            "contrat": "contratId",
-            "prm": "pointId",
-            "login": "initiateurLogin",
-        },
     )
-    demande.donneesGenerales.objetCode = "ASS"
 
     demande.arretServiceSouscrit = create_from_options(
         client,
