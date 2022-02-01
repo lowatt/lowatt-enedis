@@ -81,8 +81,9 @@ def init_cli(subparsers):
             help='Query the "{}" web-service.'.format(service),
         )
         subparser.add_argument(
-            "login",
-            help="User login.",
+            "--login",
+            help="User login. Default to ENEDIS_LOGIN environment variable.",
+            **arg_from_env("ENEDIS_LOGIN"),
         )
         for option_name, option_kwargs in options.items():
             subparser.add_argument(option_name, **option_kwargs)
