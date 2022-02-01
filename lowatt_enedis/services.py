@@ -267,10 +267,6 @@ def point_technical_data(client, args):
         },
     },
 )
-def cli_point_measures(client, args):
-    return point_measures(client, args)
-
-
 @ws("ConsultationMesures-v1.1")
 def point_measures(client, args):
     return client.service.consulterMesures(
@@ -372,10 +368,6 @@ def measures_resp2py(resp):
         MESURES_OPTIONS,
     ),
 )
-def cli_point_detailed_measures(client, args):
-    return point_detailed_measures(client, args)
-
-
 @ws("ConsultationMesuresDetaillees-v2.0", header_ns_prefix="ns2")
 def point_detailed_measures(client, args):
     demande = create_from_options(
