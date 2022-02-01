@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 # based on Enedis.SGE.REF.0465.Homologation_Catalogue des cas de tests_Tiers_SGE22.1_v1.0.pdf
 
