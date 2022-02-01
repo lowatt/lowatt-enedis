@@ -24,15 +24,17 @@ Command line interface to enedis SGE web-services.
 import datetime
 import json
 import logging
+import os
 import sys
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 import suds.sudsobject
 from suds import WebFault
 from suds.client import Client
 from suds.plugin import DocumentPlugin
+from typing_extensions import TypedDict
 
 from .certauth import HTTPSClientCertTransport
 
@@ -61,6 +63,16 @@ def wsdl(service_name):
         ) from None
 
 
+class ArgFromEnv(TypedDict):
+    default: Optional[str]
+    required: bool
+
+
+def arg_from_env(key: str) -> ArgFromEnv:
+    default = os.environ.get(key)
+    return {"default": default, "required": not default}
+
+
 def init_cli(subparsers):
     """Init CLI subparsers according to registered services."""
     for command, (service, options, _) in COMMAND_SERVICE.items():
@@ -77,19 +89,22 @@ def init_cli(subparsers):
 
         subparser.add_argument(
             "--cert-file",
-            default="fullchain.pem",
-            help="Client certificate file.",
+            help="Client certificate file. Default to ENEDIS_CERT_FILE environment variable.",
+            **arg_from_env("ENEDIS_CERT_FILE"),
         )
         subparser.add_argument(
             "--key-file",
-            default="privkey.pem",
-            help="Client private key file.",
+            help="Client private key file. Default to ENEDIS_KEY_FILE environment variable.",
+            **arg_from_env("ENEDIS_KEY_FILE"),
         )
         subparser.add_argument(
             "--homologation",
-            default=False,
+            default="ENEDIS_HOMOLOGATION" in os.environ,
             action="store_true",
-            help="Change service host to use homologation sandbox.",
+            help=(
+                "Change service host to use homologation sandbox. "
+                "Enabled by presence of ENEDIS_HOMOLOGATION in environment variables."
+            ),
         )
         subparser.add_argument(
             "--output",
