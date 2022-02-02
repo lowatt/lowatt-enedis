@@ -35,8 +35,18 @@ In other words, ``CommandeCollectePublicationMesures``,
 
 See ``lowatt-enedis --help`` for CLI usage. You'll be able to call the services
 controlled using options and see the SOAP response.  You can take a look at
-``doc/homologation.sh`` for a sample session to go through Enedis'homologation
+``doc/homologation.md`` for a sample session to go through Enedis'homologation
 process.
+
+Some flags are required by all or most of the commands so they can be
+configured once by their respective environment variables.
+
+| Option        | Environment variable |
+|---------------|----------------------|
+| `--cert-file` | `ENEDIS_CERT_FILE`   |
+| `--key-file`  | `ENEDIS_KEY_FILE`    |
+| `--login`     | `ENEDIS_LOGIN`       |
+| `--contrat`   | `ENEDIS_CONTRAT`     |
 
 ## Python library usage
 

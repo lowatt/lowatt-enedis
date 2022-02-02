@@ -25,7 +25,14 @@ from datetime import date, timedelta
 
 from dateutil import tz
 
-from . import create_from_options, dict_from_dicts, get_option, register, ws
+from . import (
+    arg_from_env,
+    create_from_options,
+    dict_from_dicts,
+    get_option,
+    register,
+    ws,
+)
 
 UTC = tz.tzutc()
 ACCORD_CLIENT_OPTIONS = {
@@ -55,6 +62,18 @@ ACCORD_CLIENT_EXTENDED_OPTIONS = {
     "--siret": {
         "help": "Numéro de SIRET de l'établissement principal de la personne morale",
     },
+}
+
+CONTRAT_OPTIONS = {
+    "--contrat": dict_from_dicts(
+        {
+            "help": (
+                "identifiant du contrat entre le demandeur et Enedis. "
+                "Default to ENEDIS_CONTRAT environment variable."
+            ),
+        },
+        arg_from_env("ENEDIS_CONTRAT"),
+    ),
 }
 
 
@@ -253,19 +272,19 @@ def point_technical_data(client, args):
 @register(
     "measures",
     "ConsultationMesures-v1.1",
-    {
-        "prm": {
-            "help": "identifiant PRM du point",
+    dict_from_dicts(
+        {
+            "prm": {
+                "help": "identifiant PRM du point",
+            },
+            "--autorisation": {
+                "help": "indique l'autorisation du client",
+                "action": "store_true",
+                "default": False,
+            },
         },
-        "contrat": {
-            "help": "identifiant du contrat entre le demandeur et Enedis",
-        },
-        "--autorisation": {
-            "help": "indique l'autorisation du client",
-            "action": "store_true",
-            "default": False,
-        },
-    },
+        CONTRAT_OPTIONS,
+    ),
 )
 @ws("ConsultationMesures-v1.1")
 def point_measures(client, args):
@@ -425,9 +444,6 @@ def detailed_measures_resp2py(resp):
             "prm": {
                 "help": "identifiant PRM du point",
             },
-            "contrat": {
-                "help": "identifiant du contrat entre le demandeur et Enedis",
-            },
             "type": {
                 "choices": ["IDX", "CDC"],
                 "help": "type de mesure demandé : IDX pour les index, CDC pour la "
@@ -439,6 +455,7 @@ def detailed_measures_resp2py(resp):
                 "10 pour C1-C4 / 30 pour C5",
             },
         },
+        CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
         ACCORD_CLIENT_EXTENDED_OPTIONS,
         MESURES_OPTIONS,
@@ -506,9 +523,6 @@ def point_cmd_histo(client, args):
             "prm": {
                 "help": "identifiant PRM du point",
             },
-            "contrat": {
-                "help": "identifiant du contrat entre le demandeur et Enedis",
-            },
             "--injection": {
                 "action": "store_true",
                 "help": "demander les données en injection (courbe de charge, "
@@ -532,6 +546,7 @@ def point_cmd_histo(client, args):
                 "help": "demander les paramètres de tarification dynamique.",
             },
         },
+        CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
     ),
 )
