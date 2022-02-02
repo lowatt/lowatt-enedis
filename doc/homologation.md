@@ -74,10 +74,10 @@ RecherchePoint v2.0
 CommandeTransmissionDonneesInfraJ v1.0
 --------------------------------------
 
-| Case      | Command                                                                                                   |
-|-----------|-----------------------------------------------------------------------------------------------------------|
-| F375A-R1  | *XFAIL* `lowatt-enedis cmdInfraJ 98800000000246 --cdc --injection --denomination "Raison Sociale"`        |
-| F375A-NR1 | *Not implemented* (need to implement --no-autorisation for cmdInfraJ) `lowatt-enedis cmdInfraJ 98800000000246 --idx --injection --denomination "Raison Sociale"` |
+| Case      | Command                                                                                                              |
+|-----------|----------------------------------------------------------------------------------------------------------------------|
+| F375A-R1  | *XFAIL* `lowatt-enedis cmdInfraJ 98800000000246 --cdc --injection --denomination "Raison Sociale"`                   |
+| F375A-NR1 | *XFAIL* `lowatt-enedis cmdInfraJ 98800000000246 --idx --injection --denomination "Raison Sociale" --no-autorisation` |
 
 
 CommandeTransmissionHistoriqueMesures v1.0

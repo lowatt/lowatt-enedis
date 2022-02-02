@@ -82,6 +82,7 @@ def _accord_client(
     args,
     extended=False,
     xs_accord_type="ns3:DeclarationAccordClientType",
+    autorisation=True,
 ):
     if get_option(args, "denomination"):
         ptype = "Morale"
@@ -114,7 +115,7 @@ def _accord_client(
         )
 
     accord = client.factory.create(xs_accord_type)
-    accord.accordClient = _boolean(True)
+    accord.accordClient = _boolean(autorisation)
 
     if ptype is not None:
         for option in unavailable_options:
@@ -549,6 +550,10 @@ def point_cmd_histo(client, args):
                 "action": "store_true",
                 "help": "demander les paramètres de tarification dynamique.",
             },
+            "--no-autorisation": {
+                "action": "store_true",
+                "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
+            },
         },
         CONTRAT_OPTIONS,
         ACCORD_CLIENT_OPTIONS,
@@ -587,6 +592,7 @@ def point_cmd_infra_j(client, args):
         client,
         args,
         xs_accord_type="ns1:DeclarationAccordClientType",
+        autorisation=not get_option(args, "no_autorisation"),
     )
     accord.injection = _boolean(False)
     accord.soutirage = _boolean(False)
