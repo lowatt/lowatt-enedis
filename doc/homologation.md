@@ -56,7 +56,7 @@ ConsultationMesuresDetaillees v2.0
 | CMD2-R3         | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-03-01 --to 2020-03-08`                  |
 | CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2020-01-01 --to 2020-02-01`                     |
 | CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2020-01-01 --to 2020-01-10`                   |
-| CMD2-NR2        | *Not implemented* (need to implement --no-autorisation for details) `lowatt-enedis details 25478147557460 ENERGIE --from 2020-01-01 --to 2020-01-08` |
+| CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-01-01 --to 2020-01-08`                  |
 
 
 RecherchePoint v2.0

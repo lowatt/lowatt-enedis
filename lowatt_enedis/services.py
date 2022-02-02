@@ -383,6 +383,10 @@ def measures_resp2py(resp):
                 "action": "store_true",
                 "help": "demander les données en injection (soutirage par défaut).",
             },
+            "--no-autorisation": {
+                "action": "store_true",
+                "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
+            },
         },
         MESURES_OPTIONS,
     ),
@@ -420,7 +424,7 @@ def point_detailed_measures(client, args):
     injection = get_option(args, "injection")
     demande.soutirage = _boolean(not injection)
     demande.injection = _boolean(injection)
-    demande.accordClient = _boolean(True)
+    demande.accordClient = _boolean(not get_option(args, "no_autorisation"))
 
     return client.service.consulterMesuresDetaillees(demande)
 
