@@ -104,7 +104,7 @@ CommandeCollectePublicationMesures v3.0
 | F305A    \* | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP"``                                                |
 | F305C       | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"``                                                |
 | F300C_O1-NR | ``lowatt-enedis subscribe 25884515170669 --cdc --linky --to `date '+%Y-%m-%d' -d "+400 days"` --denomination "COGIP"`` |
-| F300C_O2-NR | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP --no-autorisation"``                                 |
+| F300C_O2-NR | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP" --no-autorisation``                                 |
 | F300B_O2-NR | ``lowatt-enedis subscribe 98800000000246 --cdc-enable --linky --denomination "COGIP" --no-autorisation``               |
 | F305-NR     | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP" --no-autorisation``                              |
 | F305A-NR    | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation``                              |
