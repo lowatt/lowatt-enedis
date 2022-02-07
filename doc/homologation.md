@@ -54,9 +54,9 @@ ConsultationMesuresDetaillees v2.0
 | CMD2-R1 (C5)    | `lowatt-enedis details 25478147557460 COURBE --from 2020-03-01 --to 2020-03-08`                   |
 | CMD2-R2         | `lowatt-enedis details 30001610071843 COURBE --courbe-type PRI --from 2020-03-01 --to 2020-03-08` |
 | CMD2-R3         | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-03-01 --to 2020-03-08`                  |
-| CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2020-01-01 --to 2020-02-01`                     |
-| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2020-01-01 --to 2020-01-10`                   |
-| CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-01-01 --to 2020-01-08`                  |
+| CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2020-03-01 --to 2020-03-08`                     |
+| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2020-03-01 --to 2020-03-10`                   |
+| CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-03-01 --to 2020-03-08 --no-autorisation`|
 
 
 RecherchePoint v2.0
@@ -67,7 +67,7 @@ RecherchePoint v2.0
 | RP-R1    | `lowatt-enedis search --tension BTINF --categorie RES --cp 34650 --insee 34231`                   |
 | RP-R2    | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TEST --cp 84160 --insee 84042 --hp`          |
 | RP-R3    | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TES --cp 84160 --insee 84042 --hp`           |
-| RP-NR1   | `lowatt-enedis search --categorie RES --cp 34650 --insee 34231`                                   |
+| RP-NR1   | `lowatt-enedis search --categorie RES --cp 84160 --insee 84042`                                   |
 | RP-NR2   | `lowatt-enedis search --insee 34231 --voie "1 RUE DE LA MER"`                                     |
 
 
@@ -104,9 +104,8 @@ CommandeCollectePublicationMesures v3.0
 | F305A    \* | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP"``                                                |
 | F305C       | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"``                                                |
 | F300C_O1-NR | ``lowatt-enedis subscribe 25884515170669 --cdc --linky --to `date '+%Y-%m-%d' -d "+400 days"` --denomination "COGIP"`` |
-| F300C_O2-NR | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP"``                                 |
+| F300C_O2-NR | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP" --no-autorisation``                                 |
 | F300B_O2-NR | ``lowatt-enedis subscribe 98800000000246 --cdc-enable --linky --denomination "COGIP" --no-autorisation``               |
-| F300C_O3-NR | ``lowatt-enedis subscribe 25128509404458 --cdc --linky --denomination "COGIP" --no-autorisation``                      |
 | F305-NR     | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP" --no-autorisation``                              |
 | F305A-NR    | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation``                              |
 
