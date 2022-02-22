@@ -612,8 +612,8 @@ def point_cmd_infra_j(client, args):
         xs_accord_type="ns1:DeclarationAccordClientType",
         autorisation=not get_option(args, "no_autorisation"),
     )
-    accord.injection = _boolean(False)
-    accord.soutirage = _boolean(False)
+    accord.injection = _boolean(get_option(args, "injection"))
+    accord.soutirage = _boolean(get_option(args, "soutirage"))
     return client.service.commanderTransmissionDonneesInfraJ(demande)
 
 
