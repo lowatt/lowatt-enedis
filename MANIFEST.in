@@ -1,4 +1,5 @@
 prune doc
+prune assets
 include COPYING
 include README.md
 include pyproject.toml

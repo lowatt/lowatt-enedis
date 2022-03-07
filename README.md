@@ -75,3 +75,7 @@ Contribution are welcome through the [Github
 repository](https://github.com/lowatt/lowatt_enedis).
 
 Feel free to contact for more info by writing at info@lowatt.fr.
+
+## Sponsors
+
+[![QosEnergy](assets/qos-energy.png)](https://www.qosenergy.com/)
