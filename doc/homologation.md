@@ -96,18 +96,18 @@ CommandeCollectePublicationMesures v3.0
 
 | Case        | Command                                                                                                                |
 |-------------|------------------------------------------------------------------------------------------------------------------------|
-| F300C_O1    | ``lowatt-enedis subscribe 25884515170669 --cdc --linky --denomination "COGIP"``                                        |
-| F300B_O1 \* | ``lowatt-enedis subscribe 98800000000246 --cdc --denomination "COGIP"``                                                |
-| F300C_O2    | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP"``                                 |
-| F300B_O2 \* | ``lowatt-enedis subscribe 98800000000246 --cdc-enable --denomination "COGIP"``                                         |
-| F305        | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"``                                                |
-| F305A    \* | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP"``                                                |
-| F305C       | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"``                                                |
-| F300C_O1-NR | ``lowatt-enedis subscribe 25884515170669 --cdc --linky --to `date '+%Y-%m-%d' -d "+400 days"` --denomination "COGIP"`` |
-| F300C_O2-NR | ``lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP" --no-autorisation``                                 |
-| F300B_O2-NR | ``lowatt-enedis subscribe 98800000000246 --cdc-enable --linky --denomination "COGIP" --no-autorisation``               |
-| F305-NR     | ``lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP" --no-autorisation``                              |
-| F305A-NR    | ``lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation``                              |
+| F300C_O1    | `lowatt-enedis subscribe 25884515170669 --cdc --linky --denomination "COGIP"`                                          |
+| F300B_O1 \* | `lowatt-enedis subscribe 98800000000246 --cdc --denomination "COGIP"`                                                  |
+| F300C_O2    | `lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP"`                                   |
+| F300B_O2 \* | `lowatt-enedis subscribe 98800000000246 --cdc-enable --denomination "COGIP"`                                           |
+| F305        | `lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"`                                                  |
+| F305A    \* | `lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP"`                                                  |
+| F305C       | `lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP"`                                                  |
+| F300C_O1-NR | `lowatt-enedis subscribe 25884515170669 --cdc --linky --to 2100-01-01 --denomination "COGIP"`                          |
+| F300C_O2-NR | `lowatt-enedis subscribe 25884515170669 --cdc-enable --linky --denomination "COGIP" --no-autorisation`                 |
+| F300B_O2-NR | `lowatt-enedis subscribe 98800000000246 --cdc-enable --linky --denomination "COGIP" --no-autorisation`                 |
+| F305-NR     | `lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP" --no-autorisation`                                |
+| F305A-NR    | `lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation`                                |
 
 \* test cases for C1-C4 fail on homologation environment 22.1 (SGT500: Une erreur technique est survenue).
 
