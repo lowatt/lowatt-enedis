@@ -3,8 +3,8 @@ Homologation
 
 This explain how to pass through Enedis homologation process.
 
-This is based on SGE v22.1 (from `Enedis.SGE.REF.0465.Homologation_Catalogue
-des cas de tests_Tiers_SGE22.1_v1.0.pdf`) cases.
+This is based on SGE v23.1 (from `Enedis.SGE.REF.0465.Homologation_Catalogue 
+des cas de tests_Tiers_SGE23.1_v1.0.pdf`) cases.
 
 First setup `lowatt-enedis` and then execute given commands for each services
 you want homologation and report the time the command was run to fill Enedis
@@ -25,13 +25,15 @@ $ export ENEDIS_HOMOLOGATION=on
 ```
 
 
-ConsultationDonneesTechniquesContractuelles v0
-----------------------------------------------
+ConsultationDonneesTechniquesContractuelles v1.0
+------------------------------------------------
 
 | Case           | Command                                                 |
 |----------------|---------------------------------------------------------|
 | ADP-R1 (C1-C4) | `lowatt-enedis technical --autorisation 98800007059999` |
 | ADP-R1 (C5)    | `lowatt-enedis technical --autorisation 25946599093143` |
+| ADP-R2 (C1-C4) | `lowatt-enedis technical 98800007059999`                |
+| ADP-R2 (C5)    | `lowatt-enedis technical 25946599093143`                |
 | ADP-NR1        | `lowatt-enedis technical 99999999999999`                |
 
 
@@ -50,13 +52,28 @@ ConsultationMesuresDetaillees v2.0
 
 | Case            | Command                                                                                           |
 |-----------------|---------------------------------------------------------------------------------------------------|
-| CMD2-R1 (C1-C4) | `lowatt-enedis details 30001610071843 COURBE --from 2020-03-01 --to 2020-03-08`                   |
-| CMD2-R1 (C5)    | `lowatt-enedis details 25478147557460 COURBE --from 2020-03-01 --to 2020-03-08`                   |
-| CMD2-R2         | `lowatt-enedis details 30001610071843 COURBE --courbe-type PRI --from 2020-03-01 --to 2020-03-08` |
-| CMD2-R3         | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-03-01 --to 2020-03-08`                  |
-| CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2020-03-01 --to 2020-03-08`                     |
-| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2020-03-01 --to 2020-03-10`                   |
-| CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2020-03-01 --to 2020-03-08 --no-autorisation`|
+| CMD2-R1 (C1-C4) | `lowatt-enedis details 30001610071843 COURBE --from 2022-04-01 --to 2022-04-07`                   |
+| CMD2-R1 (C5)    | `lowatt-enedis details 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                   |
+| CMD2-R2         | `lowatt-enedis details 30001610071843 COURBE --courbe-type PRI --from 2022-04-01 --to 2022-04-07` |
+| CMD2-R3         | `lowatt-enedis details 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07`                  |
+| CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2022-04-01 --to 2022-04-07`                     |
+| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                   |
+| CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07 --no-autorisation`|
+
+
+ConsultationMesuresDetaillees v3.0
+----------------------------------
+
+| Case      | Command                 |
+|-----------|-------------------------|
+| CMD3-R1   | *Not implemented yet.*  |
+| CMD3-R2   | *Not implemented yet.*  |
+| CMD3-R3   | *Not implemented yet.*  |
+| CMD3-R4   | *Not implemented yet.*  |
+| CMD3-R5   | *Not implemented yet.*  |
+| CMD3-R6   | *Not implemented yet.*  |
+| CMD3-NR1  | *Not implemented yet.*  |
+| CMD3-NR2  | *Not implemented yet.*  |
 
 
 RecherchePoint v2.0
@@ -69,6 +86,19 @@ RecherchePoint v2.0
 | RP-R3    | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TES --cp 84160 --insee 84042 --hp`           |
 | RP-NR1   | `lowatt-enedis search --categorie RES --cp 84160 --insee 84042`                                   |
 | RP-NR2   | `lowatt-enedis search --insee 34231 --voie "1 RUE DE LA MER"`                                     |
+
+
+CommandeAccesDonneesMesures v1.0
+---------------------------------
+
+| Case      | Command                 |
+|-----------|-------------------------|
+| ACCES-R1  | *Not implemented yet.*  |
+| ACCES-R2  | *Not implemented yet.*  |
+| ACCES-R3  | *Not implemented yet.*  |
+| ACCES-R4  | *Not implemented yet.*  |
+| ACCES-NR1 | *Not implemented yet.*  |
+| ACCES-NR2 | *Not implemented yet.*  |
 
 
 CommandeTransmissionDonneesInfraJ v1.0
@@ -117,7 +147,7 @@ RechercherServicesSouscritsMesures v1.0
 | Case          | Command                                      |
 |---------------|----------------------------------------------|
 | RS-R1 (C5)    | `lowatt-enedis subscriptions 25884515170669` |
-| RS-R1 (C1-C4) | `lowatt-enedis subscriptions 98800000000246` |
+| RS-R1 (C2-C4) | `lowatt-enedis subscriptions 98800000000246` |
 
 CommandeArretServiceSouscritMesures v1.0
 ----------------------------------------
