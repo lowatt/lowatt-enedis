@@ -1,0 +1,261 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sc="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common"
+           targetNamespace="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common" version="1.0.0">
+    <!-- Demande CMDv3  -->
+    <xs:element name="consulterMesuresDetailleesV3" type="sc:ConsulterMesuresDetailleesV3Type"/>
+
+    <!-- Reponse CMDv3  -->
+    <xs:element name="consulterMesuresDetailleesResponseV3" type="sc:ConsulterMesuresDetailleesV3ResponseType"/>
+
+    <!-- Demande CMDv3  -->
+    <xs:complexType name="ConsulterMesuresDetailleesV3Type">
+        <xs:sequence>
+            <xs:element name="demande" type="sc:Demande"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Demande">
+        <xs:sequence>
+            <xs:element name="initiateurLogin" type="xs:string"/>
+            <xs:element name="pointId" type="sc:PointIdType"/>
+            <xs:element name="mesuresTypeCode" type="sc:MesuresTypeCodeType"/>
+            <xs:element name="grandeurPhysique" type="xs:string"/>
+            <xs:element name="dateDebut" type="xs:date"/>
+            <xs:element name="dateFin" type="xs:date"/>
+            <xs:element name="mesuresPas" type="sc:MesuresPasType" minOccurs="0"/>
+            <xs:element name="mesuresCorrigees" type="xs:boolean"/>
+            <xs:element name="sens" type="sc:SensMesureType"/>
+            <xs:element name="cadreAcces" type="sc:CadreAccesType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Information CMDv3 pour demande & réponse-->
+    <xs:simpleType name="PointIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Information CMDv3 pour demande -->
+    <xs:simpleType name="MesuresTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COURBE"/>
+            <xs:enumeration value="PMAX"/>
+            <xs:enumeration value="ENERGIE"/>
+            <xs:enumeration value="INDEX"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Information CMDv3 pour demande -->
+    <xs:simpleType name="MesuresPasType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="P1D"/>
+            <xs:enumeration value="P1M"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Information CMDv3 pour demande -->
+    <xs:simpleType name="SensMesureType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INJECTION"/>
+            <xs:enumeration value="SOUTIRAGE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Information CMDv3 pour demande -->
+    <xs:simpleType name="CadreAccesType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACCORD_CLIENT"/>
+            <xs:enumeration value="SERVICE_ACCES"/>
+            <xs:enumeration value="EST_TITULAIRE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ConsulterMesuresDetailleesV3ResponseType">
+        <xs:sequence>
+            <!-- CMDv3 avec/sans service d'accès toutes mesures -->
+            <xs:element name="pointId" type="sc:PointIdType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="mesuresCorrigees" type="sc:EtapeMetierType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="periode" type="sc:PeriodeType" minOccurs="0" maxOccurs="1"/>
+            <!-- CMDv3 avec service d'accès courbe, energie, pmax -->
+            <xs:element name="grandeur" type="sc:GrandeurInstantanees" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- CMDv3 avec service d'accès index -->
+            <xs:element name="contexte" type="sc:Contexte" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- CMDv3 avec service d'accès energie -->
+            <xs:element name="typeValeur" type="xs:string" minOccurs="0"/>
+            <!-- CMDv3 avec service d'accès courbe, energie, pmax -->
+            <xs:element name="modeCalcul" type="xs:string" minOccurs="0"/>
+            <!-- CMDv3 avec service d'accès energie, pmax -->
+            <xs:element name="pas" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:simpleType name="EtapeMetierType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BEST"/>
+            <xs:enumeration value="BRUT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="PeriodeType">
+        <xs:sequence>
+            <xs:element name="dateDebut" type="xs:date"/>
+            <xs:element name="dateFin" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Informations grandeur à tous les flux  -->
+    <xs:complexType name="GrandeurBase">
+        <xs:sequence>
+            <xs:element name="grandeurMetier" type="sc:GrandeurMetierType"/>
+            <xs:element name="grandeurPhysique" type="sc:GrandeurPhysiqueType"/>
+            <xs:element name="unite" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Grandeur CMDv3 avec service acces courbe, energie, pmax -->
+    <xs:complexType name="GrandeurInstantanees">
+        <xs:complexContent>
+            <xs:extension base="sc:GrandeurBase">
+                <xs:sequence>
+                    <xs:element name="points" type="sc:Points" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Grandeur CMDv3 avec/sans service acces index-->
+    <xs:complexType name="GrandeurType">
+        <xs:complexContent>
+            <xs:extension base="sc:GrandeurBase">
+                <xs:sequence>
+                    <xs:element name="calendrier" type="sc:Calendrier" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="cadranTotalisateur" type="sc:ClasseTemporelleTotalisateur" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Points CMDv3 avec service acces courbe, energie, pmax -->
+    <xs:complexType name="Points">
+        <xs:sequence>
+            <xs:element name="v" type="xs:string" nillable="true"/>
+            <xs:element name="d" type="xs:string"/>
+            <xs:element name="p" type="xs:string" minOccurs="0"/>
+            <xs:element name="n" type="xs:string" minOccurs="0"/>
+            <xs:element name="tc" type="xs:string" minOccurs="0"/>
+            <xs:element name="iv" type="xs:string" minOccurs="0"/>
+            <xs:element name="ec" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Mesure CMDv3 avec/sans service acces index -->
+    <xs:complexType name="Contexte">
+        <xs:sequence>
+            <xs:element name="etapeMetier" type="xs:string"/>
+            <xs:element name="contexteReleve" type="sc:ContexteReleveType"/>
+            <xs:element name="typeReleve" type="sc:TypeReleveType"/>
+            <xs:element name="motifReleve" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="grandeur" type="sc:GrandeurType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Calendrier CMDv3 avec/sans service acces index -->
+    <xs:complexType name="Calendrier">
+        <xs:sequence>
+            <xs:element name="idCalendrier" type="xs:string"/>
+            <xs:element name="libelleCalendrier" type="xs:string"/>
+            <xs:element name="classeTemporelle" type="sc:ClasseTemporelle" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Contexte relevé CMDv3 avec/sans service acces index -->
+    <xs:simpleType name="ContexteReleveType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COL"/>
+            <xs:enumeration value="TOP"/>
+            <xs:enumeration value="FMR"/>
+            <xs:enumeration value="CRD"/>
+            <xs:enumeration value="CRI"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Type relevé CMDv3 avec/sans service acces index -->
+    <xs:simpleType name="TypeReleveType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AP"/>
+            <xs:enumeration value="AQ"/>
+            <xs:enumeration value="AS"/>
+            <xs:enumeration value="AV"/>
+            <xs:enumeration value="LC"/>
+            <xs:enumeration value="RM"/>
+            <xs:enumeration value="RC"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Classe temporelle CMDv3 avec/sans service acces index -->
+    <xs:complexType name="ClasseTemporelle">
+        <xs:sequence>
+            <xs:element name="idClasseTemporelle" type="xs:string" minOccurs="0"/>
+            <xs:element name="libelleClasseTemporelle" type="xs:string" minOccurs="0"/>
+            <xs:element name="codeCadran" type="xs:string" minOccurs="0"/>
+            <xs:element name="valeur" type="sc:Valeur" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Classe temporelle totaliseur CMDv3 avec/sans service acces index -->
+    <xs:complexType name="ClasseTemporelleTotalisateur">
+        <xs:sequence>
+            <xs:element name="codeCadran" type="xs:string" minOccurs="0"/>
+            <xs:element name="valeur" type="sc:Valeur" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Valeur CMDv3 avec/sans service acces index -->
+    <xs:complexType name="Valeur">
+        <xs:sequence>
+            <xs:element name="d" type="xs:string"/>
+            <xs:element name="v" type="xs:integer"/>
+            <xs:element name="iv" type="sc:IvType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Valeur CMDv3 avec/sans service acces index -->
+    <xs:simpleType name="IvType">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Informations grandeur métier commune à tous les flux  -->
+    <xs:simpleType name="GrandeurMetierType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CONS"/>
+            <xs:enumeration value="PROD"/>
+            <xs:enumeration value="TOUT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Informations grandeur physique commune à tous les flux  -->
+    <xs:simpleType name="GrandeurPhysiqueType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DD"/>
+            <xs:enumeration value="PA"/>
+            <xs:enumeration value="DE"/>
+            <xs:enumeration value="DQ"/>
+            <xs:enumeration value="E"/>
+            <xs:enumeration value="EA"/>
+            <xs:enumeration value="ER"/>
+            <xs:enumeration value="ERC"/>
+            <xs:enumeration value="ERI"/>
+            <xs:enumeration value="PMA"/>
+            <xs:enumeration value="PRC"/>
+            <xs:enumeration value="PRI"/>
+            <xs:enumeration value="TF"/>
+            <xs:enumeration value="TOUT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
