@@ -50,6 +50,10 @@ ConsultationMesures v1.1
 ConsultationMesuresDetaillees v2.0
 ----------------------------------
 
+**The decommissioning of this version is planned for the end of 2023.**
+
+> La version 2 du webservice ConsultationMesureDetaillees sera décomissionné fin 2023.
+
 | Case            | Command                                                                                           |
 |-----------------|---------------------------------------------------------------------------------------------------|
 | CMD2-R1 (C1-C4) | `lowatt-enedis details 30001610071843 COURBE --from 2022-04-01 --to 2022-04-07`                   |
