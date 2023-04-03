@@ -128,13 +128,13 @@ def handle_cli_command(command, args):
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
     obj = handler(client, args)
     if args.output == "xml":
-        print(client.last_received().str())  # noqa: T001
+        print(client.last_received().str())  # noqa: T201
     elif args.output == "json":
         json.dump(
             obj, sys.stdout, indent=2, default=json_encode_default, sort_keys=True
         )
     else:
-        print(obj)  # noqa: T001
+        print(obj)  # noqa: T201
 
 
 def get_client(service, cert_file, key_file, homologation=False):
