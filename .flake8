@@ -1,15 +1,24 @@
 [flake8]
 #format = pylint
 ignore =
-  A003, # attribute overriding builtin name
-  B006, # [bugbear] Do not use mutable data structures for argument defaults (I choose by myself)
-  E123, # closing bracket does not match indentation of opening bracket's line (disagree with emacs python mode)
-  E126, # continuation line over-indented for hanging indent line (disagree with emacs python mode)
-  E226, # missing whitespace around arithmetic operator (disagree when in parameter)
-  P101, # [string-format] format string does contain unindexed parameters (don't care of py2.6)
-  P103, # [string-format] other string does contain unindexed parameters
-  P102, # [string-format] docstring does contain unindexed parameters
-  W503, # Line break occurred before a binary operator (to keep operators aligned)
+# attribute overriding builtin name
+  A003,
+# [bugbear] Do not use mutable data structures for argument defaults (I choose by myself)
+  B006,
+# closing bracket does not match indentation of opening bracket's line (disagree with emacs python mode)
+  E123,
+# continuation line over-indented for hanging indent line (disagree with emacs python mode)
+  E126,
+# missing whitespace around arithmetic operator (disagree when in parameter)
+  E226,
+# [string-format] format string does contain unindexed parameters (don't care of py2.6)
+  P101,
+# [string-format] other string does contain unindexed parameters
+  P103,
+# [string-format] docstring does contain unindexed parameters
+  P102,
+# Line break occurred before a binary operator (to keep operators aligned)
+  W503,
 max-line-length = 100
 exclude = doc/*,.tox/*,.eggs
 rst-roles =
