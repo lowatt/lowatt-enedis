@@ -29,7 +29,7 @@ import os
 import sys
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any, Callable, Dict, Iterator, Optional, Tuple, TypeVar, Union
+from typing import Any, Callable, Iterator, Optional, TypeVar, Union
 
 import suds.sudsobject
 from suds import WebFault
@@ -49,7 +49,7 @@ logging.basicConfig(level=logging.INFO)
 
 WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
 SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl")}
-COMMAND_SERVICE: Dict[str, Tuple[str, Dict[str, Any], Any]] = {}
+COMMAND_SERVICE: dict[str, tuple[str, dict[str, Any], Any]] = {}
 
 
 def wsdl(service_name: str) -> str:

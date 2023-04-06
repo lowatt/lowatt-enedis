@@ -6,7 +6,7 @@ import shlex
 import subprocess
 import sys
 from pathlib import Path
-from typing import Dict, Iterator, List, Tuple
+from typing import Iterator
 from unittest.mock import MagicMock, patch
 
 import freezegun
@@ -21,10 +21,10 @@ from typing_extensions import TypedDict
 import lowatt_enedis.services
 
 
-def get_cases(_cache: Dict[None, Dict[str, str]] = {}) -> Dict[str, str]:
+def get_cases(_cache: dict[None, dict[str, str]] = {}) -> dict[str, str]:
     with contextlib.suppress(KeyError):
         return _cache[None]
-    cases: Dict[str, str] = {}
+    cases: dict[str, str] = {}
     with (Path(__file__).parent.parent / "doc" / "homologation.md").open() as f:
         for line in f:
             match = re.search(r"\|(.*)\|.*`(lowatt-enedis .*)`.*$", line)
@@ -47,8 +47,8 @@ EXPECTED_FILENAME = Path(__file__).parent / "data" / "requests.yaml"
 
 
 def get_expected(
-    _cache: Dict[None, Dict[str, ExpectedDict]] = {}
-) -> Dict[str, ExpectedDict]:
+    _cache: dict[None, dict[str, ExpectedDict]] = {}
+) -> dict[str, ExpectedDict]:
     with contextlib.suppress(KeyError):
         return _cache[None]
     with EXPECTED_FILENAME.open() as f:
@@ -83,7 +83,7 @@ def set_expected(case: str, expected: ExpectedDict) -> None:
 
 
 @contextlib.contextmanager
-def override_sys_argv(argv: List[str]) -> Iterator[None]:
+def override_sys_argv(argv: list[str]) -> Iterator[None]:
     old, sys.argv = sys.argv, argv
     try:
         yield
@@ -92,7 +92,7 @@ def override_sys_argv(argv: List[str]) -> Iterator[None]:
 
 
 @pytest.fixture(scope="session")
-def certs(tmp_path_factory: pytest.TempPathFactory) -> Tuple[Path, Path]:
+def certs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
     certs = tmp_path_factory.mktemp("certs")
     certfile, keyfile = certs / "cert.pem", certs / "key.pem"
     subprocess.check_call(
@@ -122,7 +122,7 @@ def assert_xml_equal(actual: str, expected: str) -> None:
 
 @pytest.mark.parametrize("case", list(get_cases()))
 def test_requests(
-    case: str, tmp_path: Path, certs: Tuple[Path, Path], regen_test_data: bool
+    case: str, tmp_path: Path, certs: tuple[Path, Path], regen_test_data: bool
 ) -> None:
     # fix some defaults set at import time
     with freezegun.freeze_time("2022-02-22"), patch.dict(
