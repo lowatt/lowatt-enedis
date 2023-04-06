@@ -21,9 +21,13 @@
 SGE web-service mapping to plug them into the CLI.
 """
 
-from datetime import date, timedelta
+import argparse
+from datetime import date, datetime, timedelta
+from typing import Any, Iterator, Literal
 
+import suds.sudsobject
 from dateutil import tz
+from suds.client import Client
 
 from . import (
     arg_from_env,
@@ -82,12 +86,12 @@ CONTRAT_OPTIONS = {
 
 
 def _accord_client(
-    client,
-    args,
-    extended=False,
-    xs_accord_type="ns3:DeclarationAccordClientType",
-    autorisation=True,
-):
+    client: Client,
+    args: argparse.Namespace,
+    extended: bool = False,
+    xs_accord_type: str = "ns3:DeclarationAccordClientType",
+    autorisation: bool = True,
+) -> suds.sudsobject.Object:
     if get_option(args, "denomination"):
         ptype = "Morale"
         who_options = {
@@ -162,7 +166,9 @@ MESURES_OPTIONS_MAP = {
 }
 
 
-def _pas(client, args, demande):
+def _pas(
+    client: Client, args: argparse.Namespace, demande: suds.sudsobject.Object
+) -> None:
     pas = get_option(args, "pas")
     if pas:
         demande.pasCdc = client.factory.create("ns1:DureeType")
@@ -170,7 +176,7 @@ def _pas(client, args, demande):
         demande.pasCdc.valeur = pas
 
 
-def _check_mesure_options_consistency(args):
+def _check_mesure_options_consistency(args: argparse.Namespace) -> None:
     if get_option(args, "pas") and get_option(args, "type") != "CDC":
         raise ValueError(
             "L'option 'pas' ne peut être  spécifiée que pour le type de "
@@ -224,7 +230,7 @@ def _check_mesure_options_consistency(args):
     },
 )
 @ws("RecherchePoint-v2.0")
-def search_point(client, args):
+def search_point(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
     criteria = create_from_options(
         client,
         args,
@@ -238,6 +244,7 @@ def search_point(client, args):
             "hp": "rechercheHorsPerimetre",
         },
     )
+    assert criteria is not None
     address = create_from_options(
         client,
         args,
@@ -271,7 +278,9 @@ def search_point(client, args):
     },
 )
 @ws("ConsultationDonneesTechniquesContractuelles-v1.0")
-def point_technical_data(client, args):
+def point_technical_data(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     return client.service.consulterDonneesTechniquesContractuelles(
         get_option(args, "prm"),
         get_option(args, "login"),
@@ -297,7 +306,7 @@ def point_technical_data(client, args):
     ),
 )
 @ws("ConsultationMesures-v1.1")
-def point_measures(client, args):
+def point_measures(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
     return client.service.consulterMesures(
         get_option(args, "prm"),
         get_option(args, "login"),
@@ -306,11 +315,11 @@ def point_measures(client, args):
     )
 
 
-def parse_date(value):
+def parse_date(value: str) -> date:
     return date(*(int(part) for part in value.split("-")))
 
 
-def measures_resp2py(resp):
+def measures_resp2py(resp: suds.sudsobject.Object) -> Iterator[dict[str, Any]]:
     """Return a list of dictionaries given a response from
     ConsultationMesures web-service. Each dict contains the following keys:
     - `grille`: "frn" or "turpe",
@@ -402,7 +411,9 @@ def measures_resp2py(resp):
     ),
 )
 @ws("ConsultationMesuresDetaillees-v2.0", header_ns_prefix="ns2")
-def point_detailed_measures(client, args):
+def point_detailed_measures(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     demande = create_from_options(
         client,
         args,
@@ -416,6 +427,7 @@ def point_detailed_measures(client, args):
             MESURES_OPTIONS_MAP,
         ),
     )
+    assert demande is not None
     # demande.mesuresPas uniquement pour PMAX sur C5N, valeur P1D ou P1M
     if get_option(args, "type") == "PMAX":
         demande.grandeurPhysique = "PMA"
@@ -439,7 +451,9 @@ def point_detailed_measures(client, args):
     return client.service.consulterMesuresDetaillees(demande)
 
 
-def detailed_measures_resp2py(resp):
+def detailed_measures_resp2py(
+    resp: suds.sudsobject.Object,
+) -> Iterator[tuple[datetime, float]]:
     """Return an iterator on (UTC tz naive datetime, value) given a response from
     ConsultationMesuresDetaillees web-service.
     """
@@ -451,11 +465,11 @@ def detailed_measures_resp2py(resp):
 
 
 def _donnees_generales(
-    client,
-    args,
-    code,
-    tag_name,
-):
+    client: Client,
+    args: argparse.Namespace,
+    code: str,
+    tag_name: str,
+) -> suds.sudsobject.Object:
     obj = create_from_options(
         client,
         args,
@@ -467,6 +481,7 @@ def _donnees_generales(
             "login": "initiateurLogin",
         },
     )
+    assert obj is not None
     obj.objetCode = code
     return obj
 
@@ -511,7 +526,7 @@ DONNEES_GENERALES_OPTIONS = dict_from_dicts(
     ),
 )
 @ws("CommandeTransmissionHistoriqueMesures-v1.0", header_ns_prefix="ns1")
-def point_cmd_histo(client, args):
+def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
     _check_mesure_options_consistency(args)
 
     header = client.options.soapheaders
@@ -540,6 +555,7 @@ def point_cmd_histo(client, args):
             },
         ),
     )
+    assert demande.historiqueMesures is not None
     _pas(client, args, demande.historiqueMesures)
     demande.historiqueMesures.declarationAccordClient = _accord_client(
         client,
@@ -584,7 +600,9 @@ def point_cmd_histo(client, args):
     ),
 )
 @ws("CommandeTransmissionDonneesInfraJ-v1.0")
-def point_cmd_infra_j(client, args):
+def point_cmd_infra_j(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     demande = client.factory.create("ns1:DemandeType")
 
     demande.donneesGenerales = _donnees_generales(
@@ -606,6 +624,7 @@ def point_cmd_infra_j(client, args):
             "ptd": "ptd",
         },
     )
+    assert demande.accesDonnees is not None
     demande.accesDonnees.declarationAccordClient = accord = _accord_client(
         client,
         args,
@@ -670,7 +689,9 @@ def point_cmd_infra_j(client, args):
     ),
 )
 @ws("CommandeCollectePublicationMesures-v3.0")
-def point_cmd_publication(client, args):
+def point_cmd_publication(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     demande = client.factory.create("ns1:DemandeType")
 
     demande.donneesGenerales = _donnees_generales(
@@ -686,14 +707,16 @@ def point_cmd_publication(client, args):
         "DemandeAccesMesures",
         dict_from_dicts(MESURES_OPTIONS_MAP),
     )
+    assert demande.accesMesures is not None
+    assert acces is not None
 
     supported_actions = ["cdc_enable", "cdc", "idx"]
-    action = [a for a in supported_actions if get_option(args, a)]
+    actions = [a for a in supported_actions if get_option(args, a)]
 
-    if not action or len(action) > 1:
+    if not actions or len(actions) > 1:
         raise ValueError(f"Une action doit être selectionnée parmi {supported_actions}")
 
-    action = action[0]
+    action = actions[0]
 
     if action == "idx":
         code = "IDX"
@@ -743,7 +766,9 @@ def point_cmd_publication(client, args):
     DONNEES_GENERALES_OPTIONS,
 )
 @ws("RechercherServicesSouscritsMesures-v1.0")
-def point_search_subscriptions(client, args):
+def point_search_subscriptions(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     criteria = create_from_options(
         client,
         args,
@@ -773,7 +798,9 @@ def point_search_subscriptions(client, args):
     ),
 )
 @ws("CommandeArretServiceSouscritMesures-v1.0")
-def point_unsubscribe(client, args):
+def point_unsubscribe(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
     demande = client.factory.create("ns1:DemandeType")
 
     demande.donneesGenerales = _donnees_generales(
@@ -793,5 +820,5 @@ def point_unsubscribe(client, args):
     return client.service.commanderArretServiceSouscritMesures(demande)
 
 
-def _boolean(b):
+def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"

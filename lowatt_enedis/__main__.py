@@ -16,6 +16,7 @@
 # along with lowatt_enedis.  If not, see <https://www.gnu.org/licenses/>.
 import argparse
 import sys
+from typing import NoReturn
 
 from suds.client import Client
 
@@ -29,7 +30,7 @@ from lowatt_enedis import (
 )
 
 
-def _cli_parser():
+def _cli_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="CLI access to Enedis SGE web-services.",
     )
@@ -49,7 +50,7 @@ def _cli_parser():
     return parser
 
 
-def run():
+def run() -> NoReturn:
     parser = _cli_parser()
     args = parser.parse_args()
 
