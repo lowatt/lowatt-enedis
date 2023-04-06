@@ -60,7 +60,7 @@ class Dumper(yaml.SafeDumper):
     pass
 
 
-def multiline_dump(dumper, data):
+def multiline_dump(dumper: yaml.SafeDumper, data: str) -> yaml.ScalarNode:
     if len(data.splitlines()) > 1:
         return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|")
     return dumper.represent_scalar("tag:yaml.org,2002:str", data)

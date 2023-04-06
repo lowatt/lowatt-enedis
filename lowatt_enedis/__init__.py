@@ -21,6 +21,7 @@
 Command line interface to enedis SGE web-services.
 """
 
+import argparse
 import datetime
 import json
 import logging
@@ -28,15 +29,16 @@ import os
 import sys
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Callable, Dict, Iterator, Optional, Tuple, TypeVar, Union
 
 import suds.sudsobject
 from suds import WebFault
 from suds.client import Client
 from suds.plugin import DocumentPlugin
-from typing_extensions import TypedDict
 
 from .certauth import HTTPSClientCertTransport
+
+RT = TypeVar("RT")
 
 logging.basicConfig(level=logging.INFO)
 # logging.getLogger('suds.client').setLevel(logging.DEBUG)
@@ -50,7 +52,7 @@ SERVICES = {x.stem: x.resolve().as_uri() for x in Path(WSDL_DIR).glob("**/*.wsdl
 COMMAND_SERVICE: Dict[str, Tuple[str, Dict[str, Any], Any]] = {}
 
 
-def wsdl(service_name):
+def wsdl(service_name: str) -> str:
     """Return path to WSDL file for `service_name`."""
     try:
         return SERVICES[service_name]
@@ -63,17 +65,12 @@ def wsdl(service_name):
         ) from None
 
 
-class ArgFromEnv(TypedDict):
-    default: Optional[str]
-    required: bool
-
-
-def arg_from_env(key: str) -> ArgFromEnv:
+def arg_from_env(key: str) -> dict[str, Any]:
     default = os.environ.get(key)
     return {"default": default, "required": not default}
 
 
-def init_cli(subparsers):
+def init_cli(subparsers: Any) -> None:
     """Init CLI subparsers according to registered services."""
     for command, (service, options, _) in COMMAND_SERVICE.items():
         subparser = subparsers.add_parser(
@@ -122,7 +119,7 @@ def json_encode_default(obj: Any) -> Any:
     raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
-def handle_cli_command(command, args):
+def handle_cli_command(command: str, args: argparse.Namespace) -> None:
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
@@ -137,7 +134,9 @@ def handle_cli_command(command, args):
         print(obj)  # noqa: T201
 
 
-def get_client(service, cert_file, key_file, homologation=False):
+def get_client(
+    service: str, cert_file: str, key_file: str, homologation: bool = False
+) -> Client:
     # Need custom plugin to handle `xs:choice` potentially expected in service
     # arguments. Non-handling this seems to be an outstanding suds bug, see
     # https://stackoverflow.com/questions/5963404/suds-and-choice-tag
@@ -176,13 +175,13 @@ def get_client(service, cert_file, key_file, homologation=False):
 
 
 class _SetChoicePlugin(DocumentPlugin):  # type: ignore[misc]
-    def __init__(self):
+    def __init__(self) -> None:
         self.choosen_tags = {"autorisationClient"}
 
-    def parsed(self, context):
+    def parsed(self, context: suds.plugin.DocumentContext) -> None:
         self._rec_set_choices(context.document)
 
-    def _rec_set_choices(self, document):
+    def _rec_set_choices(self, document: suds.sax.element.Element) -> None:
         for i in document.children:
             if i.name == "choice":
                 for j in i.children:
@@ -194,14 +193,16 @@ class _SetChoicePlugin(DocumentPlugin):  # type: ignore[misc]
                 self._rec_set_choices(i)
 
 
-def register(command, service, options):
+def register(
+    command: str, service: str, options: dict[str, Any]
+) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
     """Decorator registering function as a service handler for CLI `command`,
     matching `service` web-service name, accepting `options` (list of dict given
     to `argparse.ArgumentParser.add_argument`)
 
     """
 
-    def decorator(func):
+    def decorator(func: Callable[..., RT]) -> Callable[..., RT]:
         COMMAND_SERVICE[command] = (service, options, func)
         return func
 
@@ -212,17 +213,19 @@ class WSException(Exception):
     pass
 
 
-def ws(service, header_ns_prefix="ns4"):
+def ws(
+    service: str, header_ns_prefix: str = "ns4"
+) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
     """Decorator around sge web service call, returning a wrapper that properly set
     SOAP headers required by the service
 
     """
 
-    def decorator(func):
+    def decorator(func: Callable[..., RT]) -> Callable[..., RT]:
         service_version = service.split("-")[1][1:]
 
         @wraps(func)
-        def call_service(client, args):
+        def call_service(client: Client, args: argparse.Namespace) -> RT:
             client.xstypes_map = build_xstypes_map(client)
             header = client.factory.create("{}:entete".format(header_ns_prefix))
             header.version = service_version
@@ -251,7 +254,12 @@ def ws(service, header_ns_prefix="ns4"):
     return decorator
 
 
-def create_from_options(client, args, xstype_name, options_map):
+def create_from_options(
+    client: Client,
+    args: argparse.Namespace,
+    xstype_name: str,
+    options_map: dict[str, str],
+) -> Optional[suds.sudsobject.Object]:
     """Create and return an `xstype_name` element, and fill it according to
     `options_map` {arg name: xs element name}` mapping by looking for value in
     command line `args`.
@@ -290,14 +298,16 @@ def create_from_options(client, args, xstype_name, options_map):
     return None
 
 
-def get_option(args, option):
+def get_option(args: Union[dict[str, Any], argparse.Namespace], option: str) -> Any:
     if isinstance(args, dict):
         return args.get(option, None)
     else:
         return getattr(args, option)
 
 
-def build_xstypes_map(client):
+def build_xstypes_map(
+    client: Client,
+) -> dict[str, tuple[suds.xsd.sxbase.SchemaObject, str]]:
     """Return a dictionary of type names defined in the XML schema (without
     namespace nor prefix), associated to 2-uple `(type object, prefix)`.
 
@@ -317,7 +327,9 @@ def build_xstypes_map(client):
     return xstypes_map
 
 
-def xstype_children_map(xstype):
+def xstype_children_map(
+    xstype: suds.xsd.sxbase.SchemaObject,
+) -> dict[str, suds.xsd.sxbasic.Element]:
     """Return a dictionary of children tags for xstype, without namespace nor
     prefix.
 
@@ -329,7 +341,7 @@ def xstype_children_map(xstype):
     return children_map
 
 
-def iter_methods(client):
+def iter_methods(client: Client) -> Iterator[suds.sudsobject.Facade]:
     """Return an iterator on exposerd methods suds instances."""
     for service in client.wsdl.services:
         for port in service.ports:
@@ -337,7 +349,7 @@ def iter_methods(client):
                 yield method
 
 
-def dict_from_dicts(*dicts):
+def dict_from_dicts(*dicts: dict[str, Any]) -> dict[str, Any]:
     """Build a dictionary from multiple dictionaries. In case of key conflict, the
     latest one wins.
 

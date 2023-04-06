@@ -1,29 +1,28 @@
+import argparse
 import contextlib
 import datetime
 import io
 import os
 import sys
-from dataclasses import dataclass
+from typing import Iterator
 
 import pkg_resources
 import pytest
+import suds.sudsobject
 from suds.client import Client, SoapClient
 
 import lowatt_enedis as le
 import lowatt_enedis.services  # noqa: register services
 
 
-@dataclass(init=True)
-class args:
-    cert_file = None
-    key_file = None
-    login = "bob"
-    homologation = False
-    output = "print"
+def args() -> argparse.Namespace:
+    return argparse.Namespace(
+        cert_file=None, key_file=None, login="bob", homologation=False, output="print"
+    )
 
 
 @contextlib.contextmanager
-def override_sys_argv(argv):
+def override_sys_argv(argv: list[str]) -> Iterator[None]:
     old, sys.argv = sys.argv, argv
     try:
         yield
@@ -31,7 +30,7 @@ def override_sys_argv(argv):
         sys.argv = old
 
 
-def test_introspection():
+def test_introspection() -> None:
     service = "RecherchePoint-v2.0"
     service_wsdl = le.wsdl(service)
     assert service_wsdl.endswith(".wsdl")
@@ -48,12 +47,16 @@ def test_introspection():
     assert children_map["numSiret"].min == "0"
 
 
-def test_ws_decorator():
+def test_ws_decorator() -> None:
     service, options, handler = le.COMMAND_SERVICE["search"]
+    service_location = None
+    handler_called = False
 
     @le.register("testws", service, options)
     @le.ws(service)
-    def test_handler(client, args):
+    def test_handler(
+        client: Client, args: argparse.Namespace
+    ) -> suds.sudsobject.Object:
         nonlocal handler_called, service_location
 
         handler_called = True
@@ -70,8 +73,6 @@ def test_ws_decorator():
                     assert service_location is None
                     service_location = method.location
 
-    handler_called = False
-    service_location = None
     le.handle_cli_command("testws", args())
     assert handler_called
     assert service_location == (b"https://sge-b2b.enedis.fr/RecherchePoint/v2.0")
@@ -88,12 +89,13 @@ def test_ws_decorator():
     )
 
 
-def test_cli_help():
+def test_cli_help() -> None:
     entrypoint = pkg_resources.get_entry_info(
         "lowatt_enedis",
         "console_scripts",
         "lowatt-enedis",
     )
+    assert entrypoint is not None
     func = entrypoint.load()
     stdout = io.StringIO()
     with pytest.raises(SystemExit) as cm, override_sys_argv(
@@ -108,7 +110,7 @@ def test_cli_help():
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 
-def test_detailed_measures_resp2py():
+def test_detailed_measures_resp2py() -> None:
     service, options, handler = le.COMMAND_SERVICE["details"]
     client = Client(le.wsdl(service))
     soap = SoapClient(client, client.service.consulterMesuresDetaillees.method)
@@ -123,7 +125,7 @@ def test_detailed_measures_resp2py():
         )
 
 
-def test_measures_resp2py():
+def test_measures_resp2py() -> None:
     service, options, handler = le.COMMAND_SERVICE["measures"]
     client = Client(le.wsdl(service))
     soap = SoapClient(client, client.service.consulterMesures.method)

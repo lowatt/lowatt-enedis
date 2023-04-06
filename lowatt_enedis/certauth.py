@@ -28,22 +28,23 @@ a client SSL certificate.
 """
 
 import ssl
-from http.client import HTTPSConnection
-from urllib.request import HTTPSHandler, build_opener
+from http.client import HTTPResponse, HTTPSConnection
+from typing import Any
+from urllib.request import HTTPSHandler, Request, build_opener
 
 from suds.transport.http import HttpTransport
 
 
 class _HTTPSClientAuthHandler(HTTPSHandler):
-    def __init__(self, cert_file, key_file):
+    def __init__(self, cert_file: str, key_file: str):
         super().__init__()
         self.cert_file = cert_file
         self.key_file = key_file
 
-    def https_open(self, req):
-        return self.do_open(self.get_connection, req)
+    def https_open(self, req: Request) -> HTTPResponse:
+        return self.do_open(self.get_connection, req)  # type: ignore[arg-type]
 
-    def get_connection(self, host, timeout=300):
+    def get_connection(self, host: str, timeout: int = 300) -> HTTPSConnection:
         context = ssl.SSLContext()
         context.load_cert_chain(self.cert_file, self.key_file)
         return HTTPSConnection(host, context=context)
@@ -67,16 +68,16 @@ class HTTPSClientCertTransport(HttpTransport):  # type: ignore[misc]
     .. _SUDS: https://suds-py3.readthedocs.io/en/latest
     """
 
-    def __init__(self, cert_file, key_file, *args, **kwargs):
+    def __init__(self, cert_file: str, key_file: str, *args: Any, **kwargs: Any):
         super().__init__(*args, **kwargs)
         self.url_open = build_opener(
             _HTTPSClientAuthHandler(cert_file, key_file),
         ).open
 
-    def u2open(self, u2request):
+    def u2open(self, u2request: Request) -> HTTPResponse:
         """Open an return a connection.
 
         :param u2request: A urllib2 request.
         :return: The opened file-like urllib2 object.
         """
-        return self.url_open(u2request, timeout=self.options.timeout)
+        return self.url_open(u2request, timeout=self.options.timeout)  # type: ignore[no-any-return]
