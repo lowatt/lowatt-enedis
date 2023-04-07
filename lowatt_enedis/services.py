@@ -451,6 +451,87 @@ def point_detailed_measures(
     return client.service.consulterMesuresDetaillees(demande)
 
 
+@register(
+    "detailsV3",
+    "ConsultationMesuresDetaillees-v3.0",
+    dict_from_dicts(
+        {
+            "prm": {
+                "help": "identifiant PRM du point",
+            },
+            "type": {
+                "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
+                "help": "type de mesure demandé : ENERGIE pour les consommations "
+                "globales quotidiennes, PMAX pour les puissances maximales "
+                "quotidiennes, COURBE pour la courbe de charge.",
+            },
+            "--courbe-type": {
+                # - PA pour récupérer les courbes de puissance active (seule
+                #   courbe disponible pour les segments C5 et P4)
+                # - PRI pour récupérer les courbes de puissance réactive
+                #   inductive
+                # - PRC pour récupérer les courbes de puissance réactive
+                #   capacitive
+                # - E pour récupérer les courbes de tension
+                # - TOUT pour récupérer les courbes disponibles
+                "choices": ["PA", "PRI", "PRC", "E", "TOUT"],
+                "default": "PA",
+                "help": "type de courbe demandé le cas échéant (Puissance Active, "
+                "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
+                "tension (E), tout).",
+            },
+            "--injection": {
+                "action": "store_true",
+                "help": "demander les données en injection (soutirage par défaut).",
+            },
+            "--cadre": {
+                "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
+                "default": "ACCORD_CLIENT",
+                "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
+            },
+        },
+        MESURES_OPTIONS,
+    ),
+)
+@ws("ConsultationMesuresDetaillees-v3.0", header_ns_prefix="ns2")
+def point_detailed_measuresV3(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    demande = create_from_options(
+        client,
+        args,
+        "Demande",
+        dict_from_dicts(
+            {
+                "login": "initiateurLogin",
+                "prm": "pointId",
+                "type": "mesuresTypeCode",
+            },
+            MESURES_OPTIONS_MAP,
+        ),
+    )
+    assert demande is not None
+    # demande.mesuresPas uniquement pour PMAX sur C5N, valeur P1D ou P1M
+    if get_option(args, "type") == "PMAX":
+        demande.grandeurPhysique = "PMA"
+        demande.mesuresPas = "P1D"  # 'P1M'
+    else:
+        del demande.mesuresPas
+        if get_option(args, "type") in ("ENERGIE", "INDEX"):
+            demande.grandeurPhysique = "EA"
+        elif get_option(args, "type") == "COURBE":
+            courbe_type = get_option(args, "courbe_type")
+            if not courbe_type:
+                raise ValueError(
+                    "l'option courbe-type doit être spécifié pour le type de mesure COURBE",
+                )
+            demande.grandeurPhysique = courbe_type
+    injection = get_option(args, "injection")
+    demande.sens = "INJECTION" if injection else "SOUTIRAGE"
+    demande.cadreAcces = get_option(args, "cadre")
+    return client.service.consulterMesuresDetailleesV3(demande)
+
+
 def detailed_measures_resp2py(
     resp: suds.sudsobject.Object,
 ) -> Iterator[tuple[datetime, float]]:

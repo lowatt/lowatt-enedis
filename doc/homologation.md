@@ -68,16 +68,20 @@ ConsultationMesuresDetaillees v2.0
 ConsultationMesuresDetaillees v3.0
 ----------------------------------
 
-| Case      | Command                 |
-|-----------|-------------------------|
-| CMD3-R1   | *Not implemented yet.*  |
-| CMD3-R2   | *Not implemented yet.*  |
-| CMD3-R3   | *Not implemented yet.*  |
-| CMD3-R4   | *Not implemented yet.*  |
-| CMD3-R5   | *Not implemented yet.*  |
-| CMD3-R6   | *Not implemented yet.*  |
-| CMD3-NR1  | *Not implemented yet.*  |
-| CMD3-NR2  | *Not implemented yet.*  |
+| Case              | Command                                                                                                  |
+|-------------------|----------------------------------------------------------------------------------------------------------|
+| CMD3-R1 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 COURBE --from 2022-04-01 --to 2022-04-07`                        |
+| CMD3-R1 (C5)      | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                        |
+| CMD3-R2           | `lowatt-enedis detailsV3 30001610071843 COURBE --courbe-type PRI --from 2022-04-01 --to 2022-04-07`      |
+| CMD3-R3 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
+| CMD3-R3 (C5)      | `lowatt-enedis detailsV3 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
+| CMD3-R4           | `lowatt-enedis detailsV3 25478147557460 PMAX --from 2022-04-01 --to 2022-04-07`                          |
+| CMD3-R5 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07`                         |
+| CMD3-R5 (C5)      | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07`                         |
+| CMD3-R6 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
+| CMD3-R6 (C5)      | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
+| CMD3-NR1          | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-08`                        |
+| CMD3-NR2          | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-08`                         |
 
 
 RecherchePoint v2.0
