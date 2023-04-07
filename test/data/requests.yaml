@@ -1,6 +1,6 @@
 ADP-NR1:
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -9,18 +9,18 @@ ADP-NR1:
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:consulterDonneesTechniquesContractuelles>
+      <ns0:Body>
+        <ns1:consulterDonneesTechniquesContractuelles>
           <pointId>99999999999999</pointId>
           <loginUtilisateur>test@example.com</loginUtilisateur>
           <autorisationClient>false</autorisationClient>
-        </ns0:consulterDonneesTechniquesContractuelles>
-      </ns1:Body>
+        </ns1:consulterDonneesTechniquesContractuelles>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R1 (C1-C4):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -29,18 +29,18 @@ ADP-R1 (C1-C4):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:consulterDonneesTechniquesContractuelles>
+      <ns0:Body>
+        <ns1:consulterDonneesTechniquesContractuelles>
           <pointId>98800007059999</pointId>
           <loginUtilisateur>test@example.com</loginUtilisateur>
           <autorisationClient>true</autorisationClient>
-        </ns0:consulterDonneesTechniquesContractuelles>
-      </ns1:Body>
+        </ns1:consulterDonneesTechniquesContractuelles>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R1 (C5):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -49,18 +49,18 @@ ADP-R1 (C5):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:consulterDonneesTechniquesContractuelles>
+      <ns0:Body>
+        <ns1:consulterDonneesTechniquesContractuelles>
           <pointId>25946599093143</pointId>
           <loginUtilisateur>test@example.com</loginUtilisateur>
           <autorisationClient>true</autorisationClient>
-        </ns0:consulterDonneesTechniquesContractuelles>
-      </ns1:Body>
+        </ns1:consulterDonneesTechniquesContractuelles>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R2 (C1-C4):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -69,18 +69,18 @@ ADP-R2 (C1-C4):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:consulterDonneesTechniquesContractuelles>
+      <ns0:Body>
+        <ns1:consulterDonneesTechniquesContractuelles>
           <pointId>98800007059999</pointId>
           <loginUtilisateur>test@example.com</loginUtilisateur>
           <autorisationClient>false</autorisationClient>
-        </ns0:consulterDonneesTechniquesContractuelles>
-      </ns1:Body>
+        </ns1:consulterDonneesTechniquesContractuelles>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R2 (C5):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -89,13 +89,13 @@ ADP-R2 (C5):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:consulterDonneesTechniquesContractuelles>
+      <ns0:Body>
+        <ns1:consulterDonneesTechniquesContractuelles>
           <pointId>25946599093143</pointId>
           <loginUtilisateur>test@example.com</loginUtilisateur>
           <autorisationClient>false</autorisationClient>
-        </ns0:consulterDonneesTechniquesContractuelles>
-      </ns1:Body>
+        </ns1:consulterDonneesTechniquesContractuelles>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 AHC-NR1:
@@ -344,6 +344,259 @@ CMD2-R4:
       </ns1:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+CMD3-NR1:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>COURBE</mesuresTypeCode>
+            <grandeurPhysique>PA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-08</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-NR2:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>INDEX</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-08</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R1 (C1-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>30001610071843</pointId>
+            <mesuresTypeCode>COURBE</mesuresTypeCode>
+            <grandeurPhysique>PA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R1 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>COURBE</mesuresTypeCode>
+            <grandeurPhysique>PA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R2:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>30001610071843</pointId>
+            <mesuresTypeCode>COURBE</mesuresTypeCode>
+            <grandeurPhysique>PRI</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R3 (C1-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>30001610071843</pointId>
+            <mesuresTypeCode>ENERGIE</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R3 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>ENERGIE</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R4:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>PMAX</mesuresTypeCode>
+            <grandeurPhysique>PMA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresPas>P1D</mesuresPas>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R5 (C1-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>30001610071843</pointId>
+            <mesuresTypeCode>INDEX</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R5 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>INDEX</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>ACCORD_CLIENT</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R6 (C1-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>30001610071843</pointId>
+            <mesuresTypeCode>INDEX</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>SERVICE_ACCES</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+CMD3-R6 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
+      <SOAP-ENV:Header/>
+      <ns0:Body>
+        <ns1:consulterMesuresDetailleesV3>
+          <demande>
+            <initiateurLogin>test@example.com</initiateurLogin>
+            <pointId>25478147557460</pointId>
+            <mesuresTypeCode>INDEX</mesuresTypeCode>
+            <grandeurPhysique>EA</grandeurPhysique>
+            <dateDebut>2022-04-01</dateDebut>
+            <dateFin>2022-04-07</dateFin>
+            <mesuresCorrigees>false</mesuresCorrigees>
+            <sens>SOUTIRAGE</sens>
+            <cadreAcces>SERVICE_ACCES</cadreAcces>
+          </demande>
+        </ns1:consulterMesuresDetailleesV3>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
 F300B_O1 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -850,7 +1103,7 @@ F305C:
   url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F375A-NR1:
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -859,8 +1112,8 @@ F375A-NR1:
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:commanderTransmissionDonneesInfraJ>
+      <ns0:Body>
+        <ns1:commanderTransmissionDonneesInfraJ>
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
@@ -884,13 +1137,13 @@ F375A-NR1:
               <ptd>false</ptd>
             </accesDonnees>
           </demande>
-        </ns0:commanderTransmissionDonneesInfraJ>
-      </ns1:Body>
+        </ns1:commanderTransmissionDonneesInfraJ>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
 F375A-R1:
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -899,8 +1152,8 @@ F375A-R1:
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:commanderTransmissionDonneesInfraJ>
+      <ns0:Body>
+        <ns1:commanderTransmissionDonneesInfraJ>
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
@@ -924,8 +1177,8 @@ F375A-R1:
               <ptd>false</ptd>
             </accesDonnees>
           </demande>
-        </ns0:commanderTransmissionDonneesInfraJ>
-      </ns1:Body>
+        </ns1:commanderTransmissionDonneesInfraJ>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
 F380-NR1:
@@ -1297,7 +1550,7 @@ RS-R1 (C1-C4):
   url: https://sge-homologation-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0
 RS-R1 (C2-C4):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -1306,20 +1559,20 @@ RS-R1 (C2-C4):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns0:Body>
-        <ns1:rechercherServicesSouscritsMesures>
+      <ns1:Body>
+        <ns0:rechercherServicesSouscritsMesures>
           <criteres>
             <pointId>98800000000246</pointId>
             <contratId>1234</contratId>
           </criteres>
           <loginUtilisateur>test@example.com</loginUtilisateur>
-        </ns1:rechercherServicesSouscritsMesures>
-      </ns0:Body>
+        </ns0:rechercherServicesSouscritsMesures>
+      </ns1:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0
 RS-R1 (C5):
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -1328,14 +1581,14 @@ RS-R1 (C5):
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns0:Body>
-        <ns1:rechercherServicesSouscritsMesures>
+      <ns1:Body>
+        <ns0:rechercherServicesSouscritsMesures>
           <criteres>
             <pointId>25884515170669</pointId>
             <contratId>1234</contratId>
           </criteres>
           <loginUtilisateur>test@example.com</loginUtilisateur>
-        </ns1:rechercherServicesSouscritsMesures>
-      </ns0:Body>
+        </ns0:rechercherServicesSouscritsMesures>
+      </ns1:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0
