@@ -3,8 +3,8 @@ Homologation
 
 This explain how to pass through Enedis homologation process.
 
-This is based on SGE v23.1 (from `Enedis.SGE.REF.0465.Homologation_Catalogue 
-des cas de tests_Tiers_SGE23.1_v1.0.pdf`) cases.
+This is based on SGE v23.2 (from `Enedis.SGE.REF.0465.Homologation_Catalogue 
+des cas de tests_Tiers_SGE23.2_v1.0.pdf`) cases.
 
 First setup `lowatt-enedis` and then execute given commands for each services
 you want homologation and report the time the command was run to fill Enedis
@@ -40,11 +40,13 @@ ConsultationDonneesTechniquesContractuelles v1.0
 ConsultationMesures v1.1
 ------------------------
 
-| Case           | Command                                                 |
-|----------------|---------------------------------------------------------|
-| AHC-R1 (C1-C4) | `lowatt-enedis measures --autorisation 98800005782026`  |
-| AHC-R1 (C5)    | `lowatt-enedis measures --autorisation 25957452924301`  |
-| AHC-NR1        | `lowatt-enedis measures 98800005782026`                 |
+| Case              | Command                                                 |
+|-------------------|---------------------------------------------------------|
+| AHC-R1 (C1-C4) \* | `lowatt-enedis measures --autorisation 98800005782026`  |
+| AHC-R1 (C5)       | `lowatt-enedis measures --autorisation 25957452924301`  |
+| AHC-NR1           | `lowatt-enedis measures 98800005782026`                 |
+
+\* Returned "SGT4G3: Aucune mesure trouvée pour ce PRM" on the homologation environment v23.2
 
 
 ConsultationMesuresDetaillees v2.0
@@ -61,27 +63,29 @@ ConsultationMesuresDetaillees v2.0
 | CMD2-R2         | `lowatt-enedis details 30001610071843 COURBE --courbe-type PRI --from 2022-04-01 --to 2022-04-07` |
 | CMD2-R3         | `lowatt-enedis details 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07`                  |
 | CMD2-R4         | `lowatt-enedis details 25478147557460 PMAX --from 2022-04-01 --to 2022-04-07`                     |
-| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                   |
+| CMD2-NR1        | `lowatt-enedis details 25478147557460 COURBE --from 2022-04-01 --to 2022-04-17`                   |
 | CMD2-NR2        | `lowatt-enedis details 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07 --no-autorisation`|
 
 
 ConsultationMesuresDetaillees v3.0
 ----------------------------------
 
-| Case              | Command                                                                                                  |
-|-------------------|----------------------------------------------------------------------------------------------------------|
-| CMD3-R1 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 COURBE --from 2022-04-01 --to 2022-04-07`                        |
-| CMD3-R1 (C5)      | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                        |
-| CMD3-R2           | `lowatt-enedis detailsV3 30001610071843 COURBE --courbe-type PRI --from 2022-04-01 --to 2022-04-07`      |
-| CMD3-R3 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
-| CMD3-R3 (C5)      | `lowatt-enedis detailsV3 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
-| CMD3-R4           | `lowatt-enedis detailsV3 25478147557460 PMAX --from 2022-04-01 --to 2022-04-07`                          |
-| CMD3-R5 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07`                         |
-| CMD3-R5 (C5)      | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07`                         |
-| CMD3-R6 (C1-C4)   | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
-| CMD3-R6 (C5)      | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
-| CMD3-NR1          | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-08`                        |
-| CMD3-NR2          | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-08`                         |
+| Case               | Command                                                                                                  |
+|--------------------|----------------------------------------------------------------------------------------------------------|
+| CMD3-R1 (C1-C4)    | `lowatt-enedis detailsV3 30001610071843 COURBE --from 2022-04-01 --to 2022-04-07`                        |
+| CMD3-R1 (C5)       | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-07`                        |
+| CMD3-R2            | `lowatt-enedis detailsV3 30001610071843 COURBE --courbe-type PRI --from 2022-04-01 --to 2022-04-07`      |
+| CMD3-R3 (C1-C4) \* | `lowatt-enedis detailsV3 30001610071843 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
+| CMD3-R3 (C5)       | `lowatt-enedis detailsV3 25478147557460 ENERGIE --from 2022-04-01 --to 2022-04-07`                       |
+| CMD3-R4            | `lowatt-enedis detailsV3 25478147557460 PMAX --from 2022-04-01 --to 2022-04-07`                          |
+| CMD3-R5 (C1-C4) \* | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07`                         |
+| CMD3-R5 (C5) \*    | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07`                         |
+| CMD3-R6 (C1-C4) \* | `lowatt-enedis detailsV3 30001610071843 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
+| CMD3-R6 (C5) \*    | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-07 --cadre SERVICE_ACCES`   |
+| CMD3-NR1           | `lowatt-enedis detailsV3 25478147557460 COURBE --from 2022-04-01 --to 2022-04-17`                        |
+| CMD3-NR2 \*        | `lowatt-enedis detailsV3 25478147557460 INDEX --from 2022-04-01 --to 2022-04-17 --cadre SERVICE_ACCES`   |
+
+\* Returned "SGT4G3: Aucune mesure trouvée pour ce PRM" on the homologation environment v23.2
 
 
 RecherchePoint v2.0
@@ -90,10 +94,12 @@ RecherchePoint v2.0
 | Case     | Command                                                                                           |
 |----------|---------------------------------------------------------------------------------------------------|
 | RP-R1    | `lowatt-enedis search --tension BTINF --categorie RES --cp 34650 --insee 34231`                   |
-| RP-R2    | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TEST --cp 84160 --insee 84042 --hp`          |
-| RP-R3    | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TES --cp 84160 --insee 84042 --hp`           |
+| RP-R2 \* | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TEST --cp 84160 --insee 84042 --hp`          |
+| RP-R3 \* | `lowatt-enedis search --voie "1 RUE DE LA MER" --nom=TES --cp 84160 --insee 84042 --hp`           |
 | RP-NR1   | `lowatt-enedis search --categorie RES --cp 84160 --insee 84042`                                   |
 | RP-NR2   | `lowatt-enedis search --insee 34231 --voie "1 RUE DE LA MER"`                                     |
+
+\* Returned "None" on the homologation environment v23.2
 
 
 CommandeAccesDonneesMesures v1.0
@@ -112,10 +118,18 @@ CommandeAccesDonneesMesures v1.0
 CommandeTransmissionDonneesInfraJ v1.0
 --------------------------------------
 
-| Case      | Command                                                                                                              |
-|-----------|----------------------------------------------------------------------------------------------------------------------|
-| F375A-R1  | *XFAIL* `lowatt-enedis cmdInfraJ 98800000000246 --cdc --soutirage --denomination "Raison Sociale"`                   |
-| F375A-NR1 | *XFAIL* `lowatt-enedis cmdInfraJ 98800000000246 --idx --injection --denomination "Raison Sociale" --no-autorisation` |
+**This webservice does not work in the Homologation environment.**
+
+> Le webservice CommandeTransmissionDonneesInfraJ ne fonctionne pas dans l’environnement d’Homologation.
+> L’acteur tiers sera donc homologué sur les requêtes.
+> Il ne devra pas prêter attention aux réponses qui lui seront renvoyées via webservice.
+
+| Case         | Command                                                                                                              |
+|--------------|----------------------------------------------------------------------------------------------------------------------|
+| F375A-R1 \*  | `lowatt-enedis cmdInfraJ 98800000000246 --cdc --soutirage --denomination "Raison Sociale"`                           |
+| F375A-NR1 \* | `lowatt-enedis cmdInfraJ 98800000000246 --idx --injection --denomination "Raison Sociale" --no-autorisation`         |
+
+\* Returned "SGT500: Une erreur technique est survenue" on the homologation environment v23.2
 
 
 CommandeTransmissionHistoriqueMesures v1.0
@@ -124,13 +138,20 @@ CommandeTransmissionHistoriqueMesures v1.0
 | Case             | Command                                                                                                   |
 |------------------|-----------------------------------------------------------------------------------------------------------|
 | F380-R1 (C1-C4)  | `lowatt-enedis cmdHisto 98800005144497 CDC --pas 10`                                                      |
-| F380-R1 (C5)     | `lowatt-enedis cmdHisto 25957452924301 CDC --pas 30 --nom roro --civilite M`                              |
+| F380-R1 (C5)     | `lowatt-enedis cmdHisto 24551519514005 CDC --pas 30 --nom roro --civilite M`                              |
 | F385B-R1         | `lowatt-enedis cmdHisto 25957452924301 IDX --nom roro --civilite M`                                       |
 | F380-NR1         | `lowatt-enedis cmdHisto 25957452924301 CDC --pas 30 --nom roro --civilite M --from 2010-01-01`            |
 | F385B-NR1        | `lowatt-enedis cmdHisto 25957452924301 IDX --nom roro --civilite M --from 2010-01-01`                     |
 
+
 CommandeCollectePublicationMesures v3.0
 ---------------------------------------
+
+**This webservice does not work on the C2-C4 segment in the Homologation environment.**
+
+> Le webservice CommandeCollectePublicationMesures ne fonctionne pas sur le segment C2-C4 dans l’environnement d’Homologation.
+> L’acteur tiers sera donc homologué sur la requête pour le segment C2-C4.
+> Il ne devra pas prêter attention à la réponse qui lui sera renvoyée via webservice.
 
 | Case        | Command                                                                                                                |
 |-------------|------------------------------------------------------------------------------------------------------------------------|
@@ -147,21 +168,40 @@ CommandeCollectePublicationMesures v3.0
 | F305-NR     | `lowatt-enedis subscribe 25884515170669 --idx --denomination "COGIP" --no-autorisation`                                |
 | F305A-NR    | `lowatt-enedis subscribe 98800000000246 --idx --denomination "COGIP" --no-autorisation`                                |
 
-\* test cases for C1-C4 fail on homologation environment 22.1 (SGT500: Une erreur technique est survenue).
+\* Returned "SGT400: Une erreur fonctionnelle est survenue." on the homologation environment v23.2
+
 
 RechercherServicesSouscritsMesures v1.0
 ---------------------------------------
 
+**This webservice does not work on the C2-C4 segment in the Homologation environment.**
+
+> Le webservice RechercheServicesSouscritsMesures v1.0 ne fonctionne pas sur le segment C2-C4 dans l’environnement d’Homologation.
+> L’acteur tiers sera donc homologué sur la requête pour le segment C2-C4.
+> Il ne devra pas prêter attention à la réponse qui lui sera renvoyée via webservice.
+
 | Case          | Command                                      |
 |---------------|----------------------------------------------|
 | RS-R1 (C5)    | `lowatt-enedis subscriptions 25884515170669` |
-| RS-R1 (C2-C4) | `lowatt-enedis subscriptions 98800000000246` |
+| RS-R1 (C2-C4) \* | `lowatt-enedis subscriptions 98800000000246` |
+
+\* Returned "None" on the homologation environment v23.2
+
 
 CommandeArretServiceSouscritMesures v1.0
 ----------------------------------------
 
-| Case      | Command                                                   |
-|-----------|-----------------------------------------------------------|
-| ASS-R1 \* |  `lowatt-enedis unsubscribe 25884515170669 --id 47761068` |
+**This webservice does not work on the C2-C4 segment in the Homologation environment.**
 
-\* use an id returned by RS-R1.
+> Le webservice CommandeArretServiceSouscritMesures v1.0 ne fonctionne pas sur le segment C2-C4 dans l’environnement d’Homologation.
+> L’acteur tiers sera donc homologué sur la requête pour le segment C2-C4.
+> Il ne devra pas prêter attention à la réponse qui lui sera renvoyée via webservice.
+
+| Case                   | Command                                                  |
+|------------------------|----------------------------------------------------------|
+| ASS-R1 (C5) \*\*       | `lowatt-enedis unsubscribe 25884515170669 --id 47761068` |
+| Ass-R1 (C2-C4) \* \*\* | `lowatt-enedis unsubscribe 98800000000246 --id 47761068` |
+
+\* Returned "SGT500: Une erreur technique est survenue" on the homologation environment v23.2
+
+\*\* Use an id returned by RS-R1.
