@@ -105,14 +105,23 @@ RecherchePoint v2.0
 CommandeAccesDonneesMesures v1.0
 ---------------------------------
 
-| Case      | Command                 |
-|-----------|-------------------------|
-| ACCES-R1  | *Not implemented yet.*  |
-| ACCES-R2  | *Not implemented yet.*  |
-| ACCES-R3  | *Not implemented yet.*  |
-| ACCES-R4  | *Not implemented yet.*  |
-| ACCES-NR1 | *Not implemented yet.*  |
-| ACCES-NR2 | *Not implemented yet.*  |
+| Case                | Command                                                                        |
+|---------------------|--------------------------------------------------------------------------------|
+| ACCES-R1 (C2-C4) \* | `lowatt-enedis cmdAcces 98800002267746 ENERGIE --nom DUPONT`                   |
+| ACCES-R1 (C5) \*\*  | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT`                   |
+| ACCES-R2 (C2-C4) \* | `lowatt-enedis cmdAcces 98800002267746 COURBE --nom DUPONT`                    |
+| ACCES-R2 (C5) \*\*  | `lowatt-enedis cmdAcces 24380318190106 COURBE --nom DUPONT`                    |
+| ACCES-R3 \*\*       | `lowatt-enedis cmdAcces 24380318190106 PMAX --nom DUPONT`                      |
+| ACCES-R4 (C2-C4) \* | `lowatt-enedis cmdAcces 98800002267746 INDEX --nom DUPONT`                     |
+| ACCES-R4 (C5) \*\*  | `lowatt-enedis cmdAcces 24380318190106 INDEX --nom DUPONT`                     |
+| ACCES-NR1 (C2-C4)   | `lowatt-enedis cmdAcces 98800002267746 ENERGIE --nom DUPONT --no-autorisation` |
+| ACCES-NR1 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --no-autorisation` |
+| ACCES-NR2 (C2-C4)   | `lowatt-enedis cmdAcces 98800002267746 ENERGIE --nom DUPONT --to 2050-04-21`   |
+| ACCES-NR2 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --to 2050-04-21`   |
+
+\* Returned "SGT400: Une erreur fonctionnelle est survenue." on the homologation environment v23.2
+
+\*\* Returned "SGT4B8: Il existe déjà plusieurs demandes en cours sur le point." on the homologation environment v23.2
 
 
 CommandeTransmissionDonneesInfraJ v1.0

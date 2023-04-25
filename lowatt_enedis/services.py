@@ -649,6 +649,95 @@ def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject
 
 
 @register(
+    "cmdAcces",
+    "CommanderAccesDonneesMesures-V1.0",
+    dict_from_dicts(
+        DONNEES_GENERALES_OPTIONS,
+        {
+            "--from": {
+                "default": (date.today()).isoformat(),
+                "help": "date de début souhaitée (incluse)",
+            },
+            "--to": {
+                "default": (date.today() + timedelta(days=365 * 3)).isoformat(),
+                "help": "date de fin souhaitée (excluse)",
+            },
+            "type": {
+                "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
+                "help": "type de mesure demandé : ENERGIE pour les consommations "
+                "globales quotidiennes, PMAX pour les puissances maximales "
+                "quotidiennes, COURBE pour la courbe de charge.",
+            },
+            "--injection": {
+                "action": "store_true",
+                "help": "demander les données en injection (soutirage par défaut).",
+            },
+        },
+        ACCORD_CLIENT_OPTIONS,
+    ),
+)
+@ws("CommanderAccesDonneesMesures-V1.0")
+def point_cmd_acces(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
+    demande = client.factory.create("ns1:DemandeType")
+
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            # XXX missing: refExterne
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    assert demande.donneesGenerales is not None
+
+    demande.donneesGenerales.objetCode = "AME"
+    demande.donneesGenerales.contrat = create_from_options(
+        client,
+        args,
+        "ContratType",
+        {
+            # XXX missing: acteurMarcheCode, contratType
+            "contrat": "contratId",
+        },
+    )
+
+    demande.accesDonnees = create_from_options(
+        client,
+        args,
+        "AccesDonneesType",
+        {
+            "from": "dateDebut",
+            "to": "dateFin",
+            "type": "typeDonnees",
+        },
+    )
+    assert demande.accesDonnees is not None
+
+    # COURBE and INDEX are correct values according to the documentation, but
+    # the error "SGT4Q1: Le type de mesure renseigné n'est pas conforme." is returned.
+    # CDC and IDX do not return this error.
+    if demande.accesDonnees.typeDonnees == "COURBE":
+        demande.accesDonnees.typeDonnees = "CDC"
+    elif demande.accesDonnees.typeDonnees == "INDEX":
+        demande.accesDonnees.typeDonnees = "IDX"
+
+    injection = get_option(args, "injection")
+    demande.accesDonnees.soutirage = _boolean(not injection)
+    demande.accesDonnees.injection = _boolean(injection)
+
+    demande.accesDonnees.declarationAccordClient = _accord_client(
+        client,
+        args,
+        xs_accord_type="ns1:DeclarationAccordClientType",
+        autorisation=not get_option(args, "no_autorisation"),
+    )
+
+    return client.service.commanderAccesDonneesMesures(demande)
+
+
+@register(
     "cmdInfraJ",
     "CommandeTransmissionDonneesInfraJ-v1.0",
     dict_from_dicts(
