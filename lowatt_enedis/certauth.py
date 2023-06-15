@@ -32,6 +32,7 @@ from http.client import HTTPResponse, HTTPSConnection
 from typing import Any
 from urllib.request import HTTPSHandler, Request, build_opener
 
+import certifi
 from suds.transport.http import HttpTransport
 
 
@@ -45,8 +46,9 @@ class _HTTPSClientAuthHandler(HTTPSHandler):
         return self.do_open(self.get_connection, req)  # type: ignore[arg-type]
 
     def get_connection(self, host: str, timeout: int = 300) -> HTTPSConnection:
-        context = ssl.SSLContext()
+        context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
         context.load_cert_chain(self.cert_file, self.key_file)
+        context.load_verify_locations(cafile=certifi.where())
         return HTTPSConnection(host, context=context)
 
 
