@@ -41,10 +41,13 @@ from .certauth import HTTPSClientCertTransport
 RT = TypeVar("RT")
 
 logging.basicConfig(level=logging.INFO)
-# logging.getLogger('suds.client').setLevel(logging.DEBUG)
-# logging.getLogger('suds.resolver').setLevel(logging.DEBUG)
-# logging.getLogger('suds.mx').setLevel(logging.DEBUG)
-# logging.getLogger('suds.transport').setLevel(logging.DEBUG)
+errHandler = logging.StreamHandler()
+errHandler.setStream(sys.stderr)
+logging.getLogger("suds.client").addHandler(errHandler)
+# logging.getLogger("suds.client").setLevel(logging.DEBUG)
+# logging.getLogger("suds.resolver").setLevel(logging.DEBUG)
+# logging.getLogger("suds.mx").setLevel(logging.DEBUG)
+# logging.getLogger("suds.transport").setLevel(logging.DEBUG)
 
 
 WSDL_DIR = PurePath(__file__).parent.joinpath("wsdl")
@@ -119,11 +122,34 @@ def json_encode_default(obj: Any) -> Any:
     raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
+class WSFaultException(Exception):
+    """Exception raised for ws excpetion with fault details.
+
+    Attributes:
+        code -- the error code
+        message -- explanation of the error
+    """
+
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(self.message)
+
+
+class WSException(Exception):
+    pass
+
+
 def handle_cli_command(command: str, args: argparse.Namespace) -> None:
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
-    obj = handler(client, args)
+    try:
+        obj = handler(client, args)
+    except WSFaultException as exc:
+        print(format_fault_exc(exc, args.output))
+        sys.exit(1)
+
     if args.output == "xml":
         print(client.last_received().str())  # noqa: T201
     elif args.output == "json":
@@ -132,6 +158,18 @@ def handle_cli_command(command: str, args: argparse.Namespace) -> None:
         )
     else:
         print(obj)  # noqa: T201
+
+
+def format_fault_exc(exc: WSFaultException, output: str) -> str:
+    if output == "json":
+        return json.dumps(
+            {"code": exc.code, "msg": exc.message},
+            indent=2,
+            default=json_encode_default,
+            sort_keys=True,
+        )
+    else:
+        return "{}: {}".format(exc.code, exc.message)
 
 
 def get_client(
@@ -209,10 +247,6 @@ def register(
     return decorator
 
 
-class WSException(Exception):
-    pass
-
-
 def ws(
     service: str, header_ns_prefix: str = "ns4"
 ) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
@@ -247,7 +281,7 @@ def ws(
                     raise WSException(str(exc))
                 else:
                     res = detail.erreur.resultat
-                    raise WSException("{}: {}".format(res._code, res.value))
+                    raise WSFaultException(res._code, res.value)
 
         return call_service
 
