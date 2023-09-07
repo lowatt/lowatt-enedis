@@ -41,9 +41,10 @@ from .certauth import HTTPSClientCertTransport
 RT = TypeVar("RT")
 
 logging.basicConfig(level=logging.INFO)
-errHandler = logging.StreamHandler()
-errHandler.setStream(sys.stderr)
+# send raw enedis errors to stderr:
+errHandler = logging.StreamHandler(sys.stderr)
 logging.getLogger("suds.client").addHandler(errHandler)
+logging.getLogger("suds.client").propagate = False
 # logging.getLogger("suds.client").setLevel(logging.DEBUG)
 # logging.getLogger("suds.resolver").setLevel(logging.DEBUG)
 # logging.getLogger("suds.mx").setLevel(logging.DEBUG)
@@ -130,10 +131,22 @@ class WSFaultException(Exception):
         message -- explanation of the error
     """
 
-    def __init__(self, code: str, message: str):
+    def __init__(self, code: str, message: str, output: str):
         self.code = code
         self.message = message
+        self.output = output
         super().__init__(self.message)
+
+    def __str__(self) -> str:
+        if self.output == "json":
+            return json.dumps(
+                {"errcode": self.code, "errmsg": self.message},
+                indent=2,
+                default=json_encode_default,
+                sort_keys=True,
+            )
+        else:
+            return "{}: {}".format(self.code, self.message)
 
 
 class WSException(Exception):
@@ -144,11 +157,7 @@ def handle_cli_command(command: str, args: argparse.Namespace) -> None:
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
-    try:
-        obj = handler(client, args)
-    except WSFaultException as exc:
-        print(format_fault_exc(exc, args.output))
-        sys.exit(1)
+    obj = handler(client, args)
 
     if args.output == "xml":
         print(client.last_received().str())  # noqa: T201
@@ -158,18 +167,6 @@ def handle_cli_command(command: str, args: argparse.Namespace) -> None:
         )
     else:
         print(obj)  # noqa: T201
-
-
-def format_fault_exc(exc: WSFaultException, output: str) -> str:
-    if output == "json":
-        return json.dumps(
-            {"code": exc.code, "msg": exc.message},
-            indent=2,
-            default=json_encode_default,
-            sort_keys=True,
-        )
-    else:
-        return "{}: {}".format(exc.code, exc.message)
 
 
 def get_client(
@@ -281,7 +278,7 @@ def ws(
                     raise WSException(str(exc))
                 else:
                     res = detail.erreur.resultat
-                    raise WSFaultException(res._code, res.value)
+                    raise WSFaultException(res._code, res.value, args.output)
 
         return call_service
 
