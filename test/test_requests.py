@@ -6,7 +6,7 @@ import shlex
 import subprocess
 import sys
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, TypedDict
 from unittest.mock import MagicMock, patch
 
 import freezegun
@@ -16,7 +16,6 @@ import lxml.objectify
 import pkg_resources
 import pytest
 import yaml
-from typing_extensions import TypedDict
 
 import lowatt_enedis.services
 
