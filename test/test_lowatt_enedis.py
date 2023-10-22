@@ -238,3 +238,56 @@ def test_measures_resp2py() -> None:
                 "unit": "kWh",
             },
         ]
+
+
+def test_create_from_options_boolean() -> None:
+    """Test that create_from_options() outputs valid boolean values.
+
+    suds does not seem to generate/check those values correctly,
+    the only valid values for xs:boolean are "true" and "false".
+    """
+
+    # From ConsultationMesuresDetaillees-v3.0
+    # <xs:complexType name="Demande">
+    #     <xs:sequence>
+    #         <!-- … -->
+    #         <xs:element name="mesuresCorrigees" type="xs:boolean"/>
+    #         <!-- … -->
+    #     </xs:sequence>
+    # </xs:complexType>
+
+    service, _, _ = le.COMMAND_SERVICE["detailsV3"]
+    client = Client(le.wsdl(service))
+    args = argparse.Namespace()
+
+    for value in [True, False]:
+        args.corrigee = value
+        option_map = {"corrigee": "mesuresCorrigees"}
+        demande = le.create_from_options(client, args, "Demande", option_map)
+        assert demande is not None
+        assert demande.mesuresCorrigees == ("true" if value else "false")
+
+    # From CommanderTransmissionHistoriqueMesures
+    # <xs:simpleType name="BooleenType">
+    #     <xs:restriction base="xs:boolean"/>
+    # </xs:simpleType>
+    # <xs:complexType name="DemandeHistoriqueMesuresType">
+    #     <xs:sequence>
+    #         <!-- … -->
+    #         <xs:element name="mesureCorrigee" type="ds:BooleenType"/>
+    #         <!-- … -->
+    #     </xs:sequence>
+    # </xs:complexType>
+
+    service, _, _ = le.COMMAND_SERVICE["cmdHisto"]
+    client = Client(le.wsdl(service))
+    args = argparse.Namespace()
+
+    for value in [True, False]:
+        args.corrigee = value
+        option_map = {"corrigee": "mesureCorrigee"}
+        demande = le.create_from_options(
+            client, args, "DemandeHistoriqueMesuresType", option_map
+        )
+        assert demande is not None
+        assert demande.mesureCorrigee == ("true" if value else "false")

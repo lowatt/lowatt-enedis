@@ -272,7 +272,6 @@ def ws(
 
         @wraps(func)
         def call_service(client: Client, args: argparse.Namespace) -> RT:
-            client.xstypes_map = build_xstypes_map(client)
             header = client.factory.create("{}:entete".format(header_ns_prefix))
             header.version = service_version
             header.infoDemandeur = client.factory.create(
@@ -302,6 +301,8 @@ def create_from_options(
     command line `args`.
 
     """
+    if not hasattr(client, "xstypes_map"):
+        client.xstypes_map = build_xstypes_map(client)
     xstype, prefix = client.xstypes_map[xstype_name]
     children_map = xstype_children_map(xstype)
     instance = client.factory.create("{}:{}".format(prefix, xstype_name))
@@ -318,7 +319,18 @@ def create_from_options(
             raise
 
         if value is not None:
-            if element.type[0] == "BooleenType":
+            xs_boolean = ("boolean", "http://www.w3.org/2001/XMLSchema")
+            has_boolean_restriction = False
+            typ = client.wsdl.schema.types.get(element.type)
+            if isinstance(typ, suds.xsd.sxbasic.Simple):
+                for child in typ.rawchildren:
+                    if (
+                        isinstance(child, suds.xsd.sxbasic.Restriction)
+                        and child.ref == xs_boolean
+                    ):
+                        has_boolean_restriction = True
+                        break
+            if element.type == xs_boolean or has_boolean_restriction:
                 value = "true" if value else "false"
             setattr(instance, element_name, value)
             has_value = True
