@@ -410,7 +410,7 @@ def measures_resp2py(resp: suds.sudsobject.Object) -> Iterator[dict[str, Any]]:
         MESURES_OPTIONS,
     ),
 )
-@ws("ConsultationMesuresDetaillees-v2.0", header_ns_prefix="ns2")
+@ws("ConsultationMesuresDetaillees-v2.0")
 def point_detailed_measures(
     client: Client, args: argparse.Namespace
 ) -> suds.sudsobject.Object:
@@ -493,7 +493,7 @@ def point_detailed_measures(
         MESURES_OPTIONS,
     ),
 )
-@ws("ConsultationMesuresDetaillees-v3.0", header_ns_prefix="ns2")
+@ws("ConsultationMesuresDetaillees-v3.0")
 def point_detailed_measuresV3(
     client: Client, args: argparse.Namespace
 ) -> suds.sudsobject.Object:
@@ -606,12 +606,11 @@ DONNEES_GENERALES_OPTIONS = dict_from_dicts(
         },
     ),
 )
-@ws("CommandeTransmissionHistoriqueMesures-v1.0", header_ns_prefix="ns1")
+@ws("CommandeTransmissionHistoriqueMesures-v1.0")
 def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
     _check_mesure_options_consistency(args)
 
     header = client.options.soapheaders
-    header.infoFonctionnelles = client.factory.create("ns1:infoFonctionnelles")
     header.infoFonctionnelles.pointId = get_option(args, "prm")
     del header.infoFonctionnelles.affaireId
 

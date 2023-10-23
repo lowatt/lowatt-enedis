@@ -259,26 +259,33 @@ def register(
     return decorator
 
 
-def ws(
-    service: str, header_ns_prefix: str = "ns4"
-) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
+def ws(service: str) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
     """Decorator around sge web service call, returning a wrapper that properly set
     SOAP headers required by the service
 
     """
 
     def decorator(func: Callable[..., RT]) -> Callable[..., RT]:
-        service_version = service.split("-")[1][1:]
-
         @wraps(func)
         def call_service(client: Client, args: argparse.Namespace) -> RT:
-            header = client.factory.create("{}:entete".format(header_ns_prefix))
-            header.version = service_version
-            header.infoDemandeur = client.factory.create(
-                "{}:infoDemandeur".format(header_ns_prefix),
-            )
-            header.infoDemandeur.loginDemandeur = get_option(args, "login")
-            client.set_options(soapheaders=header)
+            # Headers are not consistent among webservices. If the
+            # following gets more convoluted, maybe we should not try to
+            # make it generic.
+
+            # Expect a single service with a single port with a single method
+            methods = client.wsdl.services[0].ports[0].methods
+            assert len(methods) == 1
+            method = next(iter(methods.values()))
+            # Check if the method uses a header
+            headers = method.soap.input.headers
+            if len(headers) == 1:
+                header_name, header_ns = headers[0].part.element
+                header_element = "{" + header_ns + "}" + header_name
+                header = client.factory.create(header_element)
+                if "version" in header:
+                    header.version = service.split("-")[1][1:]
+                header.infoDemandeur.loginDemandeur = get_option(args, "login")
+                client.set_options(soapheaders=header)
 
             try:
                 return func(client, args)
