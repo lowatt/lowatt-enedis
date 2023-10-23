@@ -989,5 +989,155 @@ def point_unsubscribe(
     return client.service.commanderArretServiceSouscritMesures(demande)
 
 
+M023_COMMON_OPTIONS = dict_from_dicts(
+    {
+        "prms": {
+            "help": "identifiants PRM des point, séparés par des virgules",
+        },
+        "--sens": {
+            "choices": ["SOUTIRAGE", "INJECTION"],
+            "default": "SOUTIRAGE",
+            "help": "Sens de l’énergie circulant vers le réseau d’Enedis, "
+            "SOUTIRAGE par défaut.",
+        },
+        "--cadre": {
+            "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
+            "default": "ACCORD_CLIENT",
+            "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
+        },
+        "--format": {
+            "choices": ["JSON", "CSV"],
+            "default": "JSON",
+            "help": "Format des fichiers de résultats de la demande attendu, "
+            "JSON par défaut",
+        },
+    },
+    CONTRAT_OPTIONS,
+)
+M023_LOGIN_OPTIONS_MAP = {
+    "login": "initiateurLogin",
+    "contrat": "contratId",
+}
+M023_COMMON_OPTIONS_MAP = {
+    "sens": "sens",
+    "cadre": "cadreAcces",
+    "format": "format",
+}
+
+
+# CommandeHistoriqueDonneesMesuresFines
+@register(
+    "cmdHistoFine",
+    "B2B_M023MFI",
+    dict_from_dicts(
+        M023_COMMON_OPTIONS,
+        {
+            "type": {
+                "choices": ["ENERGIE", "PMAX", "COURBES", "INDEX"],
+                "help": "type de mesure demandé : ENERGIE pour les énergies "
+                "globales quotidiennes, PMAX » pour les puissances maximales "
+                "quotidiennes ou mensuelles, COURBES pour une courbe de "
+                "puissance ou de tension, INDEX pour les index quotidiens. ",
+            },
+        },
+        MESURES_OPTIONS,
+    ),
+)
+@ws("B2B_M023MFI")
+def point_cmd_histo_fine(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    donneesGenerales = create_from_options(
+        client, args, "donneesGenerales", M023_LOGIN_OPTIONS_MAP
+    )
+    assert donneesGenerales is not None
+
+    demande = create_from_options(
+        client,
+        args,
+        "demande",
+        dict_from_dicts(
+            {"type": "mesuresTypeCode"},
+            M023_COMMON_OPTIONS_MAP,
+            MESURES_OPTIONS_MAP,
+        ),
+    )
+    assert demande is not None
+
+    demande.pointIds.pointId = get_option(args, "prms").split(",")
+
+    return client.service.commandeHistoriqueDonneesMesuresFines(
+        donneesGenerales, demande
+    )
+
+
+# CommandeHistoriqueDonneesMesuresFacturantes
+@register(
+    "cmdHistoFact",
+    "B2B_M023MFA",
+    dict_from_dicts(
+        M023_COMMON_OPTIONS,
+        {
+            # MESURES_OPTIONS without --corrigee
+            "--from": MESURES_OPTIONS["--from"],
+            "--to": MESURES_OPTIONS["--to"],
+        },
+    ),
+)
+@ws("B2B_M023MFA")
+def point_cmd_histo_fact(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    donneesGenerales = create_from_options(
+        client, args, "donneesGenerales", M023_LOGIN_OPTIONS_MAP
+    )
+    assert donneesGenerales is not None
+
+    demande = create_from_options(
+        client,
+        args,
+        "demande",
+        dict_from_dicts(
+            M023_COMMON_OPTIONS_MAP,
+            {
+                "from": MESURES_OPTIONS_MAP["from"],
+                "to": MESURES_OPTIONS_MAP["to"],
+            },
+        ),
+    )
+    assert demande is not None
+
+    demande.pointIds.pointId = get_option(args, "prms").split(",")
+
+    return client.service.commandeHistoriqueDonneesMesuresFacturantes(
+        donneesGenerales, demande
+    )
+
+
+# CommandeInformationsTechniquesEtContractuelles
+@register(
+    "cmdTechnical",
+    "B2B_M023ITC",
+    M023_COMMON_OPTIONS,
+)
+@ws("B2B_M023ITC")
+def point_cmd_technical(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    donneesGenerales = create_from_options(
+        client, args, "donneesGenerales", M023_LOGIN_OPTIONS_MAP
+    )
+    assert donneesGenerales is not None
+
+    demande = create_from_options(client, args, "demande", M023_COMMON_OPTIONS_MAP)
+    assert demande is not None
+
+    demande.pointIds.pointId = get_option(args, "prms").split(",")
+
+    return client.service.commandeInformationsTechniquesEtContractuelles(
+        donneesGenerales, demande
+    )
+
+
 def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"

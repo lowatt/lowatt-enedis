@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:sc="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1"
+            targetNamespace="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
+
+    <xs:element name="affaireId" type="sc:affaireId"/>
+    <xs:element name="demandePublicationMesuresFines" type="sc:demandePublicationMesuresFines"/>
+
+    <!-- affaireId Reponse du webservice -->
+    <xs:simpleType name="affaireId">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- demandePublicationMesuresFines Requete du webservice -->
+    <xs:complexType name="demandePublicationMesuresFines">
+        <xs:sequence>
+            <xs:element name="donneesGenerales" type="sc:donneesGenerales"/>
+            <xs:element name="demande" type="sc:demande"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Données Générales -->
+    <xs:simpleType name="initiateurLogin">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="contratId">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="referenceDemandeur">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="referenceRegroupement">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="affaireReference">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="8"/>
+            <xs:maxLength value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="donneesGenerales">
+        <xs:sequence>
+            <xs:element name="initiateurLogin" type="sc:initiateurLogin"/>
+            <xs:element name="contratId" type="sc:contratId"/>
+            <xs:element name="referenceDemandeur" type="sc:referenceDemandeur" minOccurs="0"/>
+            <xs:element name="affaireReference" type="sc:affaireReference" minOccurs="0"/>
+            <xs:element name="referenceRegroupement" type="sc:referenceRegroupement" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- demande -->
+    <xs:simpleType name="format">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="JSON"/>
+            <xs:enumeration value="CSV"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pointId">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="mesuresTypeCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COURBES"/>
+            <xs:enumeration value="ENERGIE"/>
+            <xs:enumeration value="PMAX"/>
+            <xs:enumeration value="INDEX"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="mesuresCorrigees">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="dateDebut">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="dateFin">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="sens">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SOUTIRAGE"/>
+            <xs:enumeration value="INJECTION"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="cadreAcces">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SERVICE_ACCES"/>
+            <xs:enumeration value="ACCORD_CLIENT"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+	<xs:complexType name="pointIds">
+        <xs:sequence>
+            <xs:element name="pointId" type="sc:pointId" minOccurs="1" maxOccurs="10000"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="demande">
+        <xs:sequence>
+            <xs:element name="format" type="sc:format" minOccurs="0"/>
+            <xs:element name="pointIds" type="sc:pointIds" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="mesuresTypeCode" type="sc:mesuresTypeCode"/>
+            <xs:element name="mesuresCorrigees" type="sc:mesuresCorrigees" minOccurs="0"/>
+            <xs:element name="dateDebut" type="sc:dateDebut"/>
+            <xs:element name="dateFin" type="sc:dateFin"/>
+            <xs:element name="sens" type="sc:sens"/>
+            <xs:element name="cadreAcces" type="sc:cadreAcces"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

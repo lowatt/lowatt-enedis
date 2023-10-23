@@ -1,0 +1,55 @@
+<wsdl:definitions targetNamespace="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1"
+                  xmlns:err="http://www.enedis.fr/sge/b2b/technique/v1.0">
+    <!-- Types -->
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1"
+                        schemaLocation="../../xsd/m023/MesuresFacturantesModel.xsd"/>
+            <xsd:import namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"
+                        schemaLocation="../../xsd/transverse/ENEDIS.Dictionnaire.Technique.v1.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- Messages -->
+    <wsdl:message name="demandePublicationMesuresFacturantes">
+        <wsdl:part name="demandePublicationMesuresFacturantes" element="tns:demandePublicationMesuresFacturantes"/>
+    </wsdl:message>
+    <wsdl:message name="affaireId">
+        <wsdl:part name="affaireId" element="tns:affaireId"/>
+    </wsdl:message>
+    <wsdl:message name="adamB2BFault">
+        <wsdl:part name="errorB2B" element="err:erreur"/>
+    </wsdl:message>
+
+    <!-- PortType -->
+    <wsdl:portType name="AdamCommandeHistoriqueDonneesMesuresFacturantesPort">
+        <wsdl:operation name="commandeHistoriqueDonneesMesuresFacturantes">
+            <wsdl:input name="demandePublicationMesuresFacturantes" message="tns:demandePublicationMesuresFacturantes"/>
+            <wsdl:output name="affaireId" message="tns:affaireId"/>
+            <wsdl:fault name="fault" message="tns:adamB2BFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- Binding -->
+    <wsdl:binding name="AdamCommandeHistoriqueDonneesMesuresFacturantesBinding" type="tns:AdamCommandeHistoriqueDonneesMesuresFacturantesPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="commandeHistoriqueDonneesMesuresFacturantes">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="AdamCommandeHistoriqueDonneesMesuresFacturantesService">
+        <wsdl:port name="AdamCommandeHistoriqueDonneesMesuresFacturantesPort" binding="tns:AdamCommandeHistoriqueDonneesMesuresFacturantesBinding">
+            <soap:address location="https://sge-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
