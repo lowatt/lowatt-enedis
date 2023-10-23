@@ -214,3 +214,51 @@ CommandeArretServiceSouscritMesures v1.0
 \* Returned "SGT500: Une erreur technique est survenue" on the homologation environment v23.2
 
 \*\* Use an id returned by RS-R1.
+
+CommandeHistoriqueDonneesMesuresFines v1.0
+------------------------------------------
+
+**This webservice does not work in the Homologation environment.**
+
+| Case                   | Command                                                                                                                           |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| MFI-GK-R1 (C5) \*      | `lowatt-enedis cmdHistoFine 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289 ENERGIE`                   |
+| MFI-GK-R1 (C2-C4) \*   | `lowatt-enedis cmdHistoFine 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186 ENERGIE`                   |
+| MFI-GK-R2 (C5) \*      | `lowatt-enedis cmdHistoFine 25150217034354 COURBES`                                                                               |
+| MFI-GK-R2 (C2-C4) \*   | `lowatt-enedis cmdHistoFine 98800004935121 COURBES`                                                                               |
+| MFI-GK-R3 (C5) \*      | `lowatt-enedis cmdHistoFine 25150217034354 PMAX`                                                                                  |
+| MFI-GK-R3 (C2-C4) \*   | `lowatt-enedis cmdHistoFine 98800004935121 PMAX`                                                                                  |
+| MFI-GK-R4 (C5) \*      | `lowatt-enedis cmdHistoFine 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289 INDEX`                     |
+| MFI-GK-R4 (C2-C4) \*   | `lowatt-enedis cmdHistoFine 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186 INDEX`                     |
+| MFI-GK-NR1 (C5) \*     | `lowatt-enedis cmdHistoFine 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289 COURBES --from 2020-01-01` |
+| MFI-GK-NR1 (C2-C4) \*  | `lowatt-enedis cmdHistoFine 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186 COURBES`                   |
+| MFI-GK-NR2 (C5) \*     | `lowatt-enedis cmdHistoFine 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289 INDEX --from 2020-01-01`   |
+| MFI-GK-NR2 (C2-C4) \*  | `lowatt-enedis cmdHistoFine 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186 INDEX`                     |
+
+\* Returned "Erreur Technique MFI v23.4
+
+CommandeHistoriqueDonneesMesuresFacturantes v1.0
+------------------------------------------------
+
+**This webservice does not work in the Homologation environment.**
+
+| Case                   | Command                                                                                                                                   |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| MFA-GK-R1 (C5) \*      | `lowatt-enedis cmdHistoFact 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289`                                   |
+| MFA-GK-R1 (C2-C4) \*   | `lowatt-enedis cmdHistoFact 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186`                                   |
+| MFA-GK-NR1 (C5) \*     | `lowatt-enedis cmdHistoFact 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289 --from 2023-10-01 --to 2023-08-01` |
+| MFA-GK-NR1 (C2-C4) \*  | `lowatt-enedis cmdHistoFact 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186  --from 2023-10-01 --to 2023-08-01`|
+
+\* Returned "Erreur Technique MFA v23.4
+
+CommandeInformationsTechniquesEtContractuelles v1.0
+---------------------------------------------------
+
+**This webservice does not work in the Homologation environment.**
+
+| Case                   | Command                                                                                                 |
+|------------------------|---------------------------------------------------------------------------------------------------------|
+| ITC-GK-R1 (C5) \*      | `lowatt-enedis cmdTechnical 25150217034354,25825036170379,25999131613803,50086054270348,25262662681289` |
+| ITC-GK-R1 (C2-C4) \*   | `lowatt-enedis cmdTechnical 98800004935121,98800001544168,98800004938924,98800006694381,98800001220186` |
+
+\* Returned "Erreur Technique ITC v23.4
