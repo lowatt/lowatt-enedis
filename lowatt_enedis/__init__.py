@@ -136,16 +136,18 @@ class WSException(Exception):
         self.exc = exc
         fault = exc.fault
         try:
-            detail = fault.detail
+            res = fault.detail.erreur.resultat
+            self.message = str(res.value)
+            self.code: Optional[str] = str(res._code)
         except AttributeError:
-            # AttributeError: 'Fault' object has no attribute 'detail',
-            # at least when server's response isn't properly parseable.
-            self.code = None
-            self.message = str(exc)
-        else:
-            res = detail.erreur.resultat
-            self.code = res._code
-            self.message = res.value
+            if "faultcode" in fault and "faultstring" in fault:
+                self.code = str(fault.faultcode)
+                self.message = str(fault.faultstring)
+            else:
+                # Unable to find message in 'Fault' object,
+                # at least when server's response isn't properly parseable.
+                self.code = None
+                self.message = str(exc)
 
     def __str__(self) -> str:
         if self.code:
