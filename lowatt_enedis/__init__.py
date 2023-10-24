@@ -278,7 +278,9 @@ def ws(
                     raise WSException(str(exc))
                 else:
                     res = detail.erreur.resultat
-                    raise WSFaultException(res._code, res.value, args.output)
+                    raise WSFaultException(
+                        res._code, res.value, get_option(args, "output")
+                    )
 
         return call_service
 
