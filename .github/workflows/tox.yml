@@ -40,6 +40,8 @@ jobs:
       - name: Install a default Python
         uses: actions/setup-python@v2
         if: ${{ ! contains(matrix.tox_env, 'py') }}
+        with:
+          python-version: 3.11
       - name: Set up Python version
         uses: actions/setup-python@v2
         if: ${{ contains(matrix.tox_env, 'py') }}
@@ -64,10 +66,10 @@ jobs:
       TOXENV: packaging
 
     steps:
-      - name: Switch to using Python 3.9 by default
+      - name: Switch to using Python 3.11 by default
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.11
       - name: Install tox
         run: python -m pip install --user tox
       - name: Check out src from Git
