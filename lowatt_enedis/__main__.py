@@ -24,7 +24,6 @@ import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis import (
     COMMAND_SERVICE,
     WSException,
-    WSFaultException,
     handle_cli_command,
     init_cli,
     wsdl,
@@ -66,8 +65,7 @@ def run() -> NoReturn:
     elif args.command:
         try:
             handle_cli_command(args.command, args)
-        except (WSException, WSFaultException) as exc:
-            print(exc)  # noqa
+        except WSException:
             sys.exit(1)
 
     else:
