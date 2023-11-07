@@ -123,50 +123,65 @@ def json_encode_default(obj: Any) -> Any:
     raise TypeError(f"Object {obj!r} is not JSON serializable")
 
 
-class WSFaultException(Exception):
+class WSException(Exception):
     """Exception raised for ws excpetion with fault details.
 
     Attributes:
-        code -- the error code
-        message -- explanation of the error
+        exc -- the original WebFault object
+        code -- the error code (if parsable)
+        message -- the error message
     """
 
-    def __init__(self, code: str, message: str, output: str):
-        self.code = code
-        self.message = message
-        self.output = output
-        super().__init__(self.message)
+    def __init__(self, exc: WebFault):
+        self.exc = exc
+        fault = exc.fault
+        try:
+            detail = fault.detail
+        except AttributeError:
+            # AttributeError: 'Fault' object has no attribute 'detail',
+            # at least when server's response isn't properly parseable.
+            self.code = None
+            self.message = str(exc)
+        else:
+            res = detail.erreur.resultat
+            self.code = res._code
+            self.message = res.value
 
     def __str__(self) -> str:
-        if self.output == "json":
-            return json.dumps(
-                {"errcode": self.code, "errmsg": self.message},
-                indent=2,
-                default=json_encode_default,
-                sort_keys=True,
-            )
-        else:
-            return "{}: {}".format(self.code, self.message)
-
-
-class WSException(Exception):
-    pass
+        if self.code:
+            return f"{self.code}: {self.message}"
+        return self.message
 
 
 def handle_cli_command(command: str, args: argparse.Namespace) -> None:
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
-    obj = handler(client, args)
-
-    if args.output == "xml":
-        print(client.last_received().str())  # noqa: T201
-    elif args.output == "json":
-        json.dump(
-            obj, sys.stdout, indent=2, default=json_encode_default, sort_keys=True
-        )
+    try:
+        obj = handler(client, args)
+    except WSException as exc:
+        if args.output == "xml":
+            print(client.last_received().str())  # noqa: T201
+        elif args.output == "json":
+            json.dump(
+                {"errcode": exc.code, "errmsg": exc.message},
+                sys.stdout,
+                indent=2,
+                default=json_encode_default,
+                sort_keys=True,
+            )
+        else:
+            print(exc)  # noqa: T201
+        raise
     else:
-        print(obj)  # noqa: T201
+        if args.output == "xml":
+            print(client.last_received().str())  # noqa: T201
+        elif args.output == "json":
+            json.dump(
+                obj, sys.stdout, indent=2, default=json_encode_default, sort_keys=True
+            )
+        else:
+            print(obj)  # noqa: T201
 
 
 def get_client(
@@ -269,18 +284,7 @@ def ws(
             try:
                 return func(client, args)
             except WebFault as exc:
-                fault = exc.fault
-                try:
-                    detail = fault.detail
-                except AttributeError:
-                    # AttributeError: 'Fault' object has no attribute 'detail',
-                    # at least when server's response isn't properly parseable.
-                    raise WSException(str(exc))
-                else:
-                    res = detail.erreur.resultat
-                    raise WSFaultException(
-                        res._code, res.value, get_option(args, "output")
-                    )
+                raise WSException(exc)
 
         return call_service
 

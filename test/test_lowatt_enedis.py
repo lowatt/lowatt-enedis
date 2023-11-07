@@ -5,14 +5,17 @@ import io
 import os
 import sys
 from typing import Iterator
+from unittest import mock
 
 import pkg_resources
 import pytest
 import suds.sudsobject
+from suds import WebFault
 from suds.client import Client, SoapClient
 
 import lowatt_enedis as le
 import lowatt_enedis.services  # noqa: register services
+from lowatt_enedis.__main__ import run
 
 
 def args() -> argparse.Namespace:
@@ -87,6 +90,56 @@ def test_ws_decorator() -> None:
     assert service_location == (
         b"https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0"
     )
+
+
+def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
+    @le.register(
+        "test",
+        "RecherchePoint-v2.0",
+        {"--do-raise": {"action": "store_true", "help": "raise a webfault"}},
+    )
+    @le.ws("Test-v1.0")
+    def handler(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
+        if args.do_raise:
+            fault = suds.sudsobject.Object()
+            fault.detail = suds.sudsobject.Object()
+            fault.detail.erreur = suds.sudsobject.Object()
+            fault.detail.erreur.resultat = suds.sudsobject.Object()
+            fault.detail.erreur.resultat._code = "STG42"
+            fault.detail.erreur.resultat.value = "some error"
+            obj = suds.sudsobject.Object()
+            obj.error = "foo"
+            raise WebFault(fault=fault, document=obj)
+        obj = suds.sudsobject.Object()
+        obj.data = "foo"
+        return obj
+
+    with mock.patch.dict(
+        os.environ,
+        {
+            "ENEDIS_CERT_FILE": "tls.crt",
+            "ENEDIS_KEY_FILE": "tls.key",
+            "ENEDIS_LOGIN": "bob",
+            "ENEDIS_CONTRAT": "1234",
+        },
+        clear=True,
+    ):
+        for cmd, expected_code, expected_out in (
+            (["lowatt-enedis", "test"], 0, '{\n   data = "foo"\n }\n'),
+            (["lowatt-enedis", "test", "--do-raise"], 1, "STG42: some error\n"),
+            (["lowatt-enedis", "test", "--output=json"], 0, '{\n  "data": "foo"\n}'),
+            (
+                ["lowatt-enedis", "test", "--do-raise", "--output=json"],
+                1,
+                '{\n  "errcode": "STG42",\n  "errmsg": "some error"\n}',
+            ),
+        ):
+            with mock.patch.object(sys, "argv", cmd), pytest.raises(SystemExit) as cm:
+                run()
+            assert cm.value.code == expected_code
+            output = capsys.readouterr()
+            assert output.out == expected_out
+            assert output.err == ""
 
 
 def test_cli_help() -> None:
