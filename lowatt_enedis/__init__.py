@@ -133,7 +133,7 @@ class WSException(Exception):
     """
 
     def __init__(self, exc: WebFault):
-        self.exc = exc
+        self.web_fault = exc
         fault = exc.fault
         try:
             res = fault.detail.erreur.resultat
@@ -163,7 +163,8 @@ def handle_cli_command(command: str, args: argparse.Namespace) -> None:
         obj = handler(client, args)
     except WSException as exc:
         if args.output == "xml":
-            print(client.last_received().str())  # noqa: T201
+            # client.last_received() is None in case of WebFault
+            print(exc.web_fault.document.str())  # noqa: T201
         elif args.output == "json":
             json.dump(
                 {"errcode": exc.code, "errmsg": exc.message},
