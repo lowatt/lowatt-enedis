@@ -22,6 +22,7 @@ SGE web-service mapping to plug them into the CLI.
 """
 
 import argparse
+import warnings
 from datetime import date, datetime, timedelta
 from typing import Any, Iterator, Literal
 
@@ -414,6 +415,11 @@ def measures_resp2py(resp: suds.sudsobject.Object) -> Iterator[dict[str, Any]]:
 def point_detailed_measures(
     client: Client, args: argparse.Namespace
 ) -> suds.sudsobject.Object:
+    warnings.warn(
+        "ConsultationMesuresDetaillees-v2.0 is deprecated and pending for removal",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     demande = create_from_options(
         client,
         args,
@@ -608,6 +614,11 @@ DONNEES_GENERALES_OPTIONS = dict_from_dicts(
 )
 @ws("CommandeTransmissionHistoriqueMesures-v1.0")
 def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
+    warnings.warn(
+        "CommandeTransmissionHistoriqueMesures-v1.0 is deprecated and pending for removal",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     _check_mesure_options_consistency(args)
 
     header = client.options.soapheaders
