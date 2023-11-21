@@ -14,7 +14,7 @@ ACCES-NR1 (C2-C4):
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
-              <pointId>98800002267746</pointId>
+              <pointId>98800005569823</pointId>
               <initiateurLogin>test@example.com</initiateurLogin>
               <contrat>
                 <contratId>1234</contratId>
@@ -94,7 +94,7 @@ ACCES-NR2 (C2-C4):
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
-              <pointId>98800002267746</pointId>
+              <pointId>98800005569823</pointId>
               <initiateurLogin>test@example.com</initiateurLogin>
               <contrat>
                 <contratId>1234</contratId>
@@ -174,7 +174,7 @@ ACCES-R1 (C2-C4) \*:
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
-              <pointId>98800002267746</pointId>
+              <pointId>98800005569823</pointId>
               <initiateurLogin>test@example.com</initiateurLogin>
               <contrat>
                 <contratId>1234</contratId>
@@ -254,7 +254,7 @@ ACCES-R2 (C2-C4) \*:
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
-              <pointId>98800002267746</pointId>
+              <pointId>98800005569823</pointId>
               <initiateurLogin>test@example.com</initiateurLogin>
               <contrat>
                 <contratId>1234</contratId>
@@ -374,7 +374,7 @@ ACCES-R4 (C2-C4) \*:
           <demande>
             <donneesGenerales>
               <objetCode>AME</objetCode>
-              <pointId>98800002267746</pointId>
+              <pointId>98800005569823</pointId>
               <initiateurLogin>test@example.com</initiateurLogin>
               <contrat>
                 <contratId>1234</contratId>
@@ -551,7 +551,7 @@ AHC-NR1:
       </SOAP-ENV:Header>
       <ns0:Body>
         <ns1:consulterMesures>
-          <pointId>98800005782026</pointId>
+          <pointId>30001610071843</pointId>
           <loginDemandeur>test@example.com</loginDemandeur>
           <contratId>1234</contratId>
           <autorisationClient>false</autorisationClient>
@@ -572,7 +572,7 @@ AHC-R1 (C1-C4) \*:
       </SOAP-ENV:Header>
       <ns0:Body>
         <ns1:consulterMesures>
-          <pointId>98800005782026</pointId>
+          <pointId>30001610071843</pointId>
           <loginDemandeur>test@example.com</loginDemandeur>
           <contratId>1234</contratId>
           <autorisationClient>true</autorisationClient>
@@ -601,9 +601,9 @@ AHC-R1 (C5):
       </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/ConsultationMesures/v1.1
-ASS-R1 (C5) \*\*:
+ASS-R1 (C2-C4) \* \*\*:
   data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
       <SOAP-ENV:Header>
         <tec:entete>
           <version>1.0</version>
@@ -612,36 +612,8 @@ ASS-R1 (C5) \*\*:
           </infoDemandeur>
         </tec:entete>
       </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:commanderArretServiceSouscritMesures>
-          <demande>
-            <donneesGenerales>
-              <objetCode>ASS</objetCode>
-              <pointId>25884515170669</pointId>
-              <initiateurLogin>test@example.com</initiateurLogin>
-              <contratId>1234</contratId>
-            </donneesGenerales>
-            <arretServiceSouscrit>
-              <serviceSouscritId>47761068</serviceSouscritId>
-            </arretServiceSouscrit>
-          </demande>
-        </ns0:commanderArretServiceSouscritMesures>
-      </ns1:Body>
-    </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
-Ass-R1 (C2-C4) \* \*\*:
-  data: |
-    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
-      <SOAP-ENV:Header>
-        <tec:entete>
-          <version>1.0</version>
-          <infoDemandeur>
-            <loginDemandeur>test@example.com</loginDemandeur>
-          </infoDemandeur>
-        </tec:entete>
-      </SOAP-ENV:Header>
-      <ns1:Body>
-        <ns0:commanderArretServiceSouscritMesures>
+      <ns0:Body>
+        <ns1:commanderArretServiceSouscritMesures>
           <demande>
             <donneesGenerales>
               <objetCode>ASS</objetCode>
@@ -653,8 +625,64 @@ Ass-R1 (C2-C4) \* \*\*:
               <serviceSouscritId>47761068</serviceSouscritId>
             </arretServiceSouscrit>
           </demande>
-        </ns0:commanderArretServiceSouscritMesures>
-      </ns1:Body>
+        </ns1:commanderArretServiceSouscritMesures>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
+ASS-R1 (C5) \*\*:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns0:Body>
+        <ns1:commanderArretServiceSouscritMesures>
+          <demande>
+            <donneesGenerales>
+              <objetCode>ASS</objetCode>
+              <pointId>25884515170669</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+            </donneesGenerales>
+            <arretServiceSouscrit>
+              <serviceSouscritId>47761068</serviceSouscritId>
+            </arretServiceSouscrit>
+          </demande>
+        </ns1:commanderArretServiceSouscritMesures>
+      </ns0:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
+Ass-R1 (C2-C4) \* \*\*:
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns0:Body>
+        <ns1:commanderArretServiceSouscritMesures>
+          <demande>
+            <donneesGenerales>
+              <objetCode>ASS</objetCode>
+              <pointId>98800000000246</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+            </donneesGenerales>
+            <arretServiceSouscrit>
+              <serviceSouscritId>47761068</serviceSouscritId>
+            </arretServiceSouscrit>
+          </demande>
+        </ns1:commanderArretServiceSouscritMesures>
+      </ns0:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
 CMD2-NR1:
