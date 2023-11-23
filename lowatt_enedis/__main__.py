@@ -24,10 +24,13 @@ import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis import (
     COMMAND_SERVICE,
     WSException,
+    arg_from_env,
     handle_cli_command,
     init_cli,
     wsdl,
 )
+
+from . import decrypt
 
 
 def _cli_parser() -> argparse.ArgumentParser:
@@ -38,6 +41,7 @@ def _cli_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest="command")
     init_cli(subparsers)
 
+    # wsdl command
     subparser = subparsers.add_parser(
         "wsdl",
         help="Display WSDL information about some ws command.",
@@ -45,6 +49,31 @@ def _cli_parser() -> argparse.ArgumentParser:
     subparser.add_argument(
         "service_command",
         help="Command name.",
+    )
+
+    # decrypt command
+    subparser = subparsers.add_parser(
+        "decrypt",
+        help="Decrypt AES-128-CBC enedis files",
+    )
+    subparser.add_argument(
+        "--key",
+        help="Hex AES key",
+        **arg_from_env("ENEDIS_DECRYPT_KEY"),
+    )
+    subparser.add_argument(
+        "--iv",
+        help="Hex CBC IV",
+        **arg_from_env("ENEDIS_DECRYPT_IV"),
+    )
+    subparser.add_argument(
+        "input_file", help="Input file", type=argparse.FileType("rb")
+    )
+    subparser.add_argument(
+        "-o",
+        "--output",
+        help="Output file",
+        required=True,
     )
 
     return parser
@@ -62,6 +91,10 @@ def run() -> NoReturn:
 
         print(Client(wsdl(service_name)))  # noqa
 
+    elif args.command == "decrypt":
+        decrypted = decrypt.decrypt_aes_128_cbc(args.key, args.iv, args.input_file)
+        with open(args.output, "wb") as f:
+            f.write(decrypted)
     elif args.command:
         try:
             handle_cli_command(args.command, args)
