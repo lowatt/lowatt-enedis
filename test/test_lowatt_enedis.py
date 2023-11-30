@@ -20,7 +20,7 @@ from lowatt_enedis.__main__ import run
 
 def args() -> argparse.Namespace:
     return argparse.Namespace(
-        cert_file=None, key_file=None, login="bob", homologation=False, output="print"
+        cert_file=None, key_file=None, login="bob", homologation=False, output="json"
     )
 
 
@@ -75,6 +75,7 @@ def test_ws_decorator() -> None:
                 for method in port.methods.values():
                     assert service_location is None
                     service_location = method.location
+        return suds.sudsobject.Object()
 
     le.handle_cli_command("testws", args())
     assert handler_called
@@ -113,7 +114,7 @@ def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
             fault.detail.erreur.resultat = suds.sudsobject.Object()
             fault.detail.erreur.resultat._code = "STG42"
             fault.detail.erreur.resultat.value = "some error"
-            obj = suds.sudsobject.Object()
+            obj = suds.sax.document.Document(suds.sax.element.Element("error"))
             raise WebFault(fault=fault, document=obj)
         if args.do_raise_no_value:
             # Error as returned by M023 on homologation 23.4
@@ -126,6 +127,10 @@ def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
             fault.detail.erreur.resultat._code = ""
             obj = suds.sudsobject.Object()
             raise WebFault(fault=fault, document=obj)
+        if args.output == "xml":
+            # mimic client.options.retxml = True
+            return b"<data>foo</data>"
+        assert args.output == "json", args
         obj = suds.sudsobject.Object()
         obj.data = "foo"
         return obj
@@ -141,18 +146,26 @@ def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
         clear=True,
     ):
         for cmd, expected_code, expected_out in (
-            (["lowatt-enedis", "test"], 0, '{\n   data = "foo"\n }\n'),
-            (["lowatt-enedis", "test", "--do-raise"], 1, "STG42: some error\n"),
-            (["lowatt-enedis", "test", "--output=json"], 0, '{\n  "data": "foo"\n}'),
+            (
+                ["lowatt-enedis", "test"],
+                0,
+                '<?xml version="1.0" ?>\n<data>foo</data>\n',
+            ),
+            (
+                ["lowatt-enedis", "test", "--do-raise"],
+                1,
+                '<?xml version="1.0" ?>\n<error/>\n',
+            ),
+            (["lowatt-enedis", "test", "--output=json"], 0, '{\n  "data": "foo"\n}\n'),
             (
                 ["lowatt-enedis", "test", "--do-raise", "--output=json"],
                 1,
-                '{\n  "errcode": "STG42",\n  "errmsg": "some error"\n}',
+                '{\n  "errcode": "STG42",\n  "errmsg": "some error"\n}\n',
             ),
             (
                 ["lowatt-enedis", "test", "--do-raise-no-value", "--output=json"],
                 1,
-                '{\n  "errcode": "soap:Server",\n  "errmsg": "Erreur Technique MFI"\n}',
+                '{\n  "errcode": "soap:Server",\n  "errmsg": "Erreur Technique MFI"\n}\n',
             ),
         ):
             with mock.patch.object(sys, "argv", cmd), pytest.raises(SystemExit) as cm:
