@@ -27,10 +27,12 @@ import json
 import logging
 import os
 import sys
+import xml.dom.minidom
 from functools import wraps
 from pathlib import Path, PurePath
 from typing import Any, Callable, Iterator, Optional, TypeVar, Union
 
+import rich
 import suds.sudsobject
 from suds import WebFault
 from suds.client import Client
@@ -110,8 +112,9 @@ def init_cli(subparsers: Any) -> None:
         )
         subparser.add_argument(
             "--output",
-            choices=["print", "xml", "json"],
-            help="Output type. Default is to print the suds object",
+            choices=["xml", "json"],
+            default="xml",
+            help="Output type. Default is xml",
         )
 
 
@@ -155,36 +158,39 @@ class WSException(Exception):
         return self.message
 
 
+def pretty_xml(input_xml: str) -> str:
+    output_xml = xml.dom.minidom.parseString(input_xml).toprettyxml(indent="  ")
+    return "\n".join(line for line in output_xml.split("\n") if line.strip())
+
+
 def handle_cli_command(command: str, args: argparse.Namespace) -> None:
     """Run `command` service using configuration in `args`."""
     service, _, handler = COMMAND_SERVICE[command]
     client = get_client(service, args.cert_file, args.key_file, args.homologation)
+    if args.output == "xml":
+        client.options.retxml = True
     try:
         obj = handler(client, args)
     except WSException as exc:
-        if args.output == "xml":
-            # client.last_received() is None in case of WebFault
-            print(exc.web_fault.document.str())  # noqa: T201
-        elif args.output == "json":
-            json.dump(
-                {"errcode": exc.code, "errmsg": exc.message},
-                sys.stdout,
-                indent=2,
-                default=json_encode_default,
-                sort_keys=True,
+        if args.output == "json":
+            rich.print_json(
+                json.dumps(
+                    {"errcode": exc.code, "errmsg": exc.message},
+                    indent=2,
+                    default=json_encode_default,
+                    sort_keys=True,
+                )
             )
         else:
-            print(exc)  # noqa: T201
+            rich.print(pretty_xml(exc.web_fault.document.str()))
         raise
     else:
-        if args.output == "xml":
-            print(client.last_received().str())  # noqa: T201
-        elif args.output == "json":
-            json.dump(
-                obj, sys.stdout, indent=2, default=json_encode_default, sort_keys=True
+        if args.output == "json":
+            rich.print_json(
+                json.dumps(obj, indent=2, default=json_encode_default, sort_keys=True)
             )
         else:
-            print(obj)  # noqa: T201
+            rich.print(pretty_xml(obj.decode()))
 
 
 def get_client(
