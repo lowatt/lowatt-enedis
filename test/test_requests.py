@@ -7,7 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Iterator, TypedDict
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import freezegun
 import lxml.doctestcompare
@@ -146,12 +146,33 @@ def test_requests(
             "ENEDIS_HOMOLOGATION": "true",
         },
     ), patch("lowatt_enedis.certauth._HTTPSClientAuthHandler.https_open") as client:
-        resp = MagicMock()
-        resp.code = 500
+
+        class FakeResponse:
+            code = 500
+            msg = b""
+
+            def info(self) -> dict[str, str]:
+                return {}
+
+            def read(self) -> bytes:
+                return (
+                    b'<?xml version="1.0" ?>'
+                    b'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">'
+                    b'<soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'
+                    b'<ns3:Fault xmlns:ns3="http://schemas.xmlsoap.org/soap/envelope/">'
+                    b"</ns3:Fault>"
+                    b"</soap:Body>"
+                    b"</soapenv:Envelope>"
+                )
+
+            def close(self) -> None:
+                pass
+
+        resp = FakeResponse()
         client.return_value = resp
         with pytest.raises(SystemExit) as cm:
             func()
-        assert cm.value.code == 0
+        assert cm.value.code == 1
     if sys.version_info[:2] <= (3, 7):
         req = list(client.mock_calls[0])[1][0]
     else:
