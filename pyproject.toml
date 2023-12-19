@@ -1,17 +1,67 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lowatt-enedis"
+description = "Python client for Enedis SGE web-service"
+readme = "README.md"
+license = { text = "GPLv3" }
+authors = [{ name = "Lowatt", email = "info@lowatt.fr" }]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Archiving :: Mirroring",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+]
+requires-python = ">=3.9"
+dynamic = ["version"]
+dependencies = [
+    "python-dateutil",
+    "certifi",
+    "suds-py3",
+    "rich",
+]
+
+[project.urls]
+Source = "https://github.com/lowatt/lowatt-enedis"
+Tracker = "https://github.com/lowatt/lowatt-enedis/issues"
+
+[project.optional-dependencies]
+cryptography = [
+    "cryptography", # required for lowatt-enedis decrypt
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "lxml",
+    "freezegun",
+    "pyyaml",
+]
+typing = [
+    "mypy",
+    "types-python-dateutil",
+    "types-setuptools",
+    "types-freezegun",
+    "types-PyYAML",
+]
+
+[project.scripts]
+lowatt-enedis = "lowatt_enedis.__main__:run"
+
+[tool.hatch.version]
+source = "vcs"
+
 [tool.black]
-target-version = ['py37']
+target-version = ['py39']
 include = '\.pyi?$'
-exclude = '''
-(
-  /(
-      \.hg
-    | \.eggs
-    | \.tox
-    | build
-    | dist
-  )/
-)
-'''
+exclude = '(\.tox|\.git)'
 
 [tool.isort]
 profile = "black"
