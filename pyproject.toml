@@ -1,17 +1,7 @@
 [tool.black]
-target-version = ['py37']
+target-version = ['py39']
 include = '\.pyi?$'
-exclude = '''
-(
-  /(
-      \.hg
-    | \.eggs
-    | \.tox
-    | build
-    | dist
-  )/
-)
-'''
+exclude = '(\.tox|\.git)'
 
 [tool.isort]
 profile = "black"
