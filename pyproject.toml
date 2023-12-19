@@ -58,6 +58,9 @@ lowatt-enedis = "lowatt_enedis.__main__:run"
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
 [tool.black]
 target-version = ['py39']
 include = '\.pyi?$'
