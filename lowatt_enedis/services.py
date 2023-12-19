@@ -53,7 +53,7 @@ ACCORD_CLIENT_OPTIONS = {
         "help": "Prénom de la personne physique",
     },
     "--civilite": {
-        "choices": ["M", "Mme", "Mlle"],
+        "choices": ["M", "Mme"],
         "help": "Civilité de la personne physique",
     },
     "--no-autorisation": {
