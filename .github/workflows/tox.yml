@@ -63,15 +63,14 @@ jobs:
 
     env:
       PY_COLORS: 1
-      TOXENV: packaging
 
     steps:
       - name: Switch to using Python 3.11 by default
         uses: actions/setup-python@v2
         with:
           python-version: 3.11
-      - name: Install tox
-        run: python -m pip install --user tox
+      - name: Install build
+        run: python3 -m pip install --user build
       - name: Check out src from Git
         uses: actions/checkout@v2
         with:
@@ -103,7 +102,7 @@ jobs:
           |
           xargs git tag --delete
       - name: Build dists
-        run: python -m tox
+        run: python3 -m build
       - name: Publish to test.pypi.org
         if: >-
           (
