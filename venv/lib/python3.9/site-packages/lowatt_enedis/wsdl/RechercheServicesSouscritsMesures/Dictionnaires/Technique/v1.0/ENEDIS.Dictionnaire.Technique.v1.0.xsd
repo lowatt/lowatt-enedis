@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:tns="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://www.enedis.fr/sge/b2b/technique/v1.0" version="1.0.0">
+	<xs:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="../W3C.SoapEnv.xsd"/>
+	<xs:complexType name="AcquittementType">
+		<xs:sequence>
+			<xs:element name="resultat" type="tec:ResultatType"/>
+			<xs:element name="infoFonctionnelles" type="tec:InfoFonctionnellesType" minOccurs="0"/>
+			<xs:element name="infoDemandeur" type="tec:InfoDemandeurType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResultatType">
+		<xs:simpleContent>
+			<xs:extension base="tec:ResultatLibelleType">
+				<xs:attribute name="code" type="tec:ResultatCodeType" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ErreurType">
+		<xs:sequence>
+			<xs:element name="resultat" type="tec:ResultatType"/>
+			<xs:element name="infoFonctionnelles" type="tec:InfoFonctionnellesType" minOccurs="0"/>
+			<xs:element name="infoDemandeur" type="tec:InfoDemandeurType" minOccurs="0"/>
+			<xs:element name="commentaire" type="tec:ErreurCommentaireType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="erreur" type="tec:ErreurType"/>
+	<xs:element name="acquittement" type="tec:AcquittementType"/>
+	<xs:complexType name="EnteteType">
+		<xs:sequence>
+			<xs:element name="version" type="tec:VersionType" minOccurs="0"/>
+			<xs:element name="infoFonctionnelles" type="tec:InfoFonctionnellesType" minOccurs="0"/>
+			<xs:element name="infoDemandeur" type="tec:InfoDemandeurType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="tns:mustUnderstand" use="optional"/>
+	</xs:complexType>
+	<xs:element name="entete" type="tec:EnteteType"/>
+	<xs:complexType name="InfoDemandeurType">
+		<xs:sequence>
+			<xs:element name="loginDemandeur" type="tec:DemandeurAdresseEmailType" minOccurs="0"/>
+			<xs:element name="appelDemandeurId" type="tec:DemandeurAppelIdType" minOccurs="0"/>
+			<xs:element name="referenceDemandeur" type="tec:DemandeurRefFrnType" minOccurs="0"/>
+			<xs:element name="referenceDemandeurGroupee" type="tec:DemandeurRefFrnType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ResultatCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultatLibelleType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VersionType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[1-9][0-9]*.[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErreurCommentaireType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2047"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DemandeurAdresseEmailType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-zA-Z][\-._0-9a-zA-Z]{0,255}@[0-9a-zA-Z][\-._0-9a-zA-Z]{1,255}.[a-zA-Z]{2,63}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DemandeurRefFrnType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DemandeurAppelIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InfoFonctionnellesType">
+		<xs:sequence>
+			<xs:element name="pointId" type="tec:ObjetIdType" minOccurs="0"/>
+			<xs:element name="affaireId" type="tec:ObjetIdType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ObjetIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,1198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"
+           targetNamespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" version="5.2.0">
+    <xs:simpleType name="AcceptabiliteResultatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AcheminementTarifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActeurCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActiviteCodeNafType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Za-z]{1,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActiviteSecteurCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AdresseAfnorLigneType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="38"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AdresseEmailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9a-zA-Z][\-._0-9a-zA-Z]{0,255}@[0-9a-zA-Z][\-._0-9a-zA-Z]{1,255}.[a-zA-Z]{2,63}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireAnnulationMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireAnnulationMotifRefusCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireClotureMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireEtatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z]{4,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireModificationMotifRefusCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireNatureModificationCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="AffaireStatutCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ANNUL"/>
+            <xs:enumeration value="COURS"/>
+            <xs:enumeration value="TERMN"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AlimentationEtatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ALIM"/>
+            <xs:enumeration value="COUP"/>
+            <xs:enumeration value="LIMI"/>
+            <xs:enumeration value="NRAC"/>
+            <xs:enumeration value="NALI"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AlimentationModeApresCompteurCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AlimentationSecoursModeBasculeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AnneeType">
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:simpleType name="ApplicationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AutoconsommationIndividuelleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BooleenType">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="CalendrierCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CalendrierJourTypeCategorieCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z1-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CalendrierJourTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z1-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CentreGeographiqueCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="11"/>
+            <xs:enumeration value="12"/>
+            <xs:enumeration value="121"/>
+            <xs:enumeration value="122"/>
+            <xs:enumeration value="124"/>
+            <xs:enumeration value="125"/>
+            <xs:enumeration value="13"/>
+            <xs:enumeration value="14"/>
+            <xs:enumeration value="142"/>
+            <xs:enumeration value="143"/>
+            <xs:enumeration value="144"/>
+            <xs:enumeration value="145"/>
+            <xs:enumeration value="146"/>
+            <xs:enumeration value="147"/>
+            <xs:enumeration value="148"/>
+            <xs:enumeration value="15"/>
+            <xs:enumeration value="151"/>
+            <xs:enumeration value="152"/>
+            <xs:enumeration value="154"/>
+            <xs:enumeration value="155"/>
+            <xs:enumeration value="16"/>
+            <xs:enumeration value="161"/>
+            <xs:enumeration value="162"/>
+            <xs:enumeration value="163"/>
+            <xs:enumeration value="164"/>
+            <xs:enumeration value="165"/>
+            <xs:enumeration value="171"/>
+            <xs:enumeration value="172"/>
+            <xs:enumeration value="173"/>
+            <xs:enumeration value="175"/>
+            <xs:enumeration value="176"/>
+            <xs:enumeration value="177"/>
+            <xs:enumeration value="179"/>
+            <xs:enumeration value="191"/>
+            <xs:enumeration value="193"/>
+            <xs:enumeration value="194"/>
+            <xs:enumeration value="195"/>
+            <xs:enumeration value="196"/>
+            <xs:enumeration value="197"/>
+            <xs:enumeration value="198"/>
+            <xs:enumeration value="199"/>
+            <xs:enumeration value="21"/>
+            <xs:enumeration value="211"/>
+            <xs:enumeration value="212"/>
+            <xs:enumeration value="213"/>
+            <xs:enumeration value="214"/>
+            <xs:enumeration value="215"/>
+            <xs:enumeration value="22"/>
+            <xs:enumeration value="221"/>
+            <xs:enumeration value="222"/>
+            <xs:enumeration value="223"/>
+            <xs:enumeration value="224"/>
+            <xs:enumeration value="225"/>
+            <xs:enumeration value="23"/>
+            <xs:enumeration value="231"/>
+            <xs:enumeration value="232"/>
+            <xs:enumeration value="233"/>
+            <xs:enumeration value="234"/>
+            <xs:enumeration value="235"/>
+            <xs:enumeration value="24"/>
+            <xs:enumeration value="241"/>
+            <xs:enumeration value="242"/>
+            <xs:enumeration value="243"/>
+            <xs:enumeration value="245"/>
+            <xs:enumeration value="25"/>
+            <xs:enumeration value="251"/>
+            <xs:enumeration value="252"/>
+            <xs:enumeration value="253"/>
+            <xs:enumeration value="254"/>
+            <xs:enumeration value="256"/>
+            <xs:enumeration value="258"/>
+            <xs:enumeration value="259"/>
+            <xs:enumeration value="26"/>
+            <xs:enumeration value="41"/>
+            <xs:enumeration value="42"/>
+            <xs:enumeration value="43"/>
+            <xs:enumeration value="45"/>
+            <xs:enumeration value="51"/>
+            <xs:enumeration value="52"/>
+            <xs:enumeration value="54"/>
+            <xs:enumeration value="55"/>
+            <xs:enumeration value="56"/>
+            <xs:enumeration value="63"/>
+            <xs:enumeration value="64"/>
+            <xs:enumeration value="65"/>
+            <xs:enumeration value="71"/>
+            <xs:enumeration value="72"/>
+            <xs:enumeration value="73"/>
+            <xs:enumeration value="74"/>
+            <xs:enumeration value="75"/>
+            <xs:enumeration value="91"/>
+            <xs:enumeration value="92"/>
+            <xs:enumeration value="93"/>
+            <xs:enumeration value="94"/>
+            <xs:enumeration value="95"/>
+            <xs:enumeration value="96"/>
+            <xs:enumeration value="97"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Chaine15Type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Chaine2047Type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="2047"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Chaine255Type">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CircuitTempoCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CiviliteAbreviationType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClasseTemporelleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CleTeleAccesType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClientFinalCategorieCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PRO"/>
+            <xs:enumeration value="RES"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClientPrioritaireTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CodeEicType">
+        <xs:restriction base="xs:string">
+            <xs:length value="16"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CodePostalFrancaisType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CommuneFranceCodeInseeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CompteurIntensiteNominaleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CompteurModeleSousTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CompteurTensionNominaleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CompteurTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ConsommationTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FACTU"/>
+            <xs:enumeration value="MOYEN"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ConsuelMotifNonExigibiliteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContratIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContratTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CARDE"/>
+            <xs:enumeration value="CARDI"/>
+            <xs:enumeration value="CARDS"/>
+            <xs:enumeration value="CIP"/>
+            <xs:enumeration value="CRAE"/>
+            <xs:enumeration value="CSD"/>
+            <xs:enumeration value="GRDAA"/>
+            <xs:enumeration value="GRDAO"/>
+            <xs:enumeration value="GRDEC"/>
+            <xs:enumeration value="GRDF"/>
+            <xs:enumeration value="GRDOE"/>
+            <xs:enumeration value="GRDRE"/>
+            <xs:enumeration value="GRDT"/>
+            <xs:enumeration value="PGIAP"/>
+            <xs:enumeration value="PR101"/>
+            <xs:enumeration value="PR501"/>
+            <xs:enumeration value="PR541"/>
+            <xs:enumeration value="PR549"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CoupureLocalisationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CoupureMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CourrierIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CourrierModeleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CourrierMotifNonDistributionCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CourrierStatutCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CourrierTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CreneauHoraireCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DateHeureType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="DateType">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeChangementFrnCorrectifMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{4,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeCommunicationDistributeurTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeDiverseComptageTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeDiverseInformationsTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeDiverseQualiteFournitureTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeDiverseReseauTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeMediaCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeMiseEnServiceCorrectifMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeObjetCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DemandeTechniqueTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DeviseAbreviationType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DisjoncteurCalibreCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DisjoncteurNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DispositifComptageParticulariteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DispositifParticulierLimitationPerturbationsCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DomaineTensionCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BTINF"/>
+            <xs:enumeration value="BTSUP"/>
+            <xs:enumeration value="HTA"/>
+            <xs:enumeration value="HTB"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DureeUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="annee"/>
+            <xs:enumeration value="h"/>
+            <xs:enumeration value="jour"/>
+            <xs:enumeration value="min"/>
+            <xs:enumeration value="mois"/>
+            <xs:enumeration value="ms"/>
+            <xs:enumeration value="s"/>
+            <xs:enumeration value="semaine"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DysfonctionnementNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EntrepriseCategorieTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EquipementElectriqueLocalisationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EquipementElectriqueRegimeProprieteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EtablissementNumSiretType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FaisabiliteMotifImpossibiliteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FaisabiliteReserveMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FichierIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FichierNomType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S{1,120}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FinaliteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FormeJuridiqueCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AA"/>
+            <xs:enumeration value="AC"/>
+            <xs:enumeration value="AE"/>
+            <xs:enumeration value="ASSO"/>
+            <xs:enumeration value="CA"/>
+            <xs:enumeration value="EARL"/>
+            <xs:enumeration value="EI"/>
+            <xs:enumeration value="EIRL"/>
+            <xs:enumeration value="EURL"/>
+            <xs:enumeration value="FO"/>
+            <xs:enumeration value="GIE"/>
+            <xs:enumeration value="GIP"/>
+            <xs:enumeration value="II"/>
+            <xs:enumeration value="PL"/>
+            <xs:enumeration value="SA"/>
+            <xs:enumeration value="SARL"/>
+            <xs:enumeration value="SAS"/>
+            <xs:enumeration value="SASU"/>
+            <xs:enumeration value="SCA"/>
+            <xs:enumeration value="SCEA"/>
+            <xs:enumeration value="SCF"/>
+            <xs:enumeration value="SCI"/>
+            <xs:enumeration value="SCM"/>
+            <xs:enumeration value="SCOP"/>
+            <xs:enumeration value="SCP"/>
+            <xs:enumeration value="SCS"/>
+            <xs:enumeration value="SEL"/>
+            <xs:enumeration value="SEP"/>
+            <xs:enumeration value="SNC"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FraisCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FraudeNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FraudeOuDysfonctionnementMethodeCalculCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FraudeOuDysfonctionnementMethodeFacturationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GrandeurMetierCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GrandeurPhysiqueCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GroupePeriodeMobileCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="HeureType">
+        <xs:restriction base="xs:time"/>
+    </xs:simpleType>
+    <xs:simpleType name="IndexUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z]{1,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InstallationCaracteristiqueTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IntensiteUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="mA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IntervenantTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionDemandeMotifRefusCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionDeplanificationMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionEtatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ANNUL"/>
+            <xs:enumeration value="CLOS"/>
+            <xs:enumeration value="DMND"/>
+            <xs:enumeration value="PLAN"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionNonRealisationMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionPeriodeTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="HEOE"/>
+            <xs:enumeration value="HHOE"/>
+            <xs:enumeration value="HHOS"/>
+            <xs:enumeration value="HHOW"/>
+            <xs:enumeration value="HHSW"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionPlanificationHorsDelaiMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionRealisationEtatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NREA"/>
+            <xs:enumeration value="PREA"/>
+            <xs:enumeration value="REAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterventionReplanificationMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="JourDuMoisType">
+        <xs:restriction base="xs:gDay"/>
+    </xs:simpleType>
+    <xs:simpleType name="LibelleAffichageCompteurType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9 _\-]{1,16}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LigneTelephoniqueNumType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9\+\(\)\s\.]{1,25}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LimiteurTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LongueurUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="km"/>
+            <xs:enumeration value="m"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureDeclencheurCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureOrigineCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureStatutCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{3,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MesureUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="7"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MoisEtJourType">
+        <xs:restriction base="xs:gMonthDay"/>
+    </xs:simpleType>
+    <xs:simpleType name="MoisType">
+        <xs:restriction base="xs:gMonth"/>
+    </xs:simpleType>
+    <xs:simpleType name="NbDecimalType">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="15"/>
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NbEntierStrictementPositifType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NbEntierType">
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NiveauOuvertureServicesCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NomenclatureActiviteEconomiqueEuropeenneTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NonPriseEnCompteAutoreleveMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OffreTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NO"/>
+            <xs:enumeration value="OH"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OperationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OptionBilanContinuiteFournitureCoupureTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OptionBilanContinuiteFournitureTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OptionContractuelleSouscriteIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PeriodiciteCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonneMoraleNumSirenType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PlageHeuresCreusesCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PointAppartenanceRegroupementHebergeurDecomptantCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DECO"/>
+            <xs:enumeration value="HEBE"/>
+            <xs:enumeration value="NON"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PointAppartenanceRegroupementTurpeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NON"/>
+            <xs:enumeration value="REGT"/>
+            <xs:enumeration value="RGPT"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PointEtatContractuelCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ECRAC"/>
+            <xs:enumeration value="INACCE"/>
+            <xs:enumeration value="ECRES"/>
+            <xs:enumeration value="IMPRO"/>
+            <xs:enumeration value="RESIL"/>
+            <xs:enumeration value="SERVC"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PointIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PointSegmentClienteleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="C2"/>
+            <xs:enumeration value="C3"/>
+            <xs:enumeration value="C4"/>
+            <xs:enumeration value="C5"/>
+            <xs:enumeration value="INDET"/>
+            <xs:enumeration value="C1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PosteHoraireCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrejudiceNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationCasCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="63"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationEnvisageeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CFN"/>
+            <xs:enumeration value="MES"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationFicheCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="63"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationMotifNonFacturationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationMotifNonRealisationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PrestationOptionCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="63"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductionAutonomeCouplageModeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductionCombustibleTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z\.]{1,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductionFiliereTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z\.]{1,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductionTechnologieTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z\.]{1,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProgrammeCircuitChauffageTempoCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProgrammeCircuitEauTempoCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{1,15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PuissanceUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="kVA"/>
+            <xs:enumeration value="kWc"/>
+            <xs:enumeration value="kVAR"/>
+            <xs:enumeration value="kW"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RattachementIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RattachementPointRoleCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RattachementTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RecevabiliteMotifRefusCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RecevabilitePremiereMiseEnServicePourEssaiMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RecevabiliteResultatCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReclamationSousTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReclamationTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RectificationMotifCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RefCompteurType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RelaisCommandeTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RelaisNatureCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReleveMediaCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReleveModeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RelevePlageCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReleveQualificationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReleveTraitementModeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ResidenceTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PRP"/>
+            <xs:enumeration value="SEC"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SecteurGeographiqueCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SituationContractuelleGestionModeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INT"/>
+            <xs:enumeration value="GRD"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StructureComptageCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StructureTarifaireContexteUtilisationCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TensionLivraisonCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TensionUniteSymboleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="kV"/>
+            <xs:enumeration value="V"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TourneeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransformateurCalibreCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransformateurCouplageTypeCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransformateurCourantPositionCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransformateurPrecisionClasseCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UsageChantierCodeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UtilisateurLoginType">
+        <xs:union memberTypes="ds:AdresseEmailType"/>
+    </xs:simpleType>
+    <xs:simpleType name="ZoneQualiteDesserteCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+</xs:schema>

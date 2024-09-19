@@ -1,0 +1,77 @@
+
+<wsdl:definitions name="RechercheServicesSouscritsMesures-V1.0" 
+	targetNamespace="http://www.enedis.fr/sge/b2b/rechercheservicessouscritsmesures/v1.0"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.enedis.fr/sge/b2b/rechercheservicessouscritsmesures/v1.0"
+    xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0"
+	xmlns:ope="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0">
+
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="RechercherServicesSouscritsMesures-v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0"/>
+			<xs:import schemaLocation="../../Dictionnaires/Technique/v1.0/ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+		</xs:schema>
+	</wsdl:types>
+	
+	<!-- Messages -->
+	<wsdl:message name="rechercherServicesSouscritsMesures">
+		<wsdl:part name="rechercherServicesSouscritsMesures" element="ope:rechercherServicesSouscritsMesures" />
+	</wsdl:message>
+	<wsdl:message name="rechercherServicesSouscritsMesuresResponse">
+		<wsdl:part name="rechercherServicesSouscritsMesuresResponse" element="ope:rechercherServicesSouscritsMesuresResponse"/>
+	</wsdl:message>
+	
+	<!-- Erreur -->
+	<wsdl:message name="erreur">
+		<wsdl:part name="erreur" element="tec:erreur"/>
+	</wsdl:message>
+	
+	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="tec:entete"></wsdl:part>
+	</wsdl:message>
+	
+	<!-- Acquittement -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="tec:acquittement"></wsdl:part>
+	</wsdl:message>
+	
+	<!-- portType -->
+	<wsdl:portType name="RechercheServicesSouscritsMesuresPortType">
+		<wsdl:operation  name="rechercherServicesSouscritsMesures">
+			<wsdl:input  name="rechercherServicesSouscritsMesures" message="tns:rechercherServicesSouscritsMesures"/>
+			<wsdl:output name="echercherServicesSouscritsMesuresResponse" message="tns:rechercherServicesSouscritsMesuresResponse"/>
+			<wsdl:fault  name="erreur" message="tns:erreur"/>
+		</wsdl:operation>
+	</wsdl:portType> 
+	
+	<!-- binding -->
+	<wsdl:binding name="RechercheServicesSouscritsMesuresBinding" type="tns:RechercheServicesSouscritsMesuresPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- rechercherServicesSouscritsMesures -->
+		<wsdl:operation name="rechercherServicesSouscritsMesures">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="entete" message="tns:entete"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+			</wsdl:output>
+			<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<!-- service -->
+	<wsdl:service name="RechercheServicesSouscritsMesures-V1.0">
+		<wsdl:port name="RechercheServicesSouscritsMesuresPort" binding="tns:RechercheServicesSouscritsMesuresBinding">
+			<soap:address location="https://sge-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>

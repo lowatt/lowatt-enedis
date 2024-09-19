@@ -1,0 +1,60 @@
+<wsdl:definitions name="ConsultationDonneesTechniquesContractuelles-V1.0" targetNamespace="http://www.enedis.fr/sge/b2b/services/consultationdonneestechniquescontractuelles/v1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.enedis.fr/sge/b2b/services/consultationdonneestechniquescontractuelles/v1.0" xmlns:opev2p0="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="ConsulterDonneesTechniquesContractuelles-v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0"/>
+			<xs:import schemaLocation="../../Dictionnaire/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+		</xs:schema>
+	</wsdl:types>
+	<!-- Messages -->
+	<wsdl:message name="consulterDonneesTechniquesContractuelles">
+		<wsdl:part name="consulterDonneesTechniquesContractuelles" element="opev2p0:consulterDonneesTechniquesContractuelles"/>
+	</wsdl:message>
+	<wsdl:message name="consulterDonneesTechniquesContractuellesResponse">
+		<wsdl:part name="consulterDonneesTechniquesContractuellesResponse" element="opev2p0:consulterDonneesTechniquesContractuellesResponse"/>
+	</wsdl:message>
+	<!-- Erreur -->
+  <wsdl:message name="erreur">
+    <wsdl:part name="Erreur" element="tec:erreur"/>
+  </wsdl:message>
+  	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="tec:entete"/>
+	</wsdl:message>
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="tec:acquittement"/>
+	</wsdl:message>
+	<!-- portType -->
+	<wsdl:portType name="ConsultationDonneesTechniquesContractuellesPortType">
+		<wsdl:operation name="consulterDonneesTechniquesContractuelles">
+			<wsdl:input message="tns:consulterDonneesTechniquesContractuelles" name="consulterDonneesTechniquesContractuelles"/>
+			<wsdl:output message="tns:consulterDonneesTechniquesContractuellesResponse" name="consulterDonneesTechniquesContractuellesResponse"/>
+			<wsdl:fault message="tns:erreur" name="erreur"/>
+		</wsdl:operation>
+	</wsdl:portType> 
+	<!-- binding -->
+	<wsdl:binding name="ConsultationDonneesTechniquesContractuellesBinding" type="tns:ConsultationDonneesTechniquesContractuellesPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- consulterDonneesTechniquesContractuelles -->
+		<wsdl:operation name="consulterDonneesTechniquesContractuelles">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="consulterDonneesTechniquesContractuelles">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="entete" message="tns:entete"/>
+			</wsdl:input>
+			<wsdl:output name="consulterDonneesTechniquesContractuellesResponse">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+			</wsdl:output>
+	  		<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- service -->
+	<wsdl:service name="ConsultationDonneesTechniquesContractuellesV1.0">
+		<wsdl:port name="ConsultationDonneesTechniquesContractuellesPort" binding="tns:ConsultationDonneesTechniquesContractuellesBinding">
+			<soap:address location="https://sge-b2b.erdf.fr/ConsultationDonneesTechniquesContractuelles/v1.0"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

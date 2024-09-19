@@ -1,0 +1,78 @@
+<wsdl:definitions name="CommandeCollectePublicationMesures-V3.0"
+	targetNamespace="http://www.enedis.fr/sge/b2b/commandecollectepublicationmesures/v3.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.enedis.fr/sge/b2b/commandecollectepublicationmesures/v3.0"
+	xmlns:ope="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0"
+	xmlns:dic="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"
+	xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+    
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="CommanderCollectePublicationMesures-v3.0.xsd" namespace="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0"/>
+			<xs:import schemaLocation="../../Dictionnaires/Metier/v5.0/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd" namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+			<xs:import schemaLocation="../../Dictionnaires/Technique/v1.0/ENEDIS.Dictionnaire.Technique.v1.0.xsd" namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+		</xs:schema>
+	</wsdl:types>
+	
+	<!-- Messages -->
+	<wsdl:message name="commanderCollectePublicationMesures">
+		<wsdl:part name="commanderCollectePublicationMesures" element="ope:commanderCollectePublicationMesures"/>
+	</wsdl:message>
+	<wsdl:message name="commanderCollectePublicationMesuresResponse">
+		<wsdl:part name="commanderCollectePublicationMesuresResponse" element="ope:commanderCollectePublicationMesuresResponse"/>
+	</wsdl:message>
+	
+	<!-- Erreur -->
+  	<wsdl:message name="erreur">
+    	<wsdl:part name="Erreur" element="tec:erreur"/>
+  	</wsdl:message>
+  
+  	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part name="entete" element="tec:entete"/>
+	</wsdl:message>
+	
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part name="acquittement" element="tec:acquittement"/>
+	</wsdl:message>
+	
+	<!-- portType -->
+	<wsdl:portType name="CommandeCollectePublicationMesuresPortType">
+		<wsdl:operation name="commanderCollectePublicationMesures">
+			<wsdl:input message="tns:commanderCollectePublicationMesures" name="commanderCollectePublicationMesures"/>
+			<wsdl:output message="tns:commanderCollectePublicationMesuresResponse" name="commanderCollectePublicationMesuresResponse"/>
+			<wsdl:fault message="tns:erreur" name="erreur"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	 
+	<!-- binding -->
+	<wsdl:binding name="CommandeCollectePublicationMesuresBinding" type="tns:CommandeCollectePublicationMesuresPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- commanderCollectePublicationMesuresResponse -->
+		<wsdl:operation name="commanderCollectePublicationMesures">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="commanderCollectePublicationMesures">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="entete" message="tns:entete"/>
+			</wsdl:input>
+			<wsdl:output name="commanderCollectePublicationMesuresResponse">
+				<soap:body use="literal"/>
+				<soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+			</wsdl:output>
+			<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<!-- service -->
+	<wsdl:service name="CommandeCollectePublicationMesures-V3.0">
+		<wsdl:port name="CommandeCollectePublicationMesuresPort" binding="tns:CommandeCollectePublicationMesuresBinding">
+			<soap:address location="https://sge-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>

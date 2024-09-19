@@ -1,0 +1,2 @@
+[console_scripts]
+lowatt-enedis = lowatt_enedis.__main__:run
