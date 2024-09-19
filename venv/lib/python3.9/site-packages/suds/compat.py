@@ -1,2 +1,0 @@
-
-basestring = unicode = str
