@@ -124,8 +124,9 @@ def test_requests(
     case: str, tmp_path: Path, certs: tuple[Path, Path], regen_test_data: bool
 ) -> None:
     # fix some defaults set at import time
-    with freezegun.freeze_time("2022-02-22"), patch.dict(
-        "os.environ", {"ENEDIS_CONTRAT": "1234"}
+    with (
+        freezegun.freeze_time("2022-02-22"),
+        patch.dict("os.environ", {"ENEDIS_CONTRAT": "1234"}),
     ):
         importlib.reload(lowatt_enedis.services)
     entrypoint = pkg_resources.get_entry_info(
@@ -137,15 +138,19 @@ def test_requests(
     func = entrypoint.load()
     command = shlex.split(get_cases()[case])
 
-    with override_sys_argv(command), patch.dict(
-        "os.environ",
-        {
-            "ENEDIS_LOGIN": "test@example.com",
-            "ENEDIS_CERT_FILE": str(certs[0]),
-            "ENEDIS_KEY_FILE": str(certs[1]),
-            "ENEDIS_HOMOLOGATION": "true",
-        },
-    ), patch("lowatt_enedis.certauth._HTTPSClientAuthHandler.https_open") as client:
+    with (
+        override_sys_argv(command),
+        patch.dict(
+            "os.environ",
+            {
+                "ENEDIS_LOGIN": "test@example.com",
+                "ENEDIS_CERT_FILE": str(certs[0]),
+                "ENEDIS_KEY_FILE": str(certs[1]),
+                "ENEDIS_HOMOLOGATION": "true",
+            },
+        ),
+        patch("lowatt_enedis.certauth._HTTPSClientAuthHandler.https_open") as client,
+    ):
 
         class FakeResponse:
             code = 500
