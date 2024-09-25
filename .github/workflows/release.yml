@@ -1,0 +1,29 @@
+name: tox
+
+on:
+  release:
+    types:
+    - published
+
+jobs:
+  publish:
+    name: Publish to PyPI registry
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/lowatt-enedis
+    permissions:
+      id-token: write
+    steps:
+      - name: Switch to using Python 3.11 by default
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Install build
+        run: python3 -m pip install --user build
+      - name: Check out src from Git
+        uses: actions/checkout@v2
+      - name: Build dists
+        run: python3 -m build
+      - name: Publish to pypi.org
+        uses: pypa/gh-action-pypi-publish@release/v1
