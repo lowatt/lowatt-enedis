@@ -215,19 +215,25 @@ def get_client(
         # verification failure.
         method.location = method.location.replace(b".erdf.fr", b".enedis.fr")
 
+        # use new url available since 23/09/2024
+        # XXX: update wsdl files when new url is documented
+        method.location = method.location.replace(
+            b"https://sge-b2b.enedis.fr/", b"https://sge-ws.enedis.fr/"
+        )
+
         # ConsultationMesuresDetaillees location is also misconfigured
         if (
             method.location
             == b"http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0"
         ):
             method.location = (
-                b"https://sge-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0"
+                b"https://sge-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0"
             )
 
         if homologation:
             method.location = method.location.replace(
-                b"/sge-b2b.",
-                b"/sge-homologation-b2b.",
+                b"https://sge-ws.enedis.fr/",
+                b"https://sge-homologation-b2b.enedis.fr/",
             )
 
     return client
