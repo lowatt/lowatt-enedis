@@ -22,21 +22,24 @@ def test_decrypt(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     with (tmp_path / "encrypted").open("wb") as f:
         f.write(encrypted)
 
-    with mock.patch.object(
-        sys,
-        "argv",
-        [
-            "lowatt-enedis",
-            "decrypt",
-            "--key",
-            key.decode("ascii"),
-            "--iv",
-            iv.decode("ascii"),
-            "--output",
-            str(tmp_path / "decrypted"),
-            str(tmp_path / "encrypted"),
-        ],
-    ), pytest.raises(SystemExit) as cm:
+    with (
+        mock.patch.object(
+            sys,
+            "argv",
+            [
+                "lowatt-enedis",
+                "decrypt",
+                "--key",
+                key.decode("ascii"),
+                "--iv",
+                iv.decode("ascii"),
+                "--output",
+                str(tmp_path / "decrypted"),
+                str(tmp_path / "encrypted"),
+            ],
+        ),
+        pytest.raises(SystemExit) as cm,
+    ):
         run()
     assert cm.value.code == 0
     output = capsys.readouterr()

@@ -185,9 +185,13 @@ def test_cli_help() -> None:
     assert entrypoint is not None
     func = entrypoint.load()
     stdout = io.StringIO()
-    with pytest.raises(SystemExit) as cm, override_sys_argv(
-        ["lowatt-enedis", "--help"],
-    ), contextlib.redirect_stdout(stdout):
+    with (
+        pytest.raises(SystemExit) as cm,
+        override_sys_argv(
+            ["lowatt-enedis", "--help"],
+        ),
+        contextlib.redirect_stdout(stdout),
+    ):
         func()
     assert cm.value.code == 0
     output = stdout.getvalue()
