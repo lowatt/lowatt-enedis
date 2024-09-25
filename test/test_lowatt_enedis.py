@@ -79,7 +79,7 @@ def test_ws_decorator() -> None:
 
     le.handle_cli_command("testws", args())
     assert handler_called
-    assert service_location == (b"https://sge-b2b.enedis.fr/RecherchePoint/v2.0")
+    assert service_location == (b"https://sge-ws.enedis.fr/RecherchePoint/v2.0")
 
     handler_called = False
     service_location = None
