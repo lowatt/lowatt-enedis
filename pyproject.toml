@@ -23,7 +23,6 @@ classifiers = [
 requires-python = ">=3.9"
 dynamic = ["version"]
 dependencies = [
-    "python-dateutil",
     "certifi",
     "suds-py3",
     "rich",
@@ -46,7 +45,6 @@ test = [
 ]
 typing = [
     "mypy",
-    "types-python-dateutil",
     "types-setuptools",
     "types-freezegun",
     "types-PyYAML",
