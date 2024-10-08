@@ -9,11 +9,15 @@ from pathlib import Path
 from typing import Iterator, TypedDict
 from unittest.mock import patch
 
+if sys.version_info < (3, 10):
+    import importlib_metadata
+else:
+    from importlib import metadata as importlib_metadata
+
 import freezegun
 import lxml.doctestcompare
 import lxml.etree
 import lxml.objectify
-import pkg_resources
 import pytest
 import yaml
 
@@ -46,7 +50,7 @@ EXPECTED_FILENAME = Path(__file__).parent / "data" / "requests.yaml"
 
 
 def get_expected(
-    _cache: dict[None, dict[str, ExpectedDict]] = {}
+    _cache: dict[None, dict[str, ExpectedDict]] = {},
 ) -> dict[str, ExpectedDict]:
     with contextlib.suppress(KeyError):
         return _cache[None]
@@ -129,10 +133,9 @@ def test_requests(
         patch.dict("os.environ", {"ENEDIS_CONTRAT": "1234"}),
     ):
         importlib.reload(lowatt_enedis.services)
-    entrypoint = pkg_resources.get_entry_info(
-        "lowatt_enedis",
-        "console_scripts",
-        "lowatt-enedis",
+    (entrypoint,) = importlib_metadata.entry_points(
+        group="console_scripts",
+        name="lowatt-enedis",
     )
     assert entrypoint
     func = entrypoint.load()

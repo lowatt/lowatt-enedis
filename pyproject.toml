@@ -43,6 +43,7 @@ test = [
     "lxml",
     "freezegun",
     "pyyaml",
+    "importlib_metadata;python_version<'3.10'",
 ]
 typing = [
     "mypy",
