@@ -7,7 +7,11 @@ import sys
 from typing import Iterator
 from unittest import mock
 
-import pkg_resources
+if sys.version_info < (3, 10):
+    import importlib_metadata
+else:
+    from importlib import metadata as importlib_metadata
+
 import pytest
 import suds.sudsobject
 from suds import WebFault
@@ -177,12 +181,11 @@ def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
 
 
 def test_cli_help() -> None:
-    entrypoint = pkg_resources.get_entry_info(
-        "lowatt_enedis",
-        "console_scripts",
-        "lowatt-enedis",
+    (entrypoint,) = importlib_metadata.entry_points(
+        group="console_scripts",
+        name="lowatt-enedis",
     )
-    assert entrypoint is not None
+    assert entrypoint
     func = entrypoint.load()
     stdout = io.StringIO()
     with (
