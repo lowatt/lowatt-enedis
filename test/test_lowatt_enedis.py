@@ -211,7 +211,7 @@ def test_detailed_measures_resp2py() -> None:
         data = list(le.services.detailed_measures_resp2py(resp))
         assert len(data) == 8
         assert data[0] == (
-            datetime.datetime(2020, 2, 29, 23, tzinfo=le.services.UTC),
+            datetime.datetime(2020, 2, 29, 23, tzinfo=datetime.timezone.utc),
             100,
         )
 
