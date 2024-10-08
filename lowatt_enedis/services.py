@@ -38,7 +38,6 @@ from . import (
     ws,
 )
 
-UTC = timezone.utc
 ACCORD_CLIENT_OPTIONS = {
     # XXX exclusive option groups
     "--denomination": {
@@ -547,7 +546,7 @@ def detailed_measures_resp2py(
     # end = resp.periode.dateFin
     assert len(resp.grandeur) == 1
     for point in resp.grandeur[0].mesure:
-        yield (point.d.astimezone(UTC), point.v)
+        yield (point.d.astimezone(timezone.utc), point.v)
 
 
 def _donnees_generales(
