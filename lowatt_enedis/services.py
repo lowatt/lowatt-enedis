@@ -23,11 +23,10 @@ SGE web-service mapping to plug them into the CLI.
 
 import argparse
 import warnings
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from typing import Any, Iterator, Literal
 
 import suds.sudsobject
-from dateutil import tz
 from suds.client import Client
 
 from . import (
@@ -39,7 +38,7 @@ from . import (
     ws,
 )
 
-UTC = tz.tzutc()
+UTC = timezone.utc
 ACCORD_CLIENT_OPTIONS = {
     # XXX exclusive option groups
     "--denomination": {
