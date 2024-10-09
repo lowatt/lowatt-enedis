@@ -45,7 +45,6 @@ test = [
 ]
 typing = [
     "mypy",
-    "types-setuptools",
     "types-freezegun",
     "types-PyYAML",
 ]
