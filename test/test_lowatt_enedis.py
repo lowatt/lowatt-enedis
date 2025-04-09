@@ -4,7 +4,7 @@ import datetime
 import io
 import os
 import sys
-from typing import Iterator
+from collections.abc import Iterator
 from unittest import mock
 
 if sys.version_info < (3, 10):

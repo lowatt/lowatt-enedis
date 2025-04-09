@@ -16,7 +16,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - tox_env: check-manifest
         - tox_env: lint
         - tox_env: py39
         - tox_env: py310

@@ -28,9 +28,10 @@ import logging
 import os
 import sys
 import xml.dom.minidom
+from collections.abc import Iterator
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any, Callable, Iterator, Optional, TypeVar, Union
+from typing import Any, Callable, Optional, TypeVar, Union
 
 import rich
 import suds.sudsobject
@@ -81,7 +82,7 @@ def init_cli(subparsers: Any) -> None:
     for command, (service, options, _) in COMMAND_SERVICE.items():
         subparser = subparsers.add_parser(
             command,
-            help='Query the "{}" web-service.'.format(service),
+            help=f'Query the "{service}" web-service.',
         )
         subparser.add_argument(
             "--login",
@@ -305,7 +306,7 @@ def ws(service: str) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
             try:
                 return func(client, args)
             except WebFault as exc:
-                raise WSException(exc)
+                raise WSException(exc) from exc
 
         return call_service
 
@@ -327,7 +328,7 @@ def create_from_options(
         client.xstypes_map = build_xstypes_map(client)
     xstype, prefix = client.xstypes_map[xstype_name]
     children_map = xstype_children_map(xstype)
-    instance = client.factory.create("{}:{}".format(prefix, xstype_name))
+    instance = client.factory.create(f"{prefix}:{xstype_name}")
 
     has_value = False
     for option in options_map:
@@ -337,7 +338,7 @@ def create_from_options(
         try:
             element = children_map[element_name]
         except KeyError as exc:
-            exc.args = ("No element {} in {}".format(exc, list(children_map)),)
+            exc.args = (f"No element {exc} in {list(children_map)}",)
             raise
 
         if value is not None:
@@ -362,7 +363,7 @@ def create_from_options(
                 # enedis web-service doesn't like those empty tags
                 delattr(instance, element_name)
         else:
-            raise ValueError("Expecting a value for {}".format(option))
+            raise ValueError(f"Expecting a value for {option}")
 
     if has_value:
         return instance
@@ -383,7 +384,7 @@ def build_xstypes_map(
     namespace nor prefix), associated to 2-uple `(type object, prefix)`.
 
     """
-    assert len(client.sd) == 1, "More than one service: {}".format(client.sd)
+    assert len(client.sd) == 1, f"More than one service: {client.sd}"
 
     xstypes_map = {}
     service_def = client.sd[0]
@@ -418,8 +419,7 @@ def iter_methods(client: Client) -> Iterator[suds.sudsobject.Facade]:
     """Return an iterator on exposerd methods suds instances."""
     for service in client.wsdl.services:
         for port in service.ports:
-            for method in port.methods.values():
-                yield method
+            yield from port.methods.values()
 
 
 def dict_from_dicts(*dicts: dict[str, Any]) -> dict[str, Any]:

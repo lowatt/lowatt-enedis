@@ -5,8 +5,9 @@ import re
 import shlex
 import subprocess
 import sys
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator, TypedDict
+from typing import TypedDict
 from unittest.mock import patch
 
 if sys.version_info < (3, 10):
@@ -24,7 +25,7 @@ import yaml
 import lowatt_enedis.services
 
 
-def get_cases(_cache: dict[None, dict[str, str]] = {}) -> dict[str, str]:
+def get_cases(_cache: dict[None, dict[str, str]] = {}) -> dict[str, str]:  # noqa: B006
     with contextlib.suppress(KeyError):
         return _cache[None]
     cases: dict[str, str] = {}
@@ -50,7 +51,7 @@ EXPECTED_FILENAME = Path(__file__).parent / "data" / "requests.yaml"
 
 
 def get_expected(
-    _cache: dict[None, dict[str, ExpectedDict]] = {},
+    _cache: dict[None, dict[str, ExpectedDict]] = {},  # noqa: B006
 ) -> dict[str, ExpectedDict]:
     with contextlib.suppress(KeyError):
         return _cache[None]
@@ -181,10 +182,7 @@ def test_requests(
         with pytest.raises(SystemExit) as cm:
             func()
         assert cm.value.code == 1
-    if sys.version_info[:2] <= (3, 7):
-        req = list(client.mock_calls[0])[1][0]
-    else:
-        req = client.mock_calls[0].args[0]
+    req = client.mock_calls[0].args[0]
     data = lxml.etree.tostring(
         lxml.objectify.fromstring(req.data), encoding="utf8", pretty_print=True
     ).decode()

@@ -23,8 +23,9 @@ SGE web-service mapping to plug them into the CLI.
 
 import argparse
 import warnings
+from collections.abc import Iterator
 from datetime import date, datetime, timedelta, timezone
-from typing import Any, Iterator, Literal
+from typing import Any, Literal
 
 import suds.sudsobject
 from suds.client import Client
@@ -904,10 +905,7 @@ def point_cmd_publication(
     else:
         code = "CDC"
         transmission = action == "cdc"
-        if get_option(args, "linky"):
-            pas = "PT30M"
-        else:
-            pas = "PT10M"
+        pas = "PT30M" if get_option(args, "linky") else "PT10M"
         period = get_option(args, "period")
         if period == "monthly":
             period = "P1M"
