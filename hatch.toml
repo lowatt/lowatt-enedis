@@ -1,0 +1,5 @@
+[version]
+source = "vcs"
+
+[version.raw-options]
+local_scheme = "no-local-version"
