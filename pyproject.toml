@@ -53,13 +53,3 @@ typing = [
 
 [project.scripts]
 lowatt-enedis = "lowatt_enedis.__main__:run"
-
-[tool.black]
-target-version = ['py39']
-include = '\.pyi?$'
-exclude = '(\.tox|\.git)'
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-known_first_party = ["lowatt_enedis"]

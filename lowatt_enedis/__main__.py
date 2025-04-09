@@ -20,7 +20,6 @@ from typing import NoReturn
 
 from suds.client import Client
 
-import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis import (
     COMMAND_SERVICE,
     WSException,

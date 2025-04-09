@@ -1,0 +1,37 @@
+target-version = "py39"
+
+[lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-debugger
+    "T10",
+    # flake8-logging
+    "G",
+    # flake8-comprehension
+    "C4",
+    # flake8-simplify
+    "SIM",
+    # flake8-print
+    "T20",
+    # individual rules
+    "RUF100", # unused-noqa
+    # imports
+    "I",
+]
+
+# For error codes, see https://docs.astral.sh/ruff/rules/#error-e
+ignore = [
+# line too long
+  "E501",
+]
+
+[lint.isort]
+known-first-party = ["lowatt_enedis"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
