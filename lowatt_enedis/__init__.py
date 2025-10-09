@@ -234,7 +234,7 @@ def get_client(
         if homologation:
             method.location = method.location.replace(
                 b"https://sge-ws.enedis.fr/",
-                b"https://sge-homologation-b2b.enedis.fr/",
+                b"https://sge-homologation-ws.enedis.fr/",
             )
 
     return client

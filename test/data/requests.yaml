@@ -37,7 +37,7 @@ ACCES-NR1 (C2-C4):
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-NR1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -77,7 +77,7 @@ ACCES-NR1 (C5):
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-NR2 (C2-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -117,7 +117,7 @@ ACCES-NR2 (C2-C4):
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-NR2 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -157,7 +157,7 @@ ACCES-NR2 (C5):
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -197,7 +197,7 @@ ACCES-R1 (C2-C4) \*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R1 (C5) \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -237,7 +237,7 @@ ACCES-R1 (C5) \*\*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R2 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -277,7 +277,7 @@ ACCES-R2 (C2-C4) \*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R2 (C5) \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -317,7 +317,7 @@ ACCES-R2 (C5) \*\*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R3 \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -357,7 +357,7 @@ ACCES-R3 \*\*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R4 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -397,7 +397,7 @@ ACCES-R4 (C2-C4) \*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ACCES-R4 (C5) \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderaccesdonneesmesures/v1.0">
@@ -437,7 +437,7 @@ ACCES-R4 (C5) \*\*:
         </ns1:commanderAccesDonneesMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommanderAccesDonneesMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommanderAccesDonneesMesures/v1.0
 ADP-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
@@ -457,7 +457,7 @@ ADP-NR1:
         </ns1:consulterDonneesTechniquesContractuelles>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R1 (C1-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
@@ -477,7 +477,7 @@ ADP-R1 (C1-C4):
         </ns1:consulterDonneesTechniquesContractuelles>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
@@ -497,7 +497,7 @@ ADP-R1 (C5):
         </ns1:consulterDonneesTechniquesContractuelles>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R2 (C1-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
@@ -517,7 +517,7 @@ ADP-R2 (C1-C4):
         </ns1:consulterDonneesTechniquesContractuelles>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 ADP-R2 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consulterdonneestechniquescontractuelles/v1.0">
@@ -537,7 +537,7 @@ ADP-R2 (C5):
         </ns1:consulterDonneesTechniquesContractuelles>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationDonneesTechniquesContractuelles/v1.0
 AHC-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1">
@@ -558,7 +558,7 @@ AHC-NR1:
         </ns1:consulterMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesures/v1.1
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesures/v1.1
 AHC-R1 (C1-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1">
@@ -579,7 +579,7 @@ AHC-R1 (C1-C4) \*:
         </ns1:consulterMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesures/v1.1
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesures/v1.1
 AHC-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultermesures/v1.1">
@@ -600,7 +600,7 @@ AHC-R1 (C5):
         </ns1:consulterMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesures/v1.1
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesures/v1.1
 ASS-R1 (C2-C4) \* \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
@@ -628,7 +628,7 @@ ASS-R1 (C2-C4) \* \*\*:
         </ns1:commanderArretServiceSouscritMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
 ASS-R1 (C5) \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
@@ -656,7 +656,7 @@ ASS-R1 (C5) \*\*:
         </ns1:commanderArretServiceSouscritMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
 Ass-R1 (C2-C4) \* \*\*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderarretservicesouscritmesures/v1.0">
@@ -684,7 +684,7 @@ Ass-R1 (C2-C4) \* \*\*:
         </ns1:commanderArretServiceSouscritMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeArretServiceSouscritMesures/v1.0
 CMD2-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -706,7 +706,7 @@ CMD2-NR1:
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-NR2:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -728,7 +728,7 @@ CMD2-NR2:
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-R1 (C1-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -750,7 +750,7 @@ CMD2-R1 (C1-C4):
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -772,7 +772,7 @@ CMD2-R1 (C5):
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-R2:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -794,7 +794,7 @@ CMD2-R2:
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-R3:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -816,7 +816,7 @@ CMD2-R3:
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD2-R4:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/v2.0">
@@ -839,7 +839,7 @@ CMD2-R4:
         </ns1:consulterMesuresDetaillees>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v2.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v2.0
 CMD3-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -860,7 +860,7 @@ CMD3-NR1:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-NR2 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -881,7 +881,7 @@ CMD3-NR2 \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R1 (C1-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -902,7 +902,7 @@ CMD3-R1 (C1-C4):
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -923,7 +923,7 @@ CMD3-R1 (C5):
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R2:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -944,7 +944,7 @@ CMD3-R2:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R3 (C1-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -965,7 +965,7 @@ CMD3-R3 (C1-C4) \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R3 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -986,7 +986,7 @@ CMD3-R3 (C5):
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R4:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -1008,7 +1008,7 @@ CMD3-R4:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R5 (C1-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -1029,7 +1029,7 @@ CMD3-R5 (C1-C4) \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R5 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -1050,7 +1050,7 @@ CMD3-R5 (C5) \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R6 (C1-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -1071,7 +1071,7 @@ CMD3-R6 (C1-C4) \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 CMD3-R6 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/consultationmesuresdetaillees/common">
@@ -1092,7 +1092,7 @@ CMD3-R6 (C5) \*:
         </ns1:consulterMesuresDetailleesV3>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/ConsultationMesuresDetaillees/v3.0
+  url: https://sge-homologation-ws.enedis.fr/ConsultationMesuresDetaillees/v3.0
 F300B_O1 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1134,7 +1134,7 @@ F300B_O1 \*:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300B_O2 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1176,7 +1176,7 @@ F300B_O2 \*:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300B_O2-NR:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1218,7 +1218,7 @@ F300B_O2-NR:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300C_O1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1260,7 +1260,7 @@ F300C_O1:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300C_O1-NR:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1302,7 +1302,7 @@ F300C_O1-NR:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300C_O2:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1344,7 +1344,7 @@ F300C_O2:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F300C_O2-NR:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1386,7 +1386,7 @@ F300C_O2-NR:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F305:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1428,7 +1428,7 @@ F305:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F305-NR:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1470,7 +1470,7 @@ F305-NR:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F305A    \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1512,7 +1512,7 @@ F305A    \*:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F305A-NR:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1554,7 +1554,7 @@ F305A-NR:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F305C:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandercollectepublicationmesures/v3.0">
@@ -1596,7 +1596,7 @@ F305C:
         </ns1:commanderCollectePublicationMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeCollectePublicationMesures/v3.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeCollectePublicationMesures/v3.0
 F375A-NR1 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0">
@@ -1636,7 +1636,7 @@ F375A-NR1 \*:
         </ns1:commanderTransmissionDonneesInfraJ>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
 F375A-R1 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissiondonneesinfraj/v1.0">
@@ -1676,7 +1676,7 @@ F375A-R1 \*:
         </ns1:commanderTransmissionDonneesInfraJ>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionDonneesInfraJ/v1.0
 F380-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0">
@@ -1721,7 +1721,7 @@ F380-NR1:
         </ns1:commanderTransmissionHistoriqueMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
 F380-R1 (C1-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0">
@@ -1762,7 +1762,7 @@ F380-R1 (C1-C4):
         </ns1:commanderTransmissionHistoriqueMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
 F380-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0">
@@ -1807,7 +1807,7 @@ F380-R1 (C5):
         </ns1:commanderTransmissionHistoriqueMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
 F385B-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0">
@@ -1848,7 +1848,7 @@ F385B-NR1:
         </ns1:commanderTransmissionHistoriqueMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
 F385B-R1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.erdf.fr/sge/b2b/dictionnaire/v4.0/dc" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commandertransmissionhistoriquemesures/v1.0">
@@ -1889,7 +1889,7 @@ F385B-R1:
         </ns1:commanderTransmissionHistoriqueMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeTransmissionHistoriqueMesures/v1.0
 ITC-GK-R1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandeinformationstechniquesetcontractuelles/v1">
@@ -1915,7 +1915,7 @@ ITC-GK-R1 (C2-C4) \*:
         </ns1:demandePublicationITC>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeInformationsTechniquesEtContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeInformationsTechniquesEtContractuelles/v1.0
 ITC-GK-R1 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandeinformationstechniquesetcontractuelles/v1">
@@ -1941,7 +1941,7 @@ ITC-GK-R1 (C5) \*:
         </ns1:demandePublicationITC>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeInformationsTechniquesEtContractuelles/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeInformationsTechniquesEtContractuelles/v1.0
 MFA-GK-NR1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1">
@@ -1969,7 +1969,7 @@ MFA-GK-NR1 (C2-C4) \*:
         </ns1:demandePublicationMesuresFacturantes>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
 MFA-GK-NR1 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1">
@@ -1997,7 +1997,7 @@ MFA-GK-NR1 (C5) \*:
         </ns1:demandePublicationMesuresFacturantes>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
 MFA-GK-R1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1">
@@ -2025,7 +2025,7 @@ MFA-GK-R1 (C2-C4) \*:
         </ns1:demandePublicationMesuresFacturantes>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
 MFA-GK-R1 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfacturantes/v1">
@@ -2053,7 +2053,7 @@ MFA-GK-R1 (C5) \*:
         </ns1:demandePublicationMesuresFacturantes>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFacturantes/v1.0
 MFI-GK-NR1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2083,7 +2083,7 @@ MFI-GK-NR1 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-NR1 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2113,7 +2113,7 @@ MFI-GK-NR1 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-NR2 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2143,7 +2143,7 @@ MFI-GK-NR2 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-NR2 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2173,7 +2173,7 @@ MFI-GK-NR2 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2203,7 +2203,7 @@ MFI-GK-R1 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R1 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2233,7 +2233,7 @@ MFI-GK-R1 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R2 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2259,7 +2259,7 @@ MFI-GK-R2 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R2 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2285,7 +2285,7 @@ MFI-GK-R2 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R3 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2311,7 +2311,7 @@ MFI-GK-R3 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R3 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2337,7 +2337,7 @@ MFI-GK-R3 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R4 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2367,7 +2367,7 @@ MFI-GK-R4 (C2-C4) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 MFI-GK-R4 (C5) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://sge-b2b.enedis.fr/services/commandehistoriquedonneesmesuresfines/v1">
@@ -2397,7 +2397,7 @@ MFI-GK-R4 (C5) \*:
         </ns1:demandePublicationMesuresFines>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+  url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
 RP-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
@@ -2423,7 +2423,7 @@ RP-NR1:
         </ns1:rechercherPoint>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0
+  url: https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0
 RP-NR2:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
@@ -2448,7 +2448,7 @@ RP-NR2:
         </ns1:rechercherPoint>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0
+  url: https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0
 RP-R1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
@@ -2475,7 +2475,7 @@ RP-R1:
         </ns1:rechercherPoint>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0
+  url: https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0
 RP-R2 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
@@ -2502,7 +2502,7 @@ RP-R2 \*:
         </ns1:rechercherPoint>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0
+  url: https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0
 RP-R3 \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0">
@@ -2529,7 +2529,7 @@ RP-R3 \*:
         </ns1:rechercherPoint>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RecherchePoint/v2.0
+  url: https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0
 RS-R1 (C2-C4) \*:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0">
@@ -2551,7 +2551,7 @@ RS-R1 (C2-C4) \*:
         </ns1:rechercherServicesSouscritsMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/RechercheServicesSouscritsMesures/v1.0
 RS-R1 (C5):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/rechercherservicessouscritsmesures/v1.0">
@@ -2573,4 +2573,4 @@ RS-R1 (C5):
         </ns1:rechercherServicesSouscritsMesures>
       </ns0:Body>
     </SOAP-ENV:Envelope>
-  url: https://sge-homologation-b2b.enedis.fr/RechercheServicesSouscritsMesures/v1.0
+  url: https://sge-homologation-ws.enedis.fr/RechercheServicesSouscritsMesures/v1.0
