@@ -38,6 +38,7 @@ cryptography = [
 ]
 test = [
     "pytest",
+    "pytest-accept",
     "pytest-cov",
     "lxml",
     "freezegun",

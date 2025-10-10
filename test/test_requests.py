@@ -126,7 +126,7 @@ def assert_xml_equal(actual: str, expected: str) -> None:
 
 @pytest.mark.parametrize("case", list(get_cases()))
 def test_requests(
-    case: str, tmp_path: Path, certs: tuple[Path, Path], regen_test_data: bool
+    case: str, tmp_path: Path, certs: tuple[Path, Path], accept: bool
 ) -> None:
     # fix some defaults set at import time
     with (
@@ -187,7 +187,7 @@ def test_requests(
         lxml.objectify.fromstring(req.data), encoding="utf8", pretty_print=True
     ).decode()
     actual: ExpectedDict = {"url": req.full_url, "data": data}
-    if regen_test_data:
+    if accept:
         set_expected(case, actual)
     else:
         expected = get_expected()[case]
