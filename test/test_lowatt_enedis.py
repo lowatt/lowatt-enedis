@@ -58,7 +58,8 @@ def test_ws_decorator() -> None:
     @le.register("testws", service, options)
     @le.ws(service)
     def test_handler(
-        client: Client, _args: argparse.Namespace
+        client: Client,
+        args: argparse.Namespace,  # noqa: ARG001
     ) -> suds.sudsobject.Object:
         nonlocal handler_called, service_location
 

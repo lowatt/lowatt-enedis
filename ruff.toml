@@ -33,6 +33,8 @@ select = [
     "FURB",
     # pygrep hooks
     "PGH",
+    # Pytest
+    "PT",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e
