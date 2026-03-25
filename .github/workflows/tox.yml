@@ -17,7 +17,6 @@ jobs:
       matrix:
         include:
         - tox_env: lint
-        - tox_env: py39
         - tox_env: py310
         - tox_env: py311
 

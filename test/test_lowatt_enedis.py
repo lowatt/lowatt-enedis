@@ -5,12 +5,8 @@ import io
 import os
 import sys
 from collections.abc import Iterator
+from importlib import metadata as importlib_metadata
 from unittest import mock
-
-if sys.version_info < (3, 10):
-    import importlib_metadata
-else:
-    from importlib import metadata as importlib_metadata
 
 import pytest
 import suds.sudsobject

@@ -17,7 +17,7 @@
 import argparse
 import sys
 from typing import NoReturn
-import os
+
 from suds.client import Client
 
 import lowatt_enedis.services  # noqa: F401 register services
