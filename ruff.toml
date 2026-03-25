@@ -29,6 +29,8 @@ select = [
     "ISC",
     # flake8-unused-arguments
     "ARG",
+    # refurb
+    "FURB",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e
