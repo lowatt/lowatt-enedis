@@ -25,6 +25,8 @@ select = [
     "RUF100", # unused-noqa
     # imports
     "I",
+    # flake8-implicit-str-concat
+    "ISC",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e
