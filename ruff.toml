@@ -21,6 +21,7 @@ select = [
     # flake8-print
     "T20",
     # individual rules
+    "RUF001", # ambiguous-unicode-character-string
     "RUF100", # unused-noqa
     # imports
     "I",
