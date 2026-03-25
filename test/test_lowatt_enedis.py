@@ -18,7 +18,7 @@ import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis.__main__ import run
 
 
-def args() -> argparse.Namespace:
+def dummy_args() -> argparse.Namespace:
     return argparse.Namespace(
         cert_file=None, key_file=None, login="bob", homologation=False, output="json"
     )
@@ -77,16 +77,16 @@ def test_ws_decorator() -> None:
                     service_location = method.location
         return suds.sudsobject.Object()
 
-    le.handle_cli_command("testws", args())
+    le.handle_cli_command("testws", dummy_args())
     assert handler_called
     assert service_location == (b"https://sge-ws.enedis.fr/RecherchePoint/v2.0")
 
     handler_called = False
     service_location = None
-    # XXX args(homologation=True) didn't work as expected
-    _args = args()
-    _args.homologation = True
-    le.handle_cli_command("testws", _args)
+    # XXX dummy_args(homologation=True) didn't work as expected
+    cli_args = dummy_args()
+    cli_args.homologation = True
+    le.handle_cli_command("testws", cli_args)
     assert handler_called
     assert service_location == (
         b"https://sge-homologation-ws.enedis.fr/RecherchePoint/v2.0"
