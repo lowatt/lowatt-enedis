@@ -27,6 +27,8 @@ select = [
     "I",
     # flake8-implicit-str-concat
     "ISC",
+    # flake8-unused-arguments
+    "ARG",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e

@@ -121,9 +121,7 @@ def assert_xml_equal(actual: str, expected: str) -> None:
 
 
 @pytest.mark.parametrize("case", list(get_cases()))
-def test_requests(
-    case: str, tmp_path: Path, certs: tuple[Path, Path], accept: bool
-) -> None:
+def test_requests(case: str, certs: tuple[Path, Path], accept: bool) -> None:
     # fix some defaults set at import time
     with (
         freezegun.freeze_time("2022-02-22"),
