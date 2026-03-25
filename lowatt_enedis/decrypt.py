@@ -16,3 +16,16 @@ def decrypt_aes_128_cbc(key: str, iv: str, fd: IO[bytes]) -> bytes:
     )
     decryptor = cipher.decryptor()
     return decryptor.update(fd.read()) + decryptor.finalize()
+
+
+def decrypt_aes_256_cbc_dynamic_iv(key: str, fd: IO[bytes]) -> bytes:
+    import cryptography.hazmat.primitives.ciphers as crypto
+
+    # take first 16 bytes from fd
+    iv = fd.read(16)
+    cipher = crypto.Cipher(
+        crypto.algorithms.AES256(binascii.unhexlify(key)),
+        crypto.modes.CBC(iv),
+    )
+    decryptor = cipher.decryptor()
+    return decryptor.update(fd.read()) + decryptor.finalize()

@@ -17,7 +17,7 @@
 import argparse
 import sys
 from typing import NoReturn
-
+import os
 from suds.client import Client
 
 import lowatt_enedis.services  # noqa: F401 register services
@@ -61,11 +61,21 @@ def _cli_parser() -> argparse.ArgumentParser:
         help="Hex AES key",
         **arg_from_env("ENEDIS_DECRYPT_KEY"),
     )
-    subparser.add_argument(
+
+    group = subparser.add_mutually_exclusive_group(required=True)
+
+    group.add_argument(
         "--iv",
         help="Hex CBC IV",
-        **arg_from_env("ENEDIS_DECRYPT_IV"),
+        **arg_from_env("ENEDIS_DECRYPT_IV", required=False),
     )
+
+    group.add_argument(
+        "--dynamic",
+        help="Use dynamic IV (from the beginning of the file)",
+        action="store_true",
+    )
+
     subparser.add_argument(
         "input_file", help="Input file", type=argparse.FileType("rb")
     )
@@ -92,9 +102,16 @@ def run() -> NoReturn:
         print(Client(wsdl(service_name)))  # noqa
 
     elif args.command == "decrypt":
-        decrypted = decrypt.decrypt_aes_128_cbc(args.key, args.iv, args.input_file)
-        with open(args.output, "wb") as f:
-            f.write(decrypted)
+        if args.dynamic:
+            decrypted = decrypt.decrypt_aes_256_cbc_dynamic_iv(
+                args.key, args.input_file
+            )
+            with open(args.output, "wb") as f:
+                f.write(decrypted)
+        else:
+            decrypted = decrypt.decrypt_aes_128_cbc(args.key, args.iv, args.input_file)
+            with open(args.output, "wb") as f:
+                f.write(decrypted)
     elif args.command:
         try:
             handle_cli_command(args.command, args)

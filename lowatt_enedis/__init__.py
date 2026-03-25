@@ -72,9 +72,12 @@ def wsdl(service_name: str) -> str:
         ) from None
 
 
-def arg_from_env(key: str) -> dict[str, Any]:
+def arg_from_env(key: str, required: None | bool = None) -> dict[str, Any]:
     default = os.environ.get(key)
-    return {"default": default, "required": not default}
+    return {
+        "default": default,
+        "required": (required is None and not default) or required,
+    }
 
 
 def init_cli(subparsers: Any) -> None:
