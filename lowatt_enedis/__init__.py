@@ -28,10 +28,10 @@ import logging
 import os
 import sys
 import xml.dom.minidom
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from functools import wraps
 from pathlib import Path, PurePath
-from typing import Any, Callable, Optional, TypeVar, Union
+from typing import Any, TypeVar
 
 import rich
 import suds.sudsobject
@@ -145,7 +145,7 @@ class WSException(Exception):
         try:
             res = fault.detail.erreur.resultat
             self.message = str(res.value)
-            self.code: Optional[str] = str(res._code)
+            self.code: str | None = str(res._code)
         except AttributeError:
             if "faultcode" in fault and "faultstring" in fault:
                 self.code = str(fault.faultcode)
@@ -321,7 +321,7 @@ def create_from_options(
     args: argparse.Namespace,
     xstype_name: str,
     options_map: dict[str, str],
-) -> Optional[suds.sudsobject.Object]:
+) -> suds.sudsobject.Object | None:
     """Create and return an `xstype_name` element, and fill it according to
     `options_map` {arg name: xs element name}` mapping by looking for value in
     command line `args`.
@@ -373,7 +373,7 @@ def create_from_options(
     return None
 
 
-def get_option(args: Union[dict[str, Any], argparse.Namespace], option: str) -> Any:
+def get_option(args: dict[str, Any] | argparse.Namespace, option: str) -> Any:
     if isinstance(args, dict):
         return args.get(option, None)
     else:

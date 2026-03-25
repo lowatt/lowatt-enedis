@@ -12,7 +12,6 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3 :: Only",
@@ -20,7 +19,7 @@ classifiers = [
     "Topic :: System :: Archiving :: Mirroring",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dynamic = ["version"]
 dependencies = [
     "certifi",
@@ -43,7 +42,6 @@ test = [
     "lxml",
     "freezegun",
     "pyyaml",
-    "importlib_metadata;python_version<'3.10'",
 ]
 typing = [
     "mypy",

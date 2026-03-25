@@ -6,14 +6,10 @@ import shlex
 import subprocess
 import sys
 from collections.abc import Iterator
+from importlib import metadata as importlib_metadata
 from pathlib import Path
 from typing import TypedDict
 from unittest.mock import patch
-
-if sys.version_info < (3, 10):
-    import importlib_metadata
-else:
-    from importlib import metadata as importlib_metadata
 
 import freezegun
 import lxml.doctestcompare
