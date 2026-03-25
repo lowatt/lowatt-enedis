@@ -861,7 +861,7 @@ def point_cmd_infra_j(
             "--to": {
                 "default": (date.today() + timedelta(days=365)).isoformat(),
                 "help": "date de fin souhaitée, "
-                "supérieure à la date de fin précédente lors d’un renouvellement, "
+                "supérieure à la date de fin précédente lors d'un renouvellement, "
                 "un an max pour les compteurs linky",
             },
         },
@@ -1004,7 +1004,7 @@ M023_COMMON_OPTIONS = dict_from_dicts(
         "--sens": {
             "choices": ["SOUTIRAGE", "INJECTION"],
             "default": "SOUTIRAGE",
-            "help": "Sens de l’énergie circulant vers le réseau d’Enedis, "
+            "help": "Sens de l'énergie circulant vers le réseau d'Enedis, "
             "SOUTIRAGE par défaut.",
         },
         "--cadre": {
