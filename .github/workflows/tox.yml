@@ -1,6 +1,6 @@
 name: tox
 
-on:
+"on":
   push:
     branches:
     - "main"

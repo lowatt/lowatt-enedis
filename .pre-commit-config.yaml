@@ -26,3 +26,8 @@ repos:
     entry: ruff format --check --diff
     language: system
     types: [python]
+  - id: yamllint
+    name: yamllint
+    entry: yamllint --strict
+    language: system
+    types: [yaml]
