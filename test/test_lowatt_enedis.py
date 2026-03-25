@@ -58,7 +58,7 @@ def test_ws_decorator() -> None:
     @le.register("testws", service, options)
     @le.ws(service)
     def test_handler(
-        client: Client, args: argparse.Namespace
+        client: Client, _args: argparse.Namespace
     ) -> suds.sudsobject.Object:
         nonlocal handler_called, service_location
 
@@ -106,7 +106,7 @@ def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:
         },
     )
     @le.ws("Test-v1.0")
-    def handler(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
+    def handler(_client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
         if args.do_raise:
             fault = suds.sudsobject.Object()
             fault.detail = suds.sudsobject.Object()
