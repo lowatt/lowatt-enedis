@@ -125,7 +125,7 @@ def init_cli(subparsers: Any) -> None:
 def json_encode_default(obj: Any) -> Any:
     if isinstance(obj, suds.sudsobject.Object):
         return suds.sudsobject.asdict(obj)
-    elif isinstance(obj, (datetime.date, datetime.datetime)):
+    if isinstance(obj, (datetime.date, datetime.datetime)):
         return obj.isoformat()
     raise TypeError(f"Object {obj!r} is not JSON serializable")
 
@@ -376,8 +376,7 @@ def create_from_options(
 def get_option(args: dict[str, Any] | argparse.Namespace, option: str) -> Any:
     if isinstance(args, dict):
         return args.get(option, None)
-    else:
-        return getattr(args, option)
+    return getattr(args, option)
 
 
 def build_xstypes_map(

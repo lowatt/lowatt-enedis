@@ -35,6 +35,8 @@ select = [
     "PGH",
     # Pytest
     "PT",
+    # flake8-return
+    "RET",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e
