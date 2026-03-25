@@ -31,6 +31,8 @@ select = [
     "ARG",
     # refurb
     "FURB",
+    # pygrep hooks
+    "PGH",
 ]
 
 # For error codes, see https://docs.astral.sh/ruff/rules/#error-e
