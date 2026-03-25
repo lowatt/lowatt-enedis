@@ -99,7 +99,7 @@ def run() -> NoReturn:
         except KeyError:
             service_name = args.service_command
 
-        print(Client(wsdl(service_name)))  # noqa
+        print(Client(wsdl(service_name)))  # noqa: T201
 
     elif args.command == "decrypt":
         if args.dynamic:
