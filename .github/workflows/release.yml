@@ -15,10 +15,10 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - name: Switch to using Python 3.11 by default
+    - name: Switch to using Python 3.13 by default
       uses: actions/setup-python@v2
       with:
-        python-version: 3.11
+        python-version: 3.13
     - name: Install build
       run: python3 -m pip install --user build
     - name: Check out src from Git
