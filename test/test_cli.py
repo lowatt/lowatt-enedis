@@ -2,49 +2,54 @@ import argparse
 import contextlib
 import io
 import os
+import shlex
 import sys
 import unittest.mock
-from collections.abc import Iterator
+from pathlib import Path
 
-import importlib_metadata
 import pytest
 import suds.sudsobject
+import yaml
 from suds import WebFault
 from suds.client import Client
+from test_requests import Dumper
 
 import lowatt_enedis as le
 import lowatt_enedis.services  # noqa: register services
 from lowatt_enedis.__main__ import run
 
-
-@contextlib.contextmanager
-def override_sys_argv(argv: list[str]) -> Iterator[None]:
-    old, sys.argv = sys.argv, argv
-    try:
-        yield
-    finally:
-        sys.argv = old
+DATA_DIR = Path(__file__).parent / "data"
 
 
-def test_cli_help() -> None:
-    (entrypoint,) = importlib_metadata.entry_points(
-        group="console_scripts",
-        name="lowatt-enedis",
-    )
-    assert entrypoint
-    func = entrypoint.load()
-    stdout = io.StringIO()
-    with (
-        pytest.raises(SystemExit) as cm,
-        override_sys_argv(
-            ["lowatt-enedis", "--help"],
-        ),
-        contextlib.redirect_stdout(stdout),
+def test_cli_help(accept: bool) -> None:
+    result = {}
+    for test_command in (
+        ["lowatt-enedis", "--help"],
+        *(["lowatt-enedis", cmd, "--help"] for cmd in le.COMMAND_SERVICE),
     ):
-        func()
-    assert cm.value.code == 0
-    output = stdout.getvalue()
-    assert output.startswith("usage: ")
+        stdout = io.StringIO()
+        with (
+            pytest.raises(SystemExit) as cm,
+            contextlib.redirect_stdout(stdout),
+            unittest.mock.patch(
+                # This disable argparse wrapping heuristic which can differ between python versions
+                "shutil.get_terminal_size",
+                return_value=os.terminal_size((400, 24)),
+            ),
+            unittest.mock.patch("sys.argv", test_command),
+        ):
+            run()
+        assert cm.value.code == 0
+        result[shlex.join(test_command)] = stdout.getvalue()
+
+    path = DATA_DIR / "expected-cli-output.yml"
+    if accept:
+        with path.open("w") as f:
+            yaml.dump(result, f, allow_unicode=True, sort_keys=True, Dumper=Dumper)
+    else:
+        with path.open("r") as f:
+            expected = yaml.safe_load(f)
+        assert result == expected
 
 
 def test_cli_output(capsys: pytest.CaptureFixture[str]) -> None:

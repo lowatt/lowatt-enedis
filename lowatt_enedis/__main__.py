@@ -35,6 +35,7 @@ from . import decrypt
 
 def _cli_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
+        prog="lowatt-enedis",
         description="CLI access to Enedis SGE web-services.",
     )
 

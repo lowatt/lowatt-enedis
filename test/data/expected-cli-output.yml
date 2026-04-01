@@ -1,0 +1,339 @@
+lowatt-enedis --help: |
+  usage: lowatt-enedis [-h] {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,wsdl,decrypt} ...
+
+  CLI access to Enedis SGE web-services.
+
+  positional arguments:
+    {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,wsdl,decrypt}
+      search              Query the "RecherchePoint-v2.0" web-service.
+      technical           Query the "ConsultationDonneesTechniquesContractuelles-v1.0" web-service.
+      measures            Query the "ConsultationMesures-v1.1" web-service.
+      details             Query the "ConsultationMesuresDetaillees-v2.0" web-service.
+      detailsV3           Query the "ConsultationMesuresDetaillees-v3.0" web-service.
+      cmdHisto            Query the "CommandeTransmissionHistoriqueMesures-v1.0" web-service.
+      cmdAcces            Query the "CommanderAccesDonneesMesures-V1.0" web-service.
+      cmdInfraJ           Query the "CommandeTransmissionDonneesInfraJ-v1.0" web-service.
+      subscribe           Query the "CommandeCollectePublicationMesures-v3.0" web-service.
+      subscriptions       Query the "RechercherServicesSouscritsMesures-v1.0" web-service.
+      unsubscribe         Query the "CommandeArretServiceSouscritMesures-v1.0" web-service.
+      cmdHistoFine        Query the "B2B_M023MFI" web-service.
+      cmdHistoFact        Query the "B2B_M023MFA" web-service.
+      cmdTechnical        Query the "B2B_M023ITC" web-service.
+      wsdl                Display WSDL information about some ws command.
+      decrypt             Decrypt AES-128-CBC enedis files
+
+  options:
+    -h, --help            show this help message and exit
+lowatt-enedis cmdAcces --help: |
+  usage: lowatt-enedis cmdAcces [-h] --login LOGIN --contrat CONTRAT [--from FROM] [--to TO] [--injection] [--denomination DENOMINATION] [--nom NOM] [--prenom PRENOM] [--civilite {M,Mme}] [--no-autorisation] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm {ENERGIE,PMAX,COURBE,INDEX}
+
+  positional arguments:
+    prm                   identifiant PRM du point
+    {ENERGIE,PMAX,COURBE,INDEX}
+                          type de mesure demandé : ENERGIE pour les consommations globales quotidiennes, PMAX pour les puissances maximales quotidiennes, COURBE pour la courbe de charge.
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --from FROM           date de début souhaitée (incluse)
+    --to TO               date de fin souhaitée (excluse)
+    --injection           demander les données en injection (soutirage par défaut).
+    --denomination DENOMINATION
+                          Dénomination sociale de la personne morale ayant donné son accord
+    --nom NOM             Nom de la personne physique ou nom commerciale de la personne morale ayant donné son accord
+    --prenom PRENOM       Prénom de la personne physique
+    --civilite {M,Mme}    Civilité de la personne physique
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdHisto --help: |
+  usage: lowatt-enedis cmdHisto [-h] --login LOGIN --contrat CONTRAT [--pas {10,30}] [--denomination DENOMINATION] [--nom NOM] [--prenom PRENOM] [--civilite {M,Mme}] [--no-autorisation] [--naf NAF] [--secteur SECTEUR] [--siret SIRET] [--from FROM] [--to TO] [--corrigee] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm {IDX,CDC}
+
+  positional arguments:
+    prm                   identifiant PRM du point
+    {IDX,CDC}             type de mesure demandé : IDX pour les index, CDC pour la courbe de charge.
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --pas {10,30}         pas souhaité dans le cas des courbes de charges ; 10 pour C1-C4 / 30 pour C5
+    --denomination DENOMINATION
+                          Dénomination sociale de la personne morale ayant donné son accord
+    --nom NOM             Nom de la personne physique ou nom commerciale de la personne morale ayant donné son accord
+    --prenom PRENOM       Prénom de la personne physique
+    --civilite {M,Mme}    Civilité de la personne physique
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --naf NAF             Code NAF de l'activité de la personne morale
+    --secteur SECTEUR     Code du secteur d'activité de la personne morale
+    --siret SIRET         Numéro de SIRET de l'établissement principal de la personne morale
+    --from FROM           date de début souhaitée
+    --to TO               date de fin souhaitée (excluse)
+    --corrigee            obtenir les mesures corrigées (C1-C4 uniquement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdHistoFact --help: |
+  usage: lowatt-enedis cmdHistoFact [-h] --login LOGIN [--sens {SOUTIRAGE,INJECTION}] [--cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}] [--format {JSON,CSV}] --contrat CONTRAT [--from FROM] [--to TO] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prms
+
+  positional arguments:
+    prms                  identifiants PRM des point, séparés par des virgules
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --sens {SOUTIRAGE,INJECTION}
+                          Sens de l'énergie circulant vers le réseau d'Enedis, SOUTIRAGE par défaut.
+    --cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}
+                          Cadre d'accès à la demande, ACCORD_CLIENT par défaut.
+    --format {JSON,CSV}   Format des fichiers de résultats de la demande attendu, JSON par défaut
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --from FROM           date de début souhaitée (incluse)
+    --to TO               date de fin souhaitée (excluse)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdHistoFine --help: |
+  usage: lowatt-enedis cmdHistoFine [-h] --login LOGIN [--sens {SOUTIRAGE,INJECTION}] [--cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}] [--format {JSON,CSV}] --contrat CONTRAT [--from FROM] [--to TO] [--corrigee] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prms {ENERGIE,PMAX,COURBES,INDEX}
+
+  positional arguments:
+    prms                  identifiants PRM des point, séparés par des virgules
+    {ENERGIE,PMAX,COURBES,INDEX}
+                          type de mesure demandé : ENERGIE pour les énergies globales quotidiennes, PMAX » pour les puissances maximales quotidiennes ou mensuelles, COURBES pour une courbe de puissance ou de tension, INDEX pour les index quotidiens.
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --sens {SOUTIRAGE,INJECTION}
+                          Sens de l'énergie circulant vers le réseau d'Enedis, SOUTIRAGE par défaut.
+    --cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}
+                          Cadre d'accès à la demande, ACCORD_CLIENT par défaut.
+    --format {JSON,CSV}   Format des fichiers de résultats de la demande attendu, JSON par défaut
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --from FROM           date de début souhaitée (incluse)
+    --to TO               date de fin souhaitée (excluse)
+    --corrigee            obtenir les mesures corrigées (C1-C4 uniquement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdInfraJ --help: |
+  usage: lowatt-enedis cmdInfraJ [-h] --login LOGIN --contrat CONTRAT [--injection] [--soutirage] [--cdc] [--idx] [--ptd] [--denomination DENOMINATION] [--nom NOM] [--prenom PRENOM] [--civilite {M,Mme}] [--no-autorisation] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --injection           demander les données en injection (courbe de charge, tension et index).
+    --soutirage           demander les données en soutirage (courbe de charge, tension et index et paramètres de tarification dynamique).
+    --cdc                 demander les données les courbes de charge et de tension.
+    --idx                 demander les données les données d'index.
+    --ptd                 demander les paramètres de tarification dynamique.
+    --denomination DENOMINATION
+                          Dénomination sociale de la personne morale ayant donné son accord
+    --nom NOM             Nom de la personne physique ou nom commerciale de la personne morale ayant donné son accord
+    --prenom PRENOM       Prénom de la personne physique
+    --civilite {M,Mme}    Civilité de la personne physique
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdTechnical --help: |
+  usage: lowatt-enedis cmdTechnical [-h] --login LOGIN [--sens {SOUTIRAGE,INJECTION}] [--cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}] [--format {JSON,CSV}] --contrat CONTRAT --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prms
+
+  positional arguments:
+    prms                  identifiants PRM des point, séparés par des virgules
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --sens {SOUTIRAGE,INJECTION}
+                          Sens de l'énergie circulant vers le réseau d'Enedis, SOUTIRAGE par défaut.
+    --cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}
+                          Cadre d'accès à la demande, ACCORD_CLIENT par défaut.
+    --format {JSON,CSV}   Format des fichiers de résultats de la demande attendu, JSON par défaut
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis details --help: |
+  usage: lowatt-enedis details [-h] --login LOGIN [--courbe-type {PA,PRI,PRC,E,TOUT}] [--injection] [--no-autorisation] [--from FROM] [--to TO] [--corrigee] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm {ENERGIE,PMAX,COURBE}
+
+  positional arguments:
+    prm                   identifiant PRM du point
+    {ENERGIE,PMAX,COURBE}
+                          type de mesure demandé : ENERGIE pour les consommations globales quotidiennes, PMAX pour les puissances maximales quotidiennes, COURBE pour la courbe de charge.
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --courbe-type {PA,PRI,PRC,E,TOUT}
+                          type de courbe demandé le cas échéant (Puissance Active, Puissance Réactive Inductive, Puissance Réactive Capacitive, tension (E), tout).
+    --injection           demander les données en injection (soutirage par défaut).
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --from FROM           date de début souhaitée (incluse)
+    --to TO               date de fin souhaitée (excluse)
+    --corrigee            obtenir les mesures corrigées (C1-C4 uniquement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis detailsV3 --help: |
+  usage: lowatt-enedis detailsV3 [-h] --login LOGIN [--courbe-type {PA,PRI,PRC,E,TOUT}] [--injection] [--cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}] [--from FROM] [--to TO] [--corrigee] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm {ENERGIE,PMAX,COURBE,INDEX}
+
+  positional arguments:
+    prm                   identifiant PRM du point
+    {ENERGIE,PMAX,COURBE,INDEX}
+                          type de mesure demandé : ENERGIE pour les consommations globales quotidiennes, PMAX pour les puissances maximales quotidiennes, COURBE pour la courbe de charge.
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --courbe-type {PA,PRI,PRC,E,TOUT}
+                          type de courbe demandé le cas échéant (Puissance Active, Puissance Réactive Inductive, Puissance Réactive Capacitive, tension (E), tout).
+    --injection           demander les données en injection (soutirage par défaut).
+    --cadre {ACCORD_CLIENT,SERVICE_ACCES,EST_TITULAIRE}
+                          Cadre d'accès à la demande, ACCORD_CLIENT par défaut.
+    --from FROM           date de début souhaitée (incluse)
+    --to TO               date de fin souhaitée (excluse)
+    --corrigee            obtenir les mesures corrigées (C1-C4 uniquement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis measures --help: |
+  usage: lowatt-enedis measures [-h] --login LOGIN [--autorisation] --contrat CONTRAT --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --autorisation        indique l'autorisation du client
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis search --help: |
+  usage: lowatt-enedis search [-h] --login LOGIN [--siret SIRET] [--compteur COMPTEUR] [--tension {BTINF,BTSUP,HTA,HTB}] [--nom NOM] [--categorie {PRO,RES}] [--hp] [--etage ETAGE] [--batiment BATIMENT] [--voie VOIE] [--lieuDit LIEUDIT] [--cp CP] [--insee INSEE] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}]
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --siret SIRET         n° de siret
+    --compteur COMPTEUR   matricule ou numéro de série du compteur
+    --tension {BTINF,BTSUP,HTA,HTB}
+                          domaine de tension d'alimentation
+    --nom NOM             nom ou dénomination sociale du client final
+    --categorie {PRO,RES}
+                          catégorie de client final
+    --hp                  recherche hors-périmetre
+    --etage ETAGE         escalier et étage appartement
+    --batiment BATIMENT   batiment
+    --voie VOIE           numéro et nom de la voie
+    --lieuDit LIEUDIT     lieu-dit
+    --cp CP               code postal
+    --insee INSEE         code INSEE de la commune
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis subscribe --help: |
+  usage: lowatt-enedis subscribe [-h] --login LOGIN --contrat CONTRAT [--cdc-enable] [--cdc] [--idx] [--period {daily,weekly,monthly}] [--injection] [--linky] [--denomination DENOMINATION] [--nom NOM] [--prenom PRENOM] [--civilite {M,Mme}] [--no-autorisation] [--from FROM] [--to TO] [--corrigee] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --cdc-enable          demander la collecte de la courbe de charge.
+    --cdc                 demander la transmission données les courbes de charge.
+    --idx                 demander la transmission des données d'index index et autres données du compteur.
+    --period {daily,weekly,monthly}
+                          périodicité de réception pour la courbe de charge (quotidienne par défaut).
+    --injection           demander les données en injection (soutirage par défaut).
+    --linky               la demande concerne le segment C5 ou P4(segment C1-C4 ou P1-P3 par défaut).
+    --denomination DENOMINATION
+                          Dénomination sociale de la personne morale ayant donné son accord
+    --nom NOM             Nom de la personne physique ou nom commerciale de la personne morale ayant donné son accord
+    --prenom PRENOM       Prénom de la personne physique
+    --civilite {M,Mme}    Civilité de la personne physique
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --from FROM           date de début, postérieure ou égale à la date du jour
+    --to TO               date de fin souhaitée, supérieure à la date de fin précédente lors d'un renouvellement, un an max pour les compteurs linky
+    --corrigee            obtenir les mesures corrigées (C1-C4 uniquement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis subscriptions --help: |
+  usage: lowatt-enedis subscriptions [-h] --login LOGIN --contrat CONTRAT --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis technical --help: |
+  usage: lowatt-enedis technical [-h] --login LOGIN [--autorisation] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --autorisation        indique l'autorisation du client
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis unsubscribe --help: |
+  usage: lowatt-enedis unsubscribe [-h] --login LOGIN --contrat CONTRAT [--id ID] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --id ID               identifiant du service souscrit de mesures à arrêter
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
