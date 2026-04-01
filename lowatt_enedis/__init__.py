@@ -422,15 +422,3 @@ def iter_methods(client: Client) -> Iterator[suds.sudsobject.Facade]:
     for service in client.wsdl.services:
         for port in service.ports:
             yield from port.methods.values()
-
-
-def dict_from_dicts(*dicts: dict[str, Any]) -> dict[str, Any]:
-    """Build a dictionary from multiple dictionaries. In case of key conflict, the
-    latest one wins.
-
-    """
-    result = {}
-    for d in dicts:
-        result.update(d)
-
-    return result

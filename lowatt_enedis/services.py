@@ -33,7 +33,6 @@ from suds.client import Client
 from . import (
     arg_from_env,
     create_from_options,
-    dict_from_dicts,
     get_option,
     register,
     ws,
@@ -73,15 +72,13 @@ ACCORD_CLIENT_EXTENDED_OPTIONS = {
 }
 
 CONTRAT_OPTIONS = {
-    "--contrat": dict_from_dicts(
-        {
-            "help": (
-                "identifiant du contrat entre le demandeur et Enedis. "
-                "Default to ENEDIS_CONTRAT environment variable."
-            ),
-        },
-        arg_from_env("ENEDIS_CONTRAT"),
-    ),
+    "--contrat": {
+        "help": (
+            "identifiant du contrat entre le demandeur et Enedis. "
+            "Default to ENEDIS_CONTRAT environment variable."
+        ),
+    }
+    | arg_from_env("ENEDIS_CONTRAT")
 }
 
 
@@ -291,19 +288,17 @@ def point_technical_data(
 @register(
     "measures",
     "ConsultationMesures-v1.1",
-    dict_from_dicts(
-        {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
-            "--autorisation": {
-                "help": "indique l'autorisation du client",
-                "action": "store_true",
-                "default": False,
-            },
+    {
+        "prm": {
+            "help": "identifiant PRM du point",
         },
-        CONTRAT_OPTIONS,
-    ),
+        "--autorisation": {
+            "help": "indique l'autorisation du client",
+            "action": "store_true",
+            "default": False,
+        },
+    }
+    | CONTRAT_OPTIONS,
 )
 @ws("ConsultationMesures-v1.1")
 def point_measures(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
@@ -372,43 +367,41 @@ def measures_resp2py(resp: suds.sudsobject.Object) -> Iterator[dict[str, Any]]:
 @register(
     "details",
     "ConsultationMesuresDetaillees-v2.0",
-    dict_from_dicts(
-        {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
-            "type": {
-                "choices": ["ENERGIE", "PMAX", "COURBE"],
-                "help": "type de mesure demandé : ENERGIE pour les consommations "
-                "globales quotidiennes, PMAX pour les puissances maximales "
-                "quotidiennes, COURBE pour la courbe de charge.",
-            },
-            "--courbe-type": {
-                # - PA pour récupérer les courbes de puissance active (seule
-                #   courbe disponible pour les segments C5 et P4)
-                # - PRI pour récupérer les courbes de puissance réactive
-                #   inductive
-                # - PRC pour récupérer les courbes de puissance réactive
-                #   capacitive
-                # - E pour récupérer les courbes de tension
-                # - TOUT pour récupérer les courbes disponibles
-                "choices": ["PA", "PRI", "PRC", "E", "TOUT"],
-                "default": "PA",
-                "help": "type de courbe demandé le cas échéant (Puissance Active, "
-                "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
-                "tension (E), tout).",
-            },
-            "--injection": {
-                "action": "store_true",
-                "help": "demander les données en injection (soutirage par défaut).",
-            },
-            "--no-autorisation": {
-                "action": "store_true",
-                "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
-            },
+    {
+        "prm": {
+            "help": "identifiant PRM du point",
         },
-        MESURES_OPTIONS,
-    ),
+        "type": {
+            "choices": ["ENERGIE", "PMAX", "COURBE"],
+            "help": "type de mesure demandé : ENERGIE pour les consommations "
+            "globales quotidiennes, PMAX pour les puissances maximales "
+            "quotidiennes, COURBE pour la courbe de charge.",
+        },
+        "--courbe-type": {
+            # - PA pour récupérer les courbes de puissance active (seule
+            #   courbe disponible pour les segments C5 et P4)
+            # - PRI pour récupérer les courbes de puissance réactive
+            #   inductive
+            # - PRC pour récupérer les courbes de puissance réactive
+            #   capacitive
+            # - E pour récupérer les courbes de tension
+            # - TOUT pour récupérer les courbes disponibles
+            "choices": ["PA", "PRI", "PRC", "E", "TOUT"],
+            "default": "PA",
+            "help": "type de courbe demandé le cas échéant (Puissance Active, "
+            "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
+            "tension (E), tout).",
+        },
+        "--injection": {
+            "action": "store_true",
+            "help": "demander les données en injection (soutirage par défaut).",
+        },
+        "--no-autorisation": {
+            "action": "store_true",
+            "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
+        },
+    }
+    | MESURES_OPTIONS,
 )
 @ws("ConsultationMesuresDetaillees-v2.0")
 def point_detailed_measures(
@@ -423,13 +416,13 @@ def point_detailed_measures(
         client,
         args,
         "DemandeType",
-        dict_from_dicts(
+        (
             {
                 "login": "initiateurLogin",
                 "prm": "pointId",
                 "type": "mesuresTypeCode",
-            },
-            MESURES_OPTIONS_MAP,
+            }
+            | MESURES_OPTIONS_MAP
         ),
     )
     assert demande is not None
@@ -459,44 +452,42 @@ def point_detailed_measures(
 @register(
     "detailsV3",
     "ConsultationMesuresDetaillees-v3.0",
-    dict_from_dicts(
-        {
-            "prm": {
-                "help": "identifiant PRM du point",
-            },
-            "type": {
-                "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
-                "help": "type de mesure demandé : ENERGIE pour les consommations "
-                "globales quotidiennes, PMAX pour les puissances maximales "
-                "quotidiennes, COURBE pour la courbe de charge.",
-            },
-            "--courbe-type": {
-                # - PA pour récupérer les courbes de puissance active (seule
-                #   courbe disponible pour les segments C5 et P4)
-                # - PRI pour récupérer les courbes de puissance réactive
-                #   inductive
-                # - PRC pour récupérer les courbes de puissance réactive
-                #   capacitive
-                # - E pour récupérer les courbes de tension
-                # - TOUT pour récupérer les courbes disponibles
-                "choices": ["PA", "PRI", "PRC", "E", "TOUT"],
-                "default": "PA",
-                "help": "type de courbe demandé le cas échéant (Puissance Active, "
-                "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
-                "tension (E), tout).",
-            },
-            "--injection": {
-                "action": "store_true",
-                "help": "demander les données en injection (soutirage par défaut).",
-            },
-            "--cadre": {
-                "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
-                "default": "ACCORD_CLIENT",
-                "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
-            },
+    {
+        "prm": {
+            "help": "identifiant PRM du point",
         },
-        MESURES_OPTIONS,
-    ),
+        "type": {
+            "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
+            "help": "type de mesure demandé : ENERGIE pour les consommations "
+            "globales quotidiennes, PMAX pour les puissances maximales "
+            "quotidiennes, COURBE pour la courbe de charge.",
+        },
+        "--courbe-type": {
+            # - PA pour récupérer les courbes de puissance active (seule
+            #   courbe disponible pour les segments C5 et P4)
+            # - PRI pour récupérer les courbes de puissance réactive
+            #   inductive
+            # - PRC pour récupérer les courbes de puissance réactive
+            #   capacitive
+            # - E pour récupérer les courbes de tension
+            # - TOUT pour récupérer les courbes disponibles
+            "choices": ["PA", "PRI", "PRC", "E", "TOUT"],
+            "default": "PA",
+            "help": "type de courbe demandé le cas échéant (Puissance Active, "
+            "Puissance Réactive Inductive, Puissance Réactive Capacitive, "
+            "tension (E), tout).",
+        },
+        "--injection": {
+            "action": "store_true",
+            "help": "demander les données en injection (soutirage par défaut).",
+        },
+        "--cadre": {
+            "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
+            "default": "ACCORD_CLIENT",
+            "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
+        },
+    }
+    | MESURES_OPTIONS,
 )
 @ws("ConsultationMesuresDetaillees-v3.0")
 def point_detailed_measuresV3(
@@ -506,13 +497,13 @@ def point_detailed_measuresV3(
         client,
         args,
         "Demande",
-        dict_from_dicts(
+        (
             {
                 "login": "initiateurLogin",
                 "prm": "pointId",
                 "type": "mesuresTypeCode",
-            },
-            MESURES_OPTIONS_MAP,
+            }
+            | MESURES_OPTIONS_MAP
         ),
     )
     assert demande is not None
@@ -572,44 +563,39 @@ def _donnees_generales(
     return obj
 
 
-DONNEES_GENERALES_OPTIONS = dict_from_dicts(
-    {
-        "prm": {
-            "help": "identifiant PRM du point",
-        },
+DONNEES_GENERALES_OPTIONS = {
+    "prm": {
+        "help": "identifiant PRM du point",
     },
-    CONTRAT_OPTIONS,
-)
+} | CONTRAT_OPTIONS
 
 
 @register(
     "cmdHisto",
     "CommandeTransmissionHistoriqueMesures-v1.0",
-    dict_from_dicts(
-        DONNEES_GENERALES_OPTIONS,
-        {
-            "type": {
-                "choices": ["IDX", "CDC"],
-                "help": "type de mesure demandé : IDX pour les index, CDC pour la "
-                "courbe de charge.",
-            },
-            "--pas": {
-                "choices": ["10", "30"],
-                "help": "pas souhaité dans le cas des courbes de charges ; "
-                "10 pour C1-C4 / 30 pour C5",
-            },
+    DONNEES_GENERALES_OPTIONS
+    | {
+        "type": {
+            "choices": ["IDX", "CDC"],
+            "help": "type de mesure demandé : IDX pour les index, CDC pour la "
+            "courbe de charge.",
         },
-        ACCORD_CLIENT_OPTIONS,
-        ACCORD_CLIENT_EXTENDED_OPTIONS,
-        MESURES_OPTIONS,
-        {
-            # override --from's default to 2 years
-            "--from": {
-                "default": (date.today() - timedelta(days=365 * 2)).isoformat(),
-                "help": "date de début souhaitée",
-            },
+        "--pas": {
+            "choices": ["10", "30"],
+            "help": "pas souhaité dans le cas des courbes de charges ; "
+            "10 pour C1-C4 / 30 pour C5",
         },
-    ),
+    }
+    | ACCORD_CLIENT_OPTIONS
+    | ACCORD_CLIENT_EXTENDED_OPTIONS
+    | MESURES_OPTIONS
+    | {
+        # override --from's default to 2 years
+        "--from": {
+            "default": (date.today() - timedelta(days=365 * 2)).isoformat(),
+            "help": "date de début souhaitée",
+        },
+    },
 )
 @ws("CommandeTransmissionHistoriqueMesures-v1.0")
 def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
@@ -637,12 +623,12 @@ def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject
         client,
         args,
         "DemandeHistoriqueMesuresType",
-        dict_from_dicts(
-            MESURES_OPTIONS_MAP,
-            {
+        (
+            MESURES_OPTIONS_MAP
+            | {
                 "type": "mesureType",
                 "corrigee": "mesureCorrigee",  # override mesuresCorrigees
-            },
+            }
         ),
     )
     assert demande.historiqueMesures is not None
@@ -660,30 +646,28 @@ def point_cmd_histo(client: Client, args: argparse.Namespace) -> suds.sudsobject
 @register(
     "cmdAcces",
     "CommanderAccesDonneesMesures-V1.0",
-    dict_from_dicts(
-        DONNEES_GENERALES_OPTIONS,
-        {
-            "--from": {
-                "default": (date.today()).isoformat(),
-                "help": "date de début souhaitée (incluse)",
-            },
-            "--to": {
-                "default": (date.today() + timedelta(days=365 * 3)).isoformat(),
-                "help": "date de fin souhaitée (excluse)",
-            },
-            "type": {
-                "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
-                "help": "type de mesure demandé : ENERGIE pour les consommations "
-                "globales quotidiennes, PMAX pour les puissances maximales "
-                "quotidiennes, COURBE pour la courbe de charge.",
-            },
-            "--injection": {
-                "action": "store_true",
-                "help": "demander les données en injection (soutirage par défaut).",
-            },
+    DONNEES_GENERALES_OPTIONS
+    | {
+        "--from": {
+            "default": (date.today()).isoformat(),
+            "help": "date de début souhaitée (incluse)",
         },
-        ACCORD_CLIENT_OPTIONS,
-    ),
+        "--to": {
+            "default": (date.today() + timedelta(days=365 * 3)).isoformat(),
+            "help": "date de fin souhaitée (excluse)",
+        },
+        "type": {
+            "choices": ["ENERGIE", "PMAX", "COURBE", "INDEX"],
+            "help": "type de mesure demandé : ENERGIE pour les consommations "
+            "globales quotidiennes, PMAX pour les puissances maximales "
+            "quotidiennes, COURBE pour la courbe de charge.",
+        },
+        "--injection": {
+            "action": "store_true",
+            "help": "demander les données en injection (soutirage par défaut).",
+        },
+    }
+    | ACCORD_CLIENT_OPTIONS,
 )
 @ws("CommanderAccesDonneesMesures-V1.0")
 def point_cmd_acces(client: Client, args: argparse.Namespace) -> suds.sudsobject.Object:
@@ -749,34 +733,32 @@ def point_cmd_acces(client: Client, args: argparse.Namespace) -> suds.sudsobject
 @register(
     "cmdInfraJ",
     "CommandeTransmissionDonneesInfraJ-v1.0",
-    dict_from_dicts(
-        DONNEES_GENERALES_OPTIONS,
-        {
-            "--injection": {
-                "action": "store_true",
-                "help": "demander les données en injection (courbe de charge, "
-                "tension et index).",
-            },
-            "--soutirage": {
-                "action": "store_true",
-                "help": "demander les données en soutirage (courbe de charge, "
-                "tension et index et paramètres de tarification dynamique).",
-            },
-            "--cdc": {
-                "action": "store_true",
-                "help": "demander les données les courbes de charge et de tension.",
-            },
-            "--idx": {
-                "action": "store_true",
-                "help": "demander les données les données d'index.",
-            },
-            "--ptd": {
-                "action": "store_true",
-                "help": "demander les paramètres de tarification dynamique.",
-            },
+    DONNEES_GENERALES_OPTIONS
+    | {
+        "--injection": {
+            "action": "store_true",
+            "help": "demander les données en injection (courbe de charge, "
+            "tension et index).",
         },
-        ACCORD_CLIENT_OPTIONS,
-    ),
+        "--soutirage": {
+            "action": "store_true",
+            "help": "demander les données en soutirage (courbe de charge, "
+            "tension et index et paramètres de tarification dynamique).",
+        },
+        "--cdc": {
+            "action": "store_true",
+            "help": "demander les données les courbes de charge et de tension.",
+        },
+        "--idx": {
+            "action": "store_true",
+            "help": "demander les données les données d'index.",
+        },
+        "--ptd": {
+            "action": "store_true",
+            "help": "demander les paramètres de tarification dynamique.",
+        },
+    }
+    | ACCORD_CLIENT_OPTIONS,
 )
 @ws("CommandeTransmissionDonneesInfraJ-v1.0")
 def point_cmd_infra_j(
@@ -818,54 +800,52 @@ def point_cmd_infra_j(
 @register(
     "subscribe",
     "CommandeCollectePublicationMesures-v3.0",
-    dict_from_dicts(
-        DONNEES_GENERALES_OPTIONS,
-        {
-            "--cdc-enable": {
-                "action": "store_true",
-                "help": "demander la collecte de la courbe de charge.",
-            },
-            "--cdc": {
-                "action": "store_true",
-                "help": "demander la transmission données les courbes de charge.",
-            },
-            "--idx": {
-                "action": "store_true",
-                "help": "demander la transmission des données d'index index et autres "
-                "données du compteur.",
-            },
-            "--period": {
-                "choices": ["daily", "weekly", "monthly"],
-                "default": "daily",
-                "help": "périodicité de réception pour la courbe de charge "
-                "(quotidienne par défaut).",
-            },
-            "--injection": {
-                "action": "store_true",
-                "help": "demander les données en injection (soutirage par défaut).",
-            },
-            "--linky": {
-                "action": "store_true",
-                "help": "la demande concerne le segment C5 ou P4"
-                "(segment C1-C4 ou P1-P3 par défaut).",
-            },
+    DONNEES_GENERALES_OPTIONS
+    | {
+        "--cdc-enable": {
+            "action": "store_true",
+            "help": "demander la collecte de la courbe de charge.",
         },
-        ACCORD_CLIENT_OPTIONS,
-        MESURES_OPTIONS,
-        {
-            # override --from --to
-            "--from": {
-                "default": date.today().isoformat(),
-                "help": "date de début, postérieure ou égale à la date du jour",
-            },
-            "--to": {
-                "default": (date.today() + timedelta(days=365)).isoformat(),
-                "help": "date de fin souhaitée, "
-                "supérieure à la date de fin précédente lors d'un renouvellement, "
-                "un an max pour les compteurs linky",
-            },
+        "--cdc": {
+            "action": "store_true",
+            "help": "demander la transmission données les courbes de charge.",
         },
-    ),
+        "--idx": {
+            "action": "store_true",
+            "help": "demander la transmission des données d'index index et autres "
+            "données du compteur.",
+        },
+        "--period": {
+            "choices": ["daily", "weekly", "monthly"],
+            "default": "daily",
+            "help": "périodicité de réception pour la courbe de charge "
+            "(quotidienne par défaut).",
+        },
+        "--injection": {
+            "action": "store_true",
+            "help": "demander les données en injection (soutirage par défaut).",
+        },
+        "--linky": {
+            "action": "store_true",
+            "help": "la demande concerne le segment C5 ou P4"
+            "(segment C1-C4 ou P1-P3 par défaut).",
+        },
+    }
+    | ACCORD_CLIENT_OPTIONS
+    | MESURES_OPTIONS
+    | {
+        # override --from --to
+        "--from": {
+            "default": date.today().isoformat(),
+            "help": "date de début, postérieure ou égale à la date du jour",
+        },
+        "--to": {
+            "default": (date.today() + timedelta(days=365)).isoformat(),
+            "help": "date de fin souhaitée, "
+            "supérieure à la date de fin précédente lors d'un renouvellement, "
+            "un an max pour les compteurs linky",
+        },
+    },
 )
 @ws("CommandeCollectePublicationMesures-v3.0")
 def point_cmd_publication(
@@ -884,7 +864,7 @@ def point_cmd_publication(
         client,
         args,
         "DemandeAccesMesures",
-        dict_from_dicts(MESURES_OPTIONS_MAP),
+        MESURES_OPTIONS_MAP,
     )
     assert demande.accesMesures is not None
     assert acces is not None
@@ -964,14 +944,12 @@ def point_search_subscriptions(
 @register(
     "unsubscribe",
     "CommandeArretServiceSouscritMesures-v1.0",
-    dict_from_dicts(
-        DONNEES_GENERALES_OPTIONS,
-        {
-            "--id": {
-                "help": "identifiant du service souscrit de mesures à arrêter",
-            },
+    DONNEES_GENERALES_OPTIONS
+    | {
+        "--id": {
+            "help": "identifiant du service souscrit de mesures à arrêter",
         },
-    ),
+    },
 )
 @ws("CommandeArretServiceSouscritMesures-v1.0")
 def point_unsubscribe(
@@ -996,31 +974,28 @@ def point_unsubscribe(
     return client.service.commanderArretServiceSouscritMesures(demande)
 
 
-M023_COMMON_OPTIONS = dict_from_dicts(
-    {
-        "prms": {
-            "help": "identifiants PRM des point, séparés par des virgules",
-        },
-        "--sens": {
-            "choices": ["SOUTIRAGE", "INJECTION"],
-            "default": "SOUTIRAGE",
-            "help": "Sens de l'énergie circulant vers le réseau d'Enedis, "
-            "SOUTIRAGE par défaut.",
-        },
-        "--cadre": {
-            "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
-            "default": "ACCORD_CLIENT",
-            "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
-        },
-        "--format": {
-            "choices": ["JSON", "CSV"],
-            "default": "JSON",
-            "help": "Format des fichiers de résultats de la demande attendu, "
-            "JSON par défaut",
-        },
+M023_COMMON_OPTIONS = {
+    "prms": {
+        "help": "identifiants PRM des point, séparés par des virgules",
     },
-    CONTRAT_OPTIONS,
-)
+    "--sens": {
+        "choices": ["SOUTIRAGE", "INJECTION"],
+        "default": "SOUTIRAGE",
+        "help": "Sens de l'énergie circulant vers le réseau d'Enedis, "
+        "SOUTIRAGE par défaut.",
+    },
+    "--cadre": {
+        "choices": ["ACCORD_CLIENT", "SERVICE_ACCES", "EST_TITULAIRE"],
+        "default": "ACCORD_CLIENT",
+        "help": "Cadre d'accès à la demande, ACCORD_CLIENT par défaut.",
+    },
+    "--format": {
+        "choices": ["JSON", "CSV"],
+        "default": "JSON",
+        "help": "Format des fichiers de résultats de la demande attendu, "
+        "JSON par défaut",
+    },
+} | CONTRAT_OPTIONS
 M023_LOGIN_OPTIONS_MAP = {
     "login": "initiateurLogin",
     "contrat": "contratId",
@@ -1036,19 +1011,17 @@ M023_COMMON_OPTIONS_MAP = {
 @register(
     "cmdHistoFine",
     "B2B_M023MFI",
-    dict_from_dicts(
-        M023_COMMON_OPTIONS,
-        {
-            "type": {
-                "choices": ["ENERGIE", "PMAX", "COURBES", "INDEX"],
-                "help": "type de mesure demandé : ENERGIE pour les énergies "
-                "globales quotidiennes, PMAX » pour les puissances maximales "
-                "quotidiennes ou mensuelles, COURBES pour une courbe de "
-                "puissance ou de tension, INDEX pour les index quotidiens. ",
-            },
+    M023_COMMON_OPTIONS
+    | {
+        "type": {
+            "choices": ["ENERGIE", "PMAX", "COURBES", "INDEX"],
+            "help": "type de mesure demandé : ENERGIE pour les énergies "
+            "globales quotidiennes, PMAX » pour les puissances maximales "
+            "quotidiennes ou mensuelles, COURBES pour une courbe de "
+            "puissance ou de tension, INDEX pour les index quotidiens. ",
         },
-        MESURES_OPTIONS,
-    ),
+    }
+    | MESURES_OPTIONS,
 )
 @ws("B2B_M023MFI")
 def point_cmd_histo_fine(
@@ -1063,10 +1036,12 @@ def point_cmd_histo_fine(
         client,
         args,
         "demande",
-        dict_from_dicts(
-            {"type": "mesuresTypeCode"},
-            M023_COMMON_OPTIONS_MAP,
-            MESURES_OPTIONS_MAP,
+        (
+            {
+                "type": "mesuresTypeCode",
+            }
+            | M023_COMMON_OPTIONS_MAP
+            | MESURES_OPTIONS_MAP
         ),
     )
     assert demande is not None
@@ -1082,14 +1057,12 @@ def point_cmd_histo_fine(
 @register(
     "cmdHistoFact",
     "B2B_M023MFA",
-    dict_from_dicts(
-        M023_COMMON_OPTIONS,
-        {
-            # MESURES_OPTIONS without --corrigee
-            "--from": MESURES_OPTIONS["--from"],
-            "--to": MESURES_OPTIONS["--to"],
-        },
-    ),
+    M023_COMMON_OPTIONS
+    | {
+        # MESURES_OPTIONS without --corrigee
+        "--from": MESURES_OPTIONS["--from"],
+        "--to": MESURES_OPTIONS["--to"],
+    },
 )
 @ws("B2B_M023MFA")
 def point_cmd_histo_fact(
@@ -1104,12 +1077,12 @@ def point_cmd_histo_fact(
         client,
         args,
         "demande",
-        dict_from_dicts(
-            M023_COMMON_OPTIONS_MAP,
-            {
+        (
+            M023_COMMON_OPTIONS_MAP
+            | {
                 "from": MESURES_OPTIONS_MAP["from"],
                 "to": MESURES_OPTIONS_MAP["to"],
-            },
+            }
         ),
     )
     assert demande is not None
