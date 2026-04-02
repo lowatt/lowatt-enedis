@@ -399,6 +399,7 @@ def build_xstypes_map(
         if service_def.service.name not in (
             "CommanderAccesDonneesMesures-V1.0",
             "CommanderServicesAccesDonnees-V1.0",
+            "CommanderModificationOptionsServicesAccesDonnees-V1.0",
         ):
             assert xstype.name not in xstypes_map, (
                 service_def.service.name,

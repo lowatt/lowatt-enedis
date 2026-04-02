@@ -1259,5 +1259,74 @@ def point_cmd_arret_service_acces_donnees(
     return client.service.commanderArretServicesAccesDonnees(demande)
 
 
+@register(
+    "cmdModificationOptionsServicesAccesDonnees",
+    "CommanderModificationOptionsServicesAccesDonnees-V1.0",
+    DONNEES_GENERALES_OPTIONS
+    | SENS_OPTIONS
+    | {
+        "--service-id": {
+            "help": "identifiant du service a modifier",
+            "required": True,
+        },
+        "--add-corrigee": {
+            "action": "store_true",
+            "help": "ajouter l'option mesures corrigées",
+        },
+        "--add-period": {
+            "choices": list(PERIODS),
+            "help": "ajouter la publication",
+        },
+        "--drop-corrigee": {
+            "action": "store_true",
+            "help": "supprimer l'option mesures corrigées",
+        },
+        "--drop-period": {
+            "choices": list(PERIODS),
+            "help": "supprimer la publication",
+        },
+    },
+)
+@ws("CommanderModificationOptionsServicesAccesDonnees-V1.0")
+def point_modify_options_acces_donnees(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    service_id = get_option(args, "service_id")
+
+    demande = client.factory.create("ns1:DemandeType")
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.contratId = get_option(args, "contrat")
+    demande.donneesGenerales.sens = get_option(args, "sens")
+    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    service = client.factory.create("ns1:ServiceSouscritType")
+    service.serviceSouscritId = service_id
+    demande.servicesSouscrits.serviceSouscrit = [service]
+
+    for prefix in ("add", "drop"):
+        svc = client.factory.create("ns1:OptionsPublicationType")
+        if period := get_option(args, f"{prefix}_period"):
+            opt = client.factory.create("ns1:OptionPublicationType")
+            opt.periodiciteTransmission = PERIODS[period]
+            if get_option(args, f"{prefix}_corrigee"):
+                opt.mesuresCorrigees = _boolean(True)
+            else:
+                opt.mesuresCorrigees = _boolean(False)
+            svc.optionPublication = [opt]
+            if prefix == "add":
+                service.ajouterOptionsPublication = [svc]
+            else:
+                service.supprimerOptionsPublication = [svc]
+
+    return client.service.commanderModificationOptionsServicesAccesDonnees(demande)
+
+
 def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"
