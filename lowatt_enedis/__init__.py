@@ -397,7 +397,10 @@ def build_xstypes_map(
         prefix = service_def.getprefix(ns)
         # Fix for issue #34
         if service_def.service.name != "CommanderAccesDonneesMesures-V1.0":
-            assert xstype.name not in xstypes_map
+            assert xstype.name not in xstypes_map, (
+                service_def.service.name,
+                xstype.name,
+            )
         xstypes_map[xstype.name] = (xstype, prefix)
 
     return xstypes_map
