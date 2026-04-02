@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sc="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+           xmlns:ds="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"
+           targetNamespace="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0" version="1.0.0">
+   <xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc" schemaLocation="./Dictionnaires/Metier/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"/>
+   <xs:import namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds" schemaLocation="./Dictionnaires/Metier/ENEDIS.Dictionnaire.TypeSimple.v5.0.xsd"/>
+    <xs:element name="commanderArretServicesAccesDonnees" type="sc:CommanderArretServicesAccesDonneesType"/>
+    <xs:element name="commanderArretServicesAccesDonneesResponse"
+                type="sc:CommanderArretServicesAccesDonneesResponseType"/>
+
+    <xs:complexType name="CommanderArretServicesAccesDonneesType">
+        <xs:sequence>
+            <xs:element name="demande" type="sc:DemandeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CommanderArretServicesAccesDonneesResponseType">
+        <xs:sequence>
+            <xs:element name="servicesResilies" type="sc:ServicesResiliesType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DemandeType">
+        <xs:sequence>
+            <xs:element name="donneesGenerales" type="sc:DonneesGeneralesType"/>
+            <xs:element name="servicesSouscrits" type="sc:ServicesSouscritsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DonneesGeneralesType">
+        <xs:sequence>
+            <xs:element name="refExterne" type="ds:Chaine255Type" minOccurs="0"/>
+            <xs:element name="pointId" type="ds:PointIdType"/>
+            <xs:element name="initiateurLogin" type="ds:UtilisateurLoginType"/>
+            <xs:element name="contratId" type="ds:ContratIdType"/>
+            <xs:element name="sens" type="sc:SensType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="SensType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SOUTIRAGE"/>
+            <xs:enumeration value="INJECTION"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ServicesSouscritsType">
+        <xs:sequence>
+            <xs:element name="serviceSouscritId" type="ds:Chaine15Type" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ServicesResiliesType">
+        <xs:sequence>
+            <xs:element name="serviceResilie" type="sc:ServiceResilieType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ServiceResilieType">
+        <xs:sequence>
+            <xs:element name="affaireId" type="ds:AffaireIdType"/>
+            <xs:element name="serviceSouscritId" type="ds:Chaine15Type"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

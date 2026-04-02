@@ -1,0 +1,81 @@
+<wsdl:definitions name="CommanderRenouvellementServicesAccesDonnees-V1.0"
+                  targetNamespace="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0"
+                  xmlns:ope="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0"
+                  xmlns:dic="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"
+                  xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+
+    <wsdl:types>
+        <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xs:import schemaLocation="../../xsd/CommanderRenouvellementServicesAccesDonnees-V1.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0"/>
+            <xs:import schemaLocation="../../xsd/Dictionnaires/Metier/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+            <xs:import schemaLocation="../../xsd/Dictionnaires/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- Messages -->
+    <wsdl:message name="commanderRenouvellementServicesAccesDonnees">
+        <wsdl:part name="commanderRenouvellementServicesAccesDonnees" element="ope:commanderRenouvellementServicesAccesDonnees"/>
+    </wsdl:message>
+    <wsdl:message name="commanderRenouvellementServicesAccesDonneesResponse">
+        <wsdl:part name="commanderRenouvellementServicesAccesDonneesResponse" element="ope:commanderRenouvellementServicesAccesDonneesResponse"/>
+    </wsdl:message>
+
+    <!-- Erreur -->
+    <wsdl:message name="erreur">
+        <wsdl:part name="Erreur" element="tec:erreur"/>
+    </wsdl:message>
+
+    <!-- Entete -->
+    <wsdl:message name="entete">
+        <wsdl:part name="entete" element="tec:entete"/>
+    </wsdl:message>
+
+    <!-- EnteteRetour -->
+    <wsdl:message name="acquittement">
+        <wsdl:part name="acquittement" element="tec:acquittement"/>
+    </wsdl:message>
+
+    <!-- portType -->
+    <wsdl:portType name="RenouvelerServicesAccesPortType">
+        <wsdl:operation name="commanderRenouvellementServicesAccesDonnees">
+            <wsdl:input message="tns:commanderRenouvellementServicesAccesDonnees" name="commanderRenouvellementServicesAccesDonnees"/>
+            <wsdl:output message="tns:commanderRenouvellementServicesAccesDonneesResponse"
+                         name="commanderRenouvellementServicesAccesDonneesResponse"/>
+            <wsdl:fault message="tns:erreur" name="erreur"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- binding -->
+    <wsdl:binding name="RenouvelerServicesAccesBinding" type="tns:RenouvelerServicesAccesPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- renouvelerServicesAccesITCResponse -->
+        <wsdl:operation name="commanderRenouvellementServicesAccesDonnees">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="commanderRenouvellementServicesAccesDonnees">
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="entete" message="tns:entete"/>
+            </wsdl:input>
+            <wsdl:output name="commanderRenouvellementServicesAccesDonneesResponse">
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+            </wsdl:output>
+            <wsdl:fault name="erreur">
+                <soap:fault name="erreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- service -->
+    <wsdl:service name="CommanderRenouvellementServicesAccesDonnees-V1.0">
+        <wsdl:port name="RenouvelerServicesAccesPort" binding="tns:RenouvelerServicesAccesBinding">
+            <soap:address location="https://sge-ws.enedis.fr/CommandeRenouvellementServicesAccesDonnees/v1.0"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

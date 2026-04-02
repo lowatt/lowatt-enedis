@@ -1,0 +1,84 @@
+<wsdl:definitions name="CommanderArretServicesAccesDonnees-v1.0"
+                  targetNamespace="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+                  xmlns:ope="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+                  xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import schemaLocation="../../xsd/CommanderArretServicesAccesDonnees-V1.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"/>
+            <xs:import schemaLocation="../../xsd/Dictionnaires/Metier/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+            <xs:import schemaLocation="../../xsd/Dictionnaires/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd"
+                       namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- Messages -->
+    <wsdl:message name="commanderArretServicesAccesDonnees">
+        <wsdl:part name="commanderArretServicesAccesDonnees" element="ope:commanderArretServicesAccesDonnees"/>
+    </wsdl:message>
+    <wsdl:message name="commanderArretServicesAccesDonneesResponse">
+        <wsdl:part name="commanderArretServicesAccesDonneesResponse"
+                   element="ope:commanderArretServicesAccesDonneesResponse"/>
+    </wsdl:message>
+
+    <!-- Erreur -->
+    <wsdl:message name="erreur">
+        <wsdl:part name="Erreur" element="tec:erreur"/>
+    </wsdl:message>
+
+    <!-- Entete -->
+    <wsdl:message name="entete">
+        <wsdl:part name="entete" element="tec:entete"/>
+    </wsdl:message>
+
+    <!-- EnteteRetour -->
+    <wsdl:message name="acquittement">
+        <wsdl:part name="acquittement" element="tec:acquittement"/>
+    </wsdl:message>
+
+    <!-- portType -->
+    <wsdl:portType name="CommanderArretServicesAccesDonneesPortType">
+        <wsdl:operation name="commanderArretServicesAccesDonnees">
+            <wsdl:input message="tns:commanderArretServicesAccesDonnees" name="commanderArretServicesAccesDonnees"/>
+            <wsdl:output message="tns:commanderArretServicesAccesDonneesResponse"
+                         name="commanderArretServicesAccesDonneesResponse"/>
+            <wsdl:fault message="tns:erreur" name="erreur"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- binding -->
+    <wsdl:binding name="CommanderArretServicesAccesDonneesBinding"
+                  type="tns:CommanderArretServicesAccesDonneesPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- commanderArretServicesAccesDonnees -->
+        <wsdl:operation name="commanderArretServicesAccesDonnees">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="commanderArretServicesAccesDonnees">
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="entete" message="tns:entete"/>
+            </wsdl:input>
+            <wsdl:output name="commanderArretServicesAccesDonneesResponse">
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+            </wsdl:output>
+            <wsdl:fault name="erreur">
+                <soap:fault name="erreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- service -->
+    <wsdl:service name="CommanderArretServicesAccesDonnees-V1.0">
+        <wsdl:port name="CommanderArretServicesAccesDonneesPort"
+                   binding="tns:CommanderArretServicesAccesDonneesBinding">
+            <soap:address location="https://sge-ws.enedis.fr/CommandeArretServicesAccesDonnees/v1.0"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
