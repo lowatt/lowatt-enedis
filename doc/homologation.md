@@ -88,6 +88,24 @@ CommandeAccesDonneesMesures v1.0
 | ACCES-NR2 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --to 2050-04-21`   |
 | ACCES-NR2 (C2-C4)   | `lowatt-enedis cmdAcces 98800003605600 ENERGIE --nom DUPONT --to 2050-04-21`   |
 
+CommandeServicesAccesDonnees v1.0
+---------------------------------
+
+| Case           | Command                                                                                                        |
+|----------------|----------------------------------------------------------------------------------------------------------------|
+| SAD-R1 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT`                             |
+| SAD-R1 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT`                             |
+| SAD-R2 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 24377424002398 --type CDC --period monthly --nom DUPONT`               |
+| SAD-R2 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type CDC --period monthly --nom DUPONT`               |
+| SAD-R3 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 24380318190106 --type IDX --period daily --nom DUPONT`               |
+| SAD-R3 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type IDX --period daily --nom DUPONT`               |
+| SAD-R4 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 25852098337945 --type IDX --type CDC --period daily --nom DUPONT`    |
+| SAD-R4 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type IDX --type CDC --period daily --nom DUPONT`    |
+| SAD-NR1 (C5)   | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT --no-autorisation`           |
+| SAD-NR1 (C2-C4 | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT --no-autorisation`           |
+| SAD-NR2 (C5)   | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
+| SAD-NR2 (C2-C4)| `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
+
 CommandeHistoriqueDonneesMesuresFines v1.0
 ------------------------------------------
 

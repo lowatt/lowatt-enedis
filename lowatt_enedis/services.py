@@ -188,6 +188,17 @@ PERIODS = {
 }
 
 
+SENS_OPTIONS = {
+    "--sens": {
+        "choices": ["SOUTIRAGE", "INJECTION"],
+        "default": "SOUTIRAGE",
+        "help": (
+            "Sens de l'énergie circulant vers le réseau d'Enedis. SOUTIRAGE par défaut."
+        ),
+    }
+}
+
+
 @register(
     "search",
     "RecherchePoint-v2.0",
@@ -1118,6 +1129,96 @@ def point_cmd_technical(
     return client.service.commandeInformationsTechniquesEtContractuelles(
         donneesGenerales, demande
     )
+
+
+@register(
+    "cmdServicesAccesDonnees",
+    "CommanderServicesAccesDonnees-V1.0",
+    DONNEES_GENERALES_OPTIONS
+    | SENS_OPTIONS
+    | {
+        "--to": {
+            "default": (date.today() + timedelta(days=365 * 3)).isoformat(),
+            "help": (
+                "date de fin souhaitée (excluse). "
+                "Ne peut pas excéder 3 ans pour les segments C5 et P4. "
+                "3 ans par défaut"
+            ),
+        },
+        "--type": {
+            "action": "append",
+            "choices": ["CDC", "IDX", "PMAX", "ENERGIE"],
+            "help": (
+                "type de mesure demandée, peut être spécifié plusieurs fois. "
+                "PMAX n'est disponible que pour les segments C5 et P4"
+            ),
+        },
+        "--period": {
+            "choices": list(PERIODS),
+            "help": "periodicite de transmission",
+        },
+        "--corrigee": {
+            "action": "store_true",
+            "help": "inclure les mesures corrigées",
+        },
+    }
+    | ACCORD_CLIENT_OPTIONS,
+)
+@ws("CommanderServicesAccesDonnees-V1.0")
+def point_cmd_acces_donnees(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    corrigee = get_option(args, "corrigee")
+    period = get_option(args, "period")
+
+    if corrigee and not period:
+        raise ValueError("'corrigee' option require 'period' to be set")
+
+    demande = client.factory.create("ns1:DemandeType")
+
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.dateFin = get_option(args, "to")
+    demande.donneesGenerales.contratId = get_option(args, "contrat")
+    demande.donneesGenerales.sens = get_option(args, "sens")
+
+    services = []
+    for type_donnees in get_option(args, "type"):
+        service = client.factory.create("ns1:ServiceSouscritType")
+        service.typeDonnees = type_donnees
+
+        if period:
+            pub = client.factory.create("ns1:OptionsPublicationType")
+            option = client.factory.create("ns1:OptionPublicationType")
+            option.periodiciteTransmission = PERIODS[period]
+            if corrigee:
+                option.mesuresCorrigees = _boolean(True)
+            elif type_donnees == "CDC":
+                # mandatory for CDC
+                option.mesuresCorrigees = _boolean(False)
+            pub.optionPublication = [option]
+            service.optionsPublication = pub
+
+        services.append(service)
+
+    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits.serviceSouscrit = services
+
+    demande.donneesGenerales.declarationAccordClient = _accord_client(
+        client,
+        args,
+        xs_accord_type="ns1:DeclarationAccordClientType",
+        autorisation=not get_option(args, "no_autorisation"),
+    )
+
+    return client.service.commanderServicesAccesDonnees(demande)
 
 
 def _boolean(b: Any) -> Literal["true", "false"]:
