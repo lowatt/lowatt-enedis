@@ -96,6 +96,16 @@ CommandeArretServicesAccesDonnees v1.0
 | ASAD-R1 (C5)       | `lowatt-enedis cmdArretServiceAccesDonnees 24380318190106 --service-id 666`    |
 | ASAD-R1 (C2-C4)    | `lowatt-enedis cmdArretServiceAccesDonnees 98800003605600 --service-id 666`    |
 
+CommandeModificationOptionsServicesAccesDonnees v1.0
+----------------------------------------------------
+
+| Case              | Command                                                                                                                            |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --service-id 666 --add-period daily --add-corrigee`    |
+| MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --service-id 666 --add-period daily --add-corrigee`    |
+| MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --service-id 666 --drop-period daily --drop-corrigee`  |
+| MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --service-id 666 --drop-period daily --drop-corrigee`  |
+
 CommandeServicesAccesDonnees v1.0
 ---------------------------------
 

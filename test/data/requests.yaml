@@ -3499,6 +3499,150 @@ MFI-GK-R4 (C5) \*:
       </ns1:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-ws.enedis.fr/CommandeHistoriqueDonneesMesuresFines/v1.0
+MOSAD-R1 (C2-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:commanderModificationOptionsServicesAccesDonnees>
+          <demande>
+            <donneesGenerales>
+              <pointId>98800003605600</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+              <sens>SOUTIRAGE</sens>
+            </donneesGenerales>
+            <servicesSouscrits>
+              <serviceSouscrit>
+                <serviceSouscritId>666</serviceSouscritId>
+                <ajouterOptionsPublication>
+                  <optionPublication>
+                    <mesuresCorrigees>true</mesuresCorrigees>
+                    <periodiciteTransmission>P1D</periodiciteTransmission>
+                  </optionPublication>
+                </ajouterOptionsPublication>
+              </serviceSouscrit>
+            </servicesSouscrits>
+          </demande>
+        </ns0:commanderModificationOptionsServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/CommandeModificationOptionsServicesAccesDonnees/v1.0
+MOSAD-R1 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:commanderModificationOptionsServicesAccesDonnees>
+          <demande>
+            <donneesGenerales>
+              <pointId>24377424002398</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+              <sens>SOUTIRAGE</sens>
+            </donneesGenerales>
+            <servicesSouscrits>
+              <serviceSouscrit>
+                <serviceSouscritId>666</serviceSouscritId>
+                <ajouterOptionsPublication>
+                  <optionPublication>
+                    <mesuresCorrigees>true</mesuresCorrigees>
+                    <periodiciteTransmission>P1D</periodiciteTransmission>
+                  </optionPublication>
+                </ajouterOptionsPublication>
+              </serviceSouscrit>
+            </servicesSouscrits>
+          </demande>
+        </ns0:commanderModificationOptionsServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/CommandeModificationOptionsServicesAccesDonnees/v1.0
+MOSAD-R2 (C2-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:commanderModificationOptionsServicesAccesDonnees>
+          <demande>
+            <donneesGenerales>
+              <pointId>98800003605600</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+              <sens>SOUTIRAGE</sens>
+            </donneesGenerales>
+            <servicesSouscrits>
+              <serviceSouscrit>
+                <serviceSouscritId>666</serviceSouscritId>
+                <supprimerOptionsPublication>
+                  <optionPublication>
+                    <mesuresCorrigees>true</mesuresCorrigees>
+                    <periodiciteTransmission>P1D</periodiciteTransmission>
+                  </optionPublication>
+                </supprimerOptionsPublication>
+              </serviceSouscrit>
+            </servicesSouscrits>
+          </demande>
+        </ns0:commanderModificationOptionsServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/CommandeModificationOptionsServicesAccesDonnees/v1.0
+MOSAD-R2 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:commanderModificationOptionsServicesAccesDonnees>
+          <demande>
+            <donneesGenerales>
+              <pointId>24377424002398</pointId>
+              <initiateurLogin>test@example.com</initiateurLogin>
+              <contratId>1234</contratId>
+              <sens>SOUTIRAGE</sens>
+            </donneesGenerales>
+            <servicesSouscrits>
+              <serviceSouscrit>
+                <serviceSouscritId>666</serviceSouscritId>
+                <supprimerOptionsPublication>
+                  <optionPublication>
+                    <mesuresCorrigees>true</mesuresCorrigees>
+                    <periodiciteTransmission>P1D</periodiciteTransmission>
+                  </optionPublication>
+                </supprimerOptionsPublication>
+              </serviceSouscrit>
+            </servicesSouscrits>
+          </demande>
+        </ns0:commanderModificationOptionsServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/CommandeModificationOptionsServicesAccesDonnees/v1.0
 RP-NR1:
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
