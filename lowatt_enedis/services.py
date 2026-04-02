@@ -181,6 +181,13 @@ def _check_mesure_options_consistency(args: argparse.Namespace) -> None:
         )
 
 
+PERIODS = {
+    "daily": "P1D",
+    "weekly": "P7D",
+    "monthly": "P1M",
+}
+
+
 @register(
     "search",
     "RecherchePoint-v2.0",
@@ -816,7 +823,7 @@ def point_cmd_infra_j(
             "données du compteur.",
         },
         "--period": {
-            "choices": ["daily", "weekly", "monthly"],
+            "choices": list(PERIODS),
             "default": "daily",
             "help": "périodicité de réception pour la courbe de charge "
             "(quotidienne par défaut).",
@@ -886,13 +893,7 @@ def point_cmd_publication(
         code = "CDC"
         transmission = action == "cdc"
         pas = "PT30M" if get_option(args, "linky") else "PT10M"
-        period = get_option(args, "period")
-        if period == "monthly":
-            period = "P1M"
-        elif period == "weekly":
-            period = "P7D"
-        else:
-            period = "P1D"
+        period = PERIODS[get_option(args, "period")]
 
     injection = get_option(args, "injection")
 
