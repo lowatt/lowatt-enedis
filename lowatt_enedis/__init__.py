@@ -400,6 +400,7 @@ def build_xstypes_map(
             "CommanderAccesDonneesMesures-V1.0",
             "CommanderServicesAccesDonnees-V1.0",
             "CommanderModificationOptionsServicesAccesDonnees-V1.0",
+            "CommanderRenouvellementServicesAccesDonnees-V1.0",
         ):
             assert xstype.name not in xstypes_map, (
                 service_def.service.name,
