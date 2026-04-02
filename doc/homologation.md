@@ -88,6 +88,14 @@ CommandeAccesDonneesMesures v1.0
 | ACCES-NR2 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --to 2050-04-21`   |
 | ACCES-NR2 (C2-C4)   | `lowatt-enedis cmdAcces 98800003605600 ENERGIE --nom DUPONT --to 2050-04-21`   |
 
+CommandeArretServicesAccesDonnees v1.0
+--------------------------------------
+
+| Case               | Command                                                                        |
+|--------------------|--------------------------------------------------------------------------------|
+| ASAD-R1 (C5)       | `lowatt-enedis cmdArretServiceAccesDonnees 24380318190106 --service-id 666`    |
+| ASAD-R1 (C2-C4)    | `lowatt-enedis cmdArretServiceAccesDonnees 98800003605600 --service-id 666`    |
+
 CommandeServicesAccesDonnees v1.0
 ---------------------------------
 
