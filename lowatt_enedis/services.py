@@ -1328,5 +1328,60 @@ def point_modify_options_acces_donnees(
     return client.service.commanderModificationOptionsServicesAccesDonnees(demande)
 
 
+@register(
+    "cmdRenouvellementServicesAccesDonnees",
+    "CommanderRenouvellementServicesAccesDonnees-V1.0",
+    DONNEES_GENERALES_OPTIONS
+    | SENS_OPTIONS
+    | {
+        "--service-id": {
+            "action": "append",
+            "dest": "service_ids",
+            "help": "identifiant(s) du service a renouveler",
+        },
+        "--to": {
+            "default": (date.today() + timedelta(days=365 * 3)).isoformat(),
+            "help": "date de fin souhaitée (excluse). Par défaut 3 ans.",
+        },
+        "--no-autorisation": {
+            "action": "store_true",
+            "help": "demander sans l'autorisation du client (pour l'homologation seulement)",
+        },
+    }
+    | ACCORD_CLIENT_OPTIONS,
+)
+@ws("CommanderRenouvellementServicesAccesDonnees-V1.0")
+def point_cmd_renouvellement_services_acces_donnees(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    service_ids = get_option(args, "service_ids")
+    if not service_ids:
+        raise ValueError("--service-id est requis (au moins un)")
+
+    demande = client.factory.create("ns1:DemandeType")
+
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.contratId = get_option(args, "contrat")
+    demande.donneesGenerales.sens = get_option(args, "sens")
+    demande.donneesGenerales.dateFin = get_option(args, "to")
+    demande.donneesGenerales.declarationAccordClient = _accord_client(
+        client,
+        args,
+        xs_accord_type="ns1:DeclarationAccordClientType",
+        autorisation=not get_option(args, "no_autorisation"),
+    )
+    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits.serviceSouscritId = service_ids
+    return client.service.commanderRenouvellementServicesAccesDonnees(demande)
+
+
 def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"

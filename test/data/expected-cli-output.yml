@@ -1,10 +1,10 @@
 lowatt-enedis --help: |
-  usage: lowatt-enedis [-h] {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,cmdModificationOptionsServicesAccesDonnees,wsdl,decrypt} ...
+  usage: lowatt-enedis [-h] {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,cmdModificationOptionsServicesAccesDonnees,cmdRenouvellementServicesAccesDonnees,wsdl,decrypt} ...
 
   CLI access to Enedis SGE web-services.
 
   positional arguments:
-    {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,cmdModificationOptionsServicesAccesDonnees,wsdl,decrypt}
+    {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,cmdModificationOptionsServicesAccesDonnees,cmdRenouvellementServicesAccesDonnees,wsdl,decrypt}
       search              Query the "RecherchePoint-v2.0" web-service.
       technical           Query the "ConsultationDonneesTechniquesContractuelles-v1.0" web-service.
       measures            Query the "ConsultationMesures-v1.1" web-service.
@@ -25,6 +25,8 @@ lowatt-enedis --help: |
                           Query the "CommanderArretServicesAccesDonnees-V1.0" web-service.
       cmdModificationOptionsServicesAccesDonnees
                           Query the "CommanderModificationOptionsServicesAccesDonnees-V1.0" web-service.
+      cmdRenouvellementServicesAccesDonnees
+                          Query the "CommanderRenouvellementServicesAccesDonnees-V1.0" web-service.
       wsdl                Display WSDL information about some ws command.
       decrypt             Decrypt AES-128-CBC enedis files
 
@@ -197,6 +199,32 @@ lowatt-enedis cmdModificationOptionsServicesAccesDonnees --help: |
     --drop-corrigee       supprimer l'option mesures corrigées
     --drop-period {daily,weekly,monthly}
                           supprimer la publication
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdRenouvellementServicesAccesDonnees --help: |
+  usage: lowatt-enedis cmdRenouvellementServicesAccesDonnees [-h] --login LOGIN --contrat CONTRAT [--sens {SOUTIRAGE,INJECTION}] [--service-id SERVICE_IDS] [--to TO] [--no-autorisation] [--denomination DENOMINATION] [--nom NOM] [--prenom PRENOM] [--civilite {M,Mme}] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --sens {SOUTIRAGE,INJECTION}
+                          Sens de l'énergie circulant vers le réseau d'Enedis. SOUTIRAGE par défaut.
+    --service-id SERVICE_IDS
+                          identifiant(s) du service a renouveler
+    --to TO               date de fin souhaitée (excluse). Par défaut 3 ans.
+    --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --denomination DENOMINATION
+                          Dénomination sociale de la personne morale ayant donné son accord
+    --nom NOM             Nom de la personne physique ou nom commerciale de la personne morale ayant donné son accord
+    --prenom PRENOM       Prénom de la personne physique
+    --civilite {M,Mme}    Civilité de la personne physique
     --cert-file CERT_FILE
                           Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
     --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.

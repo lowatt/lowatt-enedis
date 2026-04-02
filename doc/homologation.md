@@ -106,6 +106,16 @@ CommandeModificationOptionsServicesAccesDonnees v1.0
 | MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --service-id 666 --drop-period daily --drop-corrigee`  |
 | MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --service-id 666 --drop-period daily --drop-corrigee`  |
 
+CommandeRenouvellementServicesAccesDonnees v1.0
+-----------------------------------------------
+
+| Case             | Command                                                                                                                                |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| RSAD-R1 (C5)     | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 25855571545617 --service-id 666 --nom DUPONT`                                     |
+| RSAD-R1 (C2-C4)  | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800003605600 --service-id 666 --nom DUPONT`                                     |
+| RSAD-NR1 (C5)    | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 25855571545617 --sens INJECTION --service-id 666 --nom DUPONT --no-autorisation`  |
+| RSAD-NR1 (C2-C4) | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800003605600 --sens INJECTION --service-id 666 --nom DUPONT --no-autorisation`  |
+
 CommandeServicesAccesDonnees v1.0
 ---------------------------------
 
