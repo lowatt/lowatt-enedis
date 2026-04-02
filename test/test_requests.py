@@ -33,7 +33,7 @@ def get_cases(_cache: dict[None, dict[str, str]] = {}) -> dict[str, str]:  # noq
                 case = case.strip()
                 assert case not in cases
                 cases[case] = command
-    assert len(cases) == 69
+    assert len(cases) == 71
     _cache[None] = cases
     return cases
 

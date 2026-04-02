@@ -1,10 +1,10 @@
 lowatt-enedis --help: |
-  usage: lowatt-enedis [-h] {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,wsdl,decrypt} ...
+  usage: lowatt-enedis [-h] {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,wsdl,decrypt} ...
 
   CLI access to Enedis SGE web-services.
 
   positional arguments:
-    {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,wsdl,decrypt}
+    {search,technical,measures,details,detailsV3,cmdHisto,cmdAcces,cmdInfraJ,subscribe,subscriptions,unsubscribe,cmdHistoFine,cmdHistoFact,cmdTechnical,cmdServicesAccesDonnees,cmdArretServiceAccesDonnees,wsdl,decrypt}
       search              Query the "RecherchePoint-v2.0" web-service.
       technical           Query the "ConsultationDonneesTechniquesContractuelles-v1.0" web-service.
       measures            Query the "ConsultationMesures-v1.1" web-service.
@@ -21,6 +21,8 @@ lowatt-enedis --help: |
       cmdTechnical        Query the "B2B_M023ITC" web-service.
       cmdServicesAccesDonnees
                           Query the "CommanderServicesAccesDonnees-V1.0" web-service.
+      cmdArretServiceAccesDonnees
+                          Query the "CommanderArretServicesAccesDonnees-V1.0" web-service.
       wsdl                Display WSDL information about some ws command.
       decrypt             Decrypt AES-128-CBC enedis files
 
@@ -47,6 +49,25 @@ lowatt-enedis cmdAcces --help: |
     --prenom PRENOM       Prénom de la personne physique
     --civilite {M,Mme}    Civilité de la personne physique
     --no-autorisation     demander sans l'autorisation du client (pour l'homologation seulement)
+    --cert-file CERT_FILE
+                          Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
+    --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.
+    --homologation        Change service host to use homologation sandbox. Enabled by presence of ENEDIS_HOMOLOGATION in environment variables.
+    --output {xml,json}   Output type. Default is xml
+lowatt-enedis cmdArretServiceAccesDonnees --help: |
+  usage: lowatt-enedis cmdArretServiceAccesDonnees [-h] --login LOGIN --contrat CONTRAT [--sens {SOUTIRAGE,INJECTION}] [--service-id SERVICE_IDS] --cert-file CERT_FILE --key-file KEY_FILE [--homologation] [--output {xml,json}] prm
+
+  positional arguments:
+    prm                   identifiant PRM du point
+
+  options:
+    -h, --help            show this help message and exit
+    --login LOGIN         User login. Default to ENEDIS_LOGIN environment variable.
+    --contrat CONTRAT     identifiant du contrat entre le demandeur et Enedis. Default to ENEDIS_CONTRAT environment variable.
+    --sens {SOUTIRAGE,INJECTION}
+                          Sens de l'énergie circulant vers le réseau d'Enedis. SOUTIRAGE par défaut.
+    --service-id SERVICE_IDS
+                          identifiant(s) du service a arreter
     --cert-file CERT_FILE
                           Client certificate file. Default to ENEDIS_CERT_FILE environment variable.
     --key-file KEY_FILE   Client private key file. Default to ENEDIS_KEY_FILE environment variable.

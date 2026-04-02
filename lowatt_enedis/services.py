@@ -1221,5 +1221,43 @@ def point_cmd_acces_donnees(
     return client.service.commanderServicesAccesDonnees(demande)
 
 
+@register(
+    "cmdArretServiceAccesDonnees",
+    "CommanderArretServicesAccesDonnees-V1.0",
+    DONNEES_GENERALES_OPTIONS
+    | SENS_OPTIONS
+    | {
+        "--service-id": {
+            "action": "append",
+            "dest": "service_ids",
+            "help": "identifiant(s) du service a arreter",
+        },
+    },
+)
+@ws("CommanderArretServicesAccesDonnees-V1.0")
+def point_cmd_arret_service_acces_donnees(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    service_ids = get_option(args, "service_ids")
+    if not service_ids:
+        raise ValueError("--service-id est requis (au moins un)")
+
+    demande = client.factory.create("ns1:DemandeType")
+    demande.donneesGenerales = create_from_options(
+        client,
+        args,
+        "DonneesGeneralesType",
+        {
+            "prm": "pointId",
+            "login": "initiateurLogin",
+        },
+    )
+    demande.donneesGenerales.contratId = get_option(args, "contrat")
+    demande.donneesGenerales.sens = get_option(args, "sens")
+    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits.serviceSouscritId = service_ids
+    return client.service.commanderArretServicesAccesDonnees(demande)
+
+
 def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"
