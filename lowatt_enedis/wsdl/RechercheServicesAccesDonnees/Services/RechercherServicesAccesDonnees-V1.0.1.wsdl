@@ -1,0 +1,80 @@
+<wsdl:definitions name="RechercherServicesAccesDonnees-V1.0"
+  targetNamespace="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0"
+  xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0"
+  xmlns:ope="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0">
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import schemaLocation="../xsd/RechercherServicesAccesDonnees-V1.0.1.xsd"
+              namespace="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0"/>
+            <xs:import schemaLocation="../xsd/Dictionnaires/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd"
+              namespace="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- Messages -->
+    <wsdl:message name="rechercherServicesAccesDonnees">
+        <wsdl:part name="rechercherServicesAccesDonnees" element="ope:rechercherServicesAccesDonnees"/>
+    </wsdl:message>
+    <wsdl:message name="rechercherServicesAccesDonneesReponse">
+        <wsdl:part name="rechercherServicesAccesDonneesReponse"
+          element="ope:rechercherServicesAccesDonneesReponse"/>
+    </wsdl:message>
+
+    <!-- Erreur -->
+    <wsdl:message name="erreur">
+        <wsdl:part name="erreur" element="tec:erreur"/>
+    </wsdl:message>
+
+    <!-- Entete -->
+    <wsdl:message name="entete">
+        <wsdl:part name="entete" element="tec:entete"></wsdl:part>
+    </wsdl:message>
+
+    <!-- Acquittement -->
+    <wsdl:message name="acquittement">
+        <wsdl:part name="acquittement" element="tec:acquittement"></wsdl:part>
+    </wsdl:message>
+
+    <!-- portType -->
+    <wsdl:portType name="RechercherServicesAccesDonneesPortType">
+        <wsdl:operation name="rechercherServicesAccesDonnees">
+            <wsdl:input name="rechercherServicesAccesDonnees" message="tns:rechercherServicesAccesDonnees"/>
+            <wsdl:output name="rechercherServicesAccesDonneesResponse"
+              message="tns:rechercherServicesAccesDonneesReponse"/>
+            <wsdl:fault name="erreur" message="tns:erreur"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- binding -->
+    <wsdl:binding name="RechercherServicesAccesDonneesBinding" type="tns:RechercherServicesAccesDonneesPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- rechercherServicesAccesDonnees -->
+        <wsdl:operation name="rechercherServicesAccesDonnees">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="entete" message="tns:entete"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="acquittement" message="tns:acquittement"/>
+            </wsdl:output>
+            <wsdl:fault name="erreur">
+                <soap:fault name="erreur" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- service -->
+    <wsdl:service name="RechercherServicesAccesDonnees-V1.0">
+        <wsdl:port name="RechercherServicesAccesDonneesPort" binding="tns:RechercherServicesAccesDonneesBinding">
+            <soap:address location="https://sge-ws.enedis.fr/RechercheServicesAccesDonnees/v1.0"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
