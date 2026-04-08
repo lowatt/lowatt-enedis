@@ -134,6 +134,16 @@ CommandeServicesAccesDonnees v1.0
 | SAD-NR2 (C5)   | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
 | SAD-NR2 (C2-C4)| `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
 
+
+RechercheServicesAccesDonnees v1.0
+----------------------------------
+
+| Case           | Command                                                                  |
+|----------------|--------------------------------------------------------------------------|
+| RSA-R1 (C5)    | `lowatt-enedis RechercheServicesAccesDonnees 25855571545617`             |
+| RSA-R1 (C2-C4) | `lowatt-enedis RechercheServicesAccesDonnees 98800003605600`             |
+
+
 CommandeHistoriqueDonneesMesuresFines v1.0
 ------------------------------------------
 
