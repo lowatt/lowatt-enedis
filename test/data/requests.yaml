@@ -3873,6 +3873,50 @@ RS-R1 (C5):
       </ns1:Body>
     </SOAP-ENV:Envelope>
   url: https://sge-homologation-ws.enedis.fr/RechercheServicesSouscritsMesures/v1.0
+RSA-R1 (C2-C4):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:rechercherServicesAccesDonnees>
+          <criteres>
+            <pointId>98800003605600</pointId>
+            <contratId>1234</contratId>
+          </criteres>
+          <loginUtilisateur>test@example.com</loginUtilisateur>
+        </ns0:rechercherServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/RechercheServicesAccesDonnees/v1.0
+RSA-R1 (C5):
+  data: |
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://www.enedis.fr/sge/b2b/rechercherservicesaccesdonnees/v1.0" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Header>
+        <tec:entete>
+          <version>1.0</version>
+          <infoDemandeur>
+            <loginDemandeur>test@example.com</loginDemandeur>
+          </infoDemandeur>
+        </tec:entete>
+      </SOAP-ENV:Header>
+      <ns1:Body>
+        <ns0:rechercherServicesAccesDonnees>
+          <criteres>
+            <pointId>25855571545617</pointId>
+            <contratId>1234</contratId>
+          </criteres>
+          <loginUtilisateur>test@example.com</loginUtilisateur>
+        </ns0:rechercherServicesAccesDonnees>
+      </ns1:Body>
+    </SOAP-ENV:Envelope>
+  url: https://sge-homologation-ws.enedis.fr/RechercheServicesAccesDonnees/v1.0
 RSAD-NR1 (C2-C4):
   data: |
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0">

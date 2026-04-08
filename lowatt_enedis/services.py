@@ -1383,5 +1383,28 @@ def point_cmd_renouvellement_services_acces_donnees(
     return client.service.commanderRenouvellementServicesAccesDonnees(demande)
 
 
+@register(
+    "RechercheServicesAccesDonnees",
+    "RechercherServicesAccesDonnees-V1.0.1",
+    DONNEES_GENERALES_OPTIONS,
+)
+@ws("RechercherServicesAccesDonnees-V1.0")
+def point_recherche_services_acces_donnees(
+    client: Client, args: argparse.Namespace
+) -> suds.sudsobject.Object:
+    criteria = create_from_options(
+        client,
+        args,
+        "CriteresType",
+        {
+            "prm": "pointId",
+            "contrat": "contratId",
+        },
+    )
+    return client.service.rechercherServicesAccesDonnees(
+        criteria, get_option(args, "login")
+    )
+
+
 def _boolean(b: Any) -> Literal["true", "false"]:
     return "true" if b else "false"
