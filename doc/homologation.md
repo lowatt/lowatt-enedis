@@ -60,6 +60,10 @@ ConsultationMesuresDetaillees v3.0
 | CMD3-NR1           | `lowatt-enedis detailsV3 25162373298976 COURBE --from 2025-04-01 --to 2025-04-07`                        |
 | CMD3-NR2           | `lowatt-enedis detailsV3 25162373298976 INDEX --from 2025-04-01 --to 2025-04-07 --cadre SERVICE_ACCES`   |
 
+
+* CMD3-NR1 doesn't give expected error SGT4L8; Using `--to 2025-04-09` make the test case expectedly fail with SGT4L8.
+
+
 RecherchePoint v2.0
 -------------------
 
