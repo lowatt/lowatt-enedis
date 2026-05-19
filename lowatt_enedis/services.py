@@ -1174,7 +1174,7 @@ def point_cmd_acces_donnees(
     if corrigee and not period:
         raise ValueError("'corrigee' option require 'period' to be set")
 
-    demande = client.factory.create("ns1:DemandeType")
+    demande = client.factory.create("DemandeType")
 
     demande.donneesGenerales = create_from_options(
         client,
@@ -1191,12 +1191,12 @@ def point_cmd_acces_donnees(
 
     services = []
     for type_donnees in get_option(args, "type"):
-        service = client.factory.create("ns1:ServiceSouscritType")
+        service = client.factory.create("ServiceSouscritType")
         service.typeDonnees = type_donnees
 
         if period:
-            pub = client.factory.create("ns1:OptionsPublicationType")
-            option = client.factory.create("ns1:OptionPublicationType")
+            pub = client.factory.create("OptionsPublicationType")
+            option = client.factory.create("OptionPublicationType")
             option.periodiciteTransmission = PERIODS[period]
             if corrigee:
                 option.mesuresCorrigees = _boolean(True)
@@ -1208,13 +1208,13 @@ def point_cmd_acces_donnees(
 
         services.append(service)
 
-    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits = client.factory.create("ServicesSouscritsType")
     demande.servicesSouscrits.serviceSouscrit = services
 
     demande.donneesGenerales.declarationAccordClient = _accord_client(
         client,
         args,
-        xs_accord_type="ns1:DeclarationAccordClientType",
+        xs_accord_type="DeclarationAccordClientType",
         autorisation=not get_option(args, "no_autorisation"),
     )
 
@@ -1242,7 +1242,7 @@ def point_cmd_arret_service_acces_donnees(
     if not service_ids:
         raise ValueError("--service-id est requis (au moins un)")
 
-    demande = client.factory.create("ns1:DemandeType")
+    demande = client.factory.create("DemandeType")
     demande.donneesGenerales = create_from_options(
         client,
         args,
@@ -1254,7 +1254,7 @@ def point_cmd_arret_service_acces_donnees(
     )
     demande.donneesGenerales.contratId = get_option(args, "contrat")
     demande.donneesGenerales.sens = get_option(args, "sens")
-    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits = client.factory.create("ServicesSouscritsType")
     demande.servicesSouscrits.serviceSouscritId = service_ids
     return client.service.commanderArretServicesAccesDonnees(demande)
 
@@ -1293,7 +1293,7 @@ def point_modify_options_acces_donnees(
 ) -> suds.sudsobject.Object:
     service_id = get_option(args, "service_id")
 
-    demande = client.factory.create("ns1:DemandeType")
+    demande = client.factory.create("DemandeType")
     demande.donneesGenerales = create_from_options(
         client,
         args,
@@ -1305,15 +1305,15 @@ def point_modify_options_acces_donnees(
     )
     demande.donneesGenerales.contratId = get_option(args, "contrat")
     demande.donneesGenerales.sens = get_option(args, "sens")
-    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
-    service = client.factory.create("ns1:ServiceSouscritType")
+    demande.servicesSouscrits = client.factory.create("ServicesSouscritsType")
+    service = client.factory.create("ServiceSouscritType")
     service.serviceSouscritId = service_id
     demande.servicesSouscrits.serviceSouscrit = [service]
 
     for prefix in ("add", "drop"):
-        svc = client.factory.create("ns1:OptionsPublicationType")
+        svc = client.factory.create("OptionsPublicationType")
         if period := get_option(args, f"{prefix}_period"):
-            opt = client.factory.create("ns1:OptionPublicationType")
+            opt = client.factory.create("OptionPublicationType")
             opt.periodiciteTransmission = PERIODS[period]
             if get_option(args, f"{prefix}_corrigee"):
                 opt.mesuresCorrigees = _boolean(True)
@@ -1358,7 +1358,7 @@ def point_cmd_renouvellement_services_acces_donnees(
     if not service_ids:
         raise ValueError("--service-id est requis (au moins un)")
 
-    demande = client.factory.create("ns1:DemandeType")
+    demande = client.factory.create("DemandeType")
 
     demande.donneesGenerales = create_from_options(
         client,
@@ -1375,10 +1375,10 @@ def point_cmd_renouvellement_services_acces_donnees(
     demande.donneesGenerales.declarationAccordClient = _accord_client(
         client,
         args,
-        xs_accord_type="ns1:DeclarationAccordClientType",
+        xs_accord_type="DeclarationAccordClientType",
         autorisation=not get_option(args, "no_autorisation"),
     )
-    demande.servicesSouscrits = client.factory.create("ns1:ServicesSouscritsType")
+    demande.servicesSouscrits = client.factory.create("ServicesSouscritsType")
     demande.servicesSouscrits.serviceSouscritId = service_ids
     return client.service.commanderRenouvellementServicesAccesDonnees(demande)
 

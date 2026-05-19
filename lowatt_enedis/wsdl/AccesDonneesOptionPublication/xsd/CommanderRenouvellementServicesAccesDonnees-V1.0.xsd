@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:sc="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0"
-           targetNamespace="http://www.enedis.fr/sge/b2b/commanderRenouvellementServicesAccesDonnees/v1.0" version="1.0.0">
+           xmlns:sc="http://www.enedis.fr/sge/ws/commanderRenouvellementServicesAccesDonnees/v1.0"
+           targetNamespace="http://www.enedis.fr/sge/ws/commanderRenouvellementServicesAccesDonnees/v1.0" version="1.0.0">
     <xs:element name="commanderRenouvellementServicesAccesDonnees" type="sc:RenouvelerServicesAccesType"/>
     <xs:element name="commanderRenouvellementServicesAccesDonneesResponse" type="sc:RenouvelerServicesAccesResponseType"/>
     <xs:complexType name="RenouvelerServicesAccesType">
