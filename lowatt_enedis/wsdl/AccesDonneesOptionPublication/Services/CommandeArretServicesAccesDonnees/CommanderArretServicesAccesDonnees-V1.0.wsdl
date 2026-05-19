@@ -1,16 +1,16 @@
 <wsdl:definitions name="CommanderArretServicesAccesDonnees-v1.0"
-                  targetNamespace="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+                  targetNamespace="http://www.enedis.fr/sge/ws/commanderarretservicesaccesdonnees/v1.0"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                  xmlns:tns="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
-                  xmlns:ope="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"
+                  xmlns:tns="http://www.enedis.fr/sge/ws/commanderarretservicesaccesdonnees/v1.0"
+                  xmlns:ope="http://www.enedis.fr/sge/ws/commanderarretservicesaccesdonnees/v1.0"
                   xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0">
 
     <wsdl:types>
         <xs:schema>
-            <xs:import schemaLocation="../../xsd/CommanderArretServicesAccesDonnees-V1.0.xsd"
-                       namespace="http://www.enedis.fr/sge/b2b/commanderarretservicesaccesdonnees/v1.0"/>
+            <xs:import schemaLocation="../../xsd/CommanderArretServicesAccesDonnees-v1.0.xsd"
+                       namespace="http://www.enedis.fr/sge/ws/commanderarretservicesaccesdonnees/v1.0"/>
             <xs:import schemaLocation="../../xsd/Dictionnaires/Metier/ENEDIS.Dictionnaire.TypeComplexe.v5.0.xsd"
                        namespace="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
             <xs:import schemaLocation="../../xsd/Dictionnaires/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd"

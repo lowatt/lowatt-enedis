@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:sc="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0"
-           targetNamespace="http://www.enedis.fr/sge/b2b/commanderModificationOptionsServicesAccesDonnees/v1.0" version="1.0.0">
+           xmlns:sc="http://www.enedis.fr/sge/ws/commanderModificationOptionsServicesAccesDonnees/v1.0"
+           targetNamespace="http://www.enedis.fr/sge/ws/commanderModificationOptionsServicesAccesDonnees/v1.0" version="1.0.0">
     <xs:element name="commanderModificationOptionsServicesAccesDonnees" type="sc:CommanderModificationOptionsServicesAccesDonneesType"/>
     <xs:element name="commanderModificationOptionsServicesAccesDonneesResponse" type="sc:CommanderModificationOptionsServicesAccesDonneesResponseType"/>
     <xs:complexType name="CommanderModificationOptionsServicesAccesDonneesType">

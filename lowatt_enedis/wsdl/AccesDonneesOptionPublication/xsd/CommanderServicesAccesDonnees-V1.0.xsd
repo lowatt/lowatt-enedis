@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:sc="http://www.enedis.fr/sge/b2b/commanderservicesaccesdonnees/v1.0"
-           targetNamespace="http://www.enedis.fr/sge/b2b/commanderservicesaccesdonnees/v1.0" version="1.0.0">
+           xmlns:sc="http://www.enedis.fr/sge/ws/commanderservicesaccesdonnees/v1.0"
+           targetNamespace="http://www.enedis.fr/sge/ws/commanderservicesaccesdonnees/v1.0" version="1.0.0">
     <xs:element name="commanderServicesAccesDonnees" type="sc:CommanderServicesAccesDonneesType"/>
     <xs:element name="commanderServicesAccesDonneesResponse" type="sc:CommanderServicesAccesDonneesResponseType"/>
     <xs:complexType name="CommanderServicesAccesDonneesType">
