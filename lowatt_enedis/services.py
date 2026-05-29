@@ -22,10 +22,18 @@ SGE web-service mapping to plug them into the CLI.
 """
 
 import argparse
+import dataclasses
+import sys
+import typing
 import warnings
 from collections.abc import Iterator
 from datetime import date, datetime, timedelta, timezone
 from typing import Any, Literal
+
+if sys.version_info >= (3, 11):
+    from typing import Self
+else:
+    from typing_extensions import Self
 
 import suds.sudsobject
 from suds.client import Client
@@ -1259,31 +1267,51 @@ def point_cmd_arret_service_acces_donnees(
     return client.service.commanderArretServicesAccesDonnees(demande)
 
 
+Period = Literal["daily", "weekly", "monthly"]
+
+
+@dataclasses.dataclass(frozen=True, slots=True)
+class OptionPublication:
+    service_id: str
+    period: Period
+    corrigee: bool
+
+    @classmethod
+    def parse(cls, value: str) -> Self:
+        service_id, period, corrigee = value.split(":")
+        assert corrigee in ("true", "false"), corrigee
+        period = typing.cast(Period, period)
+        assert period in typing.get_args(Period), period
+        return cls(service_id, period, corrigee == "true")
+
+
 @register(
     "cmdModificationOptionsServicesAccesDonnees",
     "CommanderModificationOptionsServicesAccesDonnees-V1.0",
     DONNEES_GENERALES_OPTIONS
     | SENS_OPTIONS
     | {
-        "--service-id": {
-            "help": "identifiant du service a modifier",
-            "required": True,
+        "--add": {
+            "dest": "add",
+            "action": "append",
+            "type": OptionPublication.parse,
+            "metavar": "SERVICE_ID:PERIOD:CORRIGEE",
+            "help": (
+                "Option de publication à ajouter (peut être répété). "
+                "PERIOD: daily|weekly|monthly. "
+                "CORRIGEE: true|false"
+            ),
         },
-        "--add-corrigee": {
-            "action": "store_true",
-            "help": "ajouter l'option mesures corrigées",
-        },
-        "--add-period": {
-            "choices": list(PERIODS),
-            "help": "ajouter la publication",
-        },
-        "--drop-corrigee": {
-            "action": "store_true",
-            "help": "supprimer l'option mesures corrigées",
-        },
-        "--drop-period": {
-            "choices": list(PERIODS),
-            "help": "supprimer la publication",
+        "--drop": {
+            "dest": "drop",
+            "action": "append",
+            "type": OptionPublication.parse,
+            "metavar": "SERVICE_ID:PERIOD:CORRIGEE",
+            "help": (
+                "Option de publication à supprimer (peut être répété). "
+                "PERIOD: daily|weekly|monthly. "
+                "CORRIGEE: true|false."
+            ),
         },
     },
 )
@@ -1291,8 +1319,6 @@ def point_cmd_arret_service_acces_donnees(
 def point_modify_options_acces_donnees(
     client: Client, args: argparse.Namespace
 ) -> suds.sudsobject.Object:
-    service_id = get_option(args, "service_id")
-
     demande = client.factory.create("DemandeType")
     demande.donneesGenerales = create_from_options(
         client,
@@ -1306,24 +1332,36 @@ def point_modify_options_acces_donnees(
     demande.donneesGenerales.contratId = get_option(args, "contrat")
     demande.donneesGenerales.sens = get_option(args, "sens")
     demande.servicesSouscrits = client.factory.create("ServicesSouscritsType")
-    service = client.factory.create("ServiceSouscritType")
-    service.serviceSouscritId = service_id
-    demande.servicesSouscrits.serviceSouscrit = [service]
+    demande.servicesSouscrits.serviceSouscrit = []
 
-    for prefix in ("add", "drop"):
-        svc = client.factory.create("OptionsPublicationType")
-        if period := get_option(args, f"{prefix}_period"):
-            opt = client.factory.create("OptionPublicationType")
-            opt.periodiciteTransmission = PERIODS[period]
-            if get_option(args, f"{prefix}_corrigee"):
-                opt.mesuresCorrigees = _boolean(True)
-            else:
-                opt.mesuresCorrigees = _boolean(False)
-            svc.optionPublication = [opt]
-            if prefix == "add":
-                service.ajouterOptionsPublication = [svc]
-            else:
-                service.supprimerOptionsPublication = [svc]
+    by_service: dict[str, dict[str, list[OptionPublication]]] = {}
+    for action in ("add", "drop"):
+        for svc in get_option(args, action) or []:
+            by_service.setdefault(svc.service_id, {"add": [], "drop": []})[
+                action
+            ].append(svc)
+
+    if not by_service:
+        raise ValueError("Au moins une des options --add ou --drop doit être donnée.")
+
+    for service_id in by_service:
+        service = client.factory.create("ServiceSouscritType")
+        service.serviceSouscritId = service_id
+        demande.servicesSouscrits.serviceSouscrit.append(service)
+        for action in ("add", "drop"):
+            pubs = []
+            for svc in by_service[service_id][action]:
+                pub = client.factory.create("OptionsPublicationType")
+                opt = client.factory.create("OptionPublicationType")
+                opt.periodiciteTransmission = PERIODS[svc.period]
+                opt.mesuresCorrigees = _boolean(svc.corrigee)
+                pub.optionPublication = [opt]
+                pubs.append(pub)
+            if pubs:
+                if action == "add":
+                    service.ajouterOptionsPublication = pubs
+                else:
+                    service.supprimerOptionsPublication = pubs
 
     return client.service.commanderModificationOptionsServicesAccesDonnees(demande)
 

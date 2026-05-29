@@ -103,12 +103,12 @@ CommandeArretServicesAccesDonnees v1.0
 CommandeModificationOptionsServicesAccesDonnees v1.0
 ----------------------------------------------------
 
-| Case              | Command                                                                                                                            |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --service-id 666 --add-period daily --add-corrigee`    |
-| MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --service-id 666 --add-period daily --add-corrigee`    |
-| MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --service-id 666 --drop-period daily --drop-corrigee`  |
-| MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --service-id 666 --drop-period daily --drop-corrigee`  |
+| Case              | Command                                                                                          |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --add 666:daily:true`   |
+| MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --add 666:daily:true`   |
+| MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --drop 666:daily:true`  |
+| MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --drop 666:daily:true`  |
 
 CommandeRenouvellementServicesAccesDonnees v1.0
 -----------------------------------------------
