@@ -1202,7 +1202,8 @@ def point_cmd_acces_donnees(
         service = client.factory.create("ServiceSouscritType")
         service.typeDonnees = type_donnees
 
-        if period:
+        # Les options de publication ne sont pas disponibles pour le type de donnée ENERGIE.
+        if type_donnees != "ENERGIE" and period:
             pub = client.factory.create("OptionsPublicationType")
             option = client.factory.create("OptionPublicationType")
             option.periodiciteTransmission = PERIODS[period]
