@@ -75,30 +75,13 @@ RecherchePoint v2.0
 | RP-NR1   | `lowatt-enedis search --categorie RES --cp 84160 --insee 84042`                                   |
 | RP-NR2   | `lowatt-enedis search --insee 34231 --voie "1 RUE DE LA MER"`                                     |
 
-CommandeAccesDonneesMesures v1.0
----------------------------------
-
-| Case                | Command                                                                        |
-|---------------------|--------------------------------------------------------------------------------|
-| ACCES-R1 (C5)       | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT`                   |
-| ACCES-R1 (C2-C4)    | `lowatt-enedis cmdAcces 98800003605600 ENERGIE --nom DUPONT`                   |
-| ACCES-R2 (C5)       | `lowatt-enedis cmdAcces 24380318190106 COURBE --nom DUPONT`                    |
-| ACCES-R2 (C2-C4)    | `lowatt-enedis cmdAcces 98800003605600 COURBE --nom DUPONT`                    |
-| ACCES-R3            | `lowatt-enedis cmdAcces 24380318190106 PMAX --nom DUPONT`                      |
-| ACCES-R4 (C5)       | `lowatt-enedis cmdAcces 24380318190106 INDEX --nom DUPONT`                     |
-| ACCES-R4 (C2-C4)    | `lowatt-enedis cmdAcces 98800003605600 INDEX --nom DUPONT`                     |
-| ACCES-NR1 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --no-autorisation` |
-| ACCES-NR1 (C2-C4)   | `lowatt-enedis cmdAcces 98800003605600 ENERGIE --nom DUPONT --no-autorisation` |
-| ACCES-NR2 (C5)      | `lowatt-enedis cmdAcces 24380318190106 ENERGIE --nom DUPONT --to 2050-04-21`   |
-| ACCES-NR2 (C2-C4)   | `lowatt-enedis cmdAcces 98800003605600 ENERGIE --nom DUPONT --to 2050-04-21`   |
-
 CommandeArretServicesAccesDonnees v1.0
 --------------------------------------
 
 | Case               | Command                                                                        |
 |--------------------|--------------------------------------------------------------------------------|
 | ASAD-R1 (C5)       | `lowatt-enedis cmdArretServiceAccesDonnees 24380318190106 --service-id 666`    |
-| ASAD-R1 (C2-C4)    | `lowatt-enedis cmdArretServiceAccesDonnees 98800003605600 --service-id 666`    |
+| ASAD-R1 (C2-C4)    | `lowatt-enedis cmdArretServiceAccesDonnees 98800000024520 --service-id 666`    |
 
 CommandeModificationOptionsServicesAccesDonnees v1.0
 ----------------------------------------------------
@@ -106,9 +89,9 @@ CommandeModificationOptionsServicesAccesDonnees v1.0
 | Case              | Command                                                                                          |
 |-------------------|--------------------------------------------------------------------------------------------------|
 | MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --add 666:daily:true`   |
-| MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --add 666:daily:true`   |
+| MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800000024520 --add 666:daily:true`   |
 | MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --drop 666:daily:true`  |
-| MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800003605600 --drop 666:daily:true`  |
+| MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800000024520 --drop 666:daily:true`  |
 
 CommandeRenouvellementServicesAccesDonnees v1.0
 -----------------------------------------------
@@ -116,9 +99,9 @@ CommandeRenouvellementServicesAccesDonnees v1.0
 | Case             | Command                                                                                                                                |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | RSAD-R1 (C5)     | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 25855571545617 --service-id 666 --nom DUPONT`                                     |
-| RSAD-R1 (C2-C4)  | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800003605600 --service-id 666 --nom DUPONT`                                     |
+| RSAD-R1 (C2-C4)  | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800000024520 --service-id 666 --nom DUPONT`                                     |
 | RSAD-NR1 (C5)    | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 25855571545617 --sens INJECTION --service-id 666 --nom DUPONT --no-autorisation`  |
-| RSAD-NR1 (C2-C4) | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800003605600 --sens INJECTION --service-id 666 --nom DUPONT --no-autorisation`  |
+| RSAD-NR1 (C2-C4) | `lowatt-enedis cmdRenouvellementServicesAccesDonnees 98800000024520 --sens INJECTION --service-id 666 --nom DUPONT --no-autorisation`  |
 
 CommandeServicesAccesDonnees v1.0
 ---------------------------------
@@ -126,17 +109,17 @@ CommandeServicesAccesDonnees v1.0
 | Case           | Command                                                                                                        |
 |----------------|----------------------------------------------------------------------------------------------------------------|
 | SAD-R1 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT`                             |
-| SAD-R1 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT`                             |
+| SAD-R1 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type ENERGIE --nom DUPONT`                             |
 | SAD-R2 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 24377424002398 --type CDC --period monthly --nom DUPONT`               |
-| SAD-R2 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type CDC --period monthly --nom DUPONT`               |
+| SAD-R2 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type CDC --period monthly --nom DUPONT`               |
 | SAD-R3 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 24380318190106 --type IDX --period daily --nom DUPONT`               |
-| SAD-R3 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type IDX --period daily --nom DUPONT`               |
+| SAD-R3 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type IDX --period daily --nom DUPONT`               |
 | SAD-R4 (C5)    | `lowatt-enedis cmdServicesAccesDonnees 25852098337945 --type IDX --type CDC --period daily --nom DUPONT`    |
-| SAD-R4 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type IDX --type CDC --period daily --nom DUPONT`    |
+| SAD-R4 (C2-C4) | `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type IDX --type CDC --period daily --nom DUPONT`    |
 | SAD-NR1 (C5)   | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT --no-autorisation`           |
-| SAD-NR1 (C2-C4 | `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT --no-autorisation`           |
+| SAD-NR1 (C2-C4 | `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type ENERGIE --nom DUPONT --no-autorisation`           |
 | SAD-NR2 (C5)   | `lowatt-enedis cmdServicesAccesDonnees 25855571545617 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
-| SAD-NR2 (C2-C4)| `lowatt-enedis cmdServicesAccesDonnees 98800003605600 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
+| SAD-NR2 (C2-C4)| `lowatt-enedis cmdServicesAccesDonnees 98800000024520 --type ENERGIE --nom DUPONT --to 2050-04-07`             |
 
 
 RechercheServicesAccesDonnees v1.0
@@ -145,7 +128,7 @@ RechercheServicesAccesDonnees v1.0
 | Case           | Command                                                                  |
 |----------------|--------------------------------------------------------------------------|
 | RSA-R1 (C5)    | `lowatt-enedis RechercheServicesAccesDonnees 25855571545617`             |
-| RSA-R1 (C2-C4) | `lowatt-enedis RechercheServicesAccesDonnees 98800003605600`             |
+| RSA-R1 (C2-C4) | `lowatt-enedis RechercheServicesAccesDonnees 98800000024520`             |
 
 
 CommandeHistoriqueDonneesMesuresFines v1.0
