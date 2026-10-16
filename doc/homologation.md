@@ -88,9 +88,9 @@ CommandeModificationOptionsServicesAccesDonnees v1.0
 
 | Case              | Command                                                                                          |
 |-------------------|--------------------------------------------------------------------------------------------------|
-| MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --add 666:daily:true`   |
+| MOSAD-R1 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --add 666:daily:false`   |
 | MOSAD-R1 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800000024520 --add 666:daily:true`   |
-| MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --drop 666:daily:true`  |
+| MOSAD-R2 (C5)     | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 24377424002398 --drop 666:daily:false`  |
 | MOSAD-R2 (C2-C4)  | `lowatt-enedis cmdModificationOptionsServicesAccesDonnees 98800000024520 --drop 666:daily:true`  |
 
 CommandeRenouvellementServicesAccesDonnees v1.0
