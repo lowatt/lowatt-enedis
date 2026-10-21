@@ -3,7 +3,7 @@ Homologation
 
 This explain how to pass through Enedis homologation process.
 
-This is based on SGE v26.1 (from `Enedis.SGE.REF.0465.Homologation_Catalogue des cas de tests_Tiers_SGE26.1.pdf`) cases.
+This is based on SGE v26.8 (from `Enedis.SGE.REF.0465.Homologation_Catalogue des cas de tests_Tiers_SGE26.8.pdf`) cases.
 
 First setup `lowatt-enedis` and then execute given commands for each services
 you want homologation and report the time the command was run to fill Enedis
